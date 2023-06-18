@@ -1,10 +1,17 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { Button } from "react-native";
+import { View, Text } from "react-native";
 
-export default function SettingsScreen() {
-    return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Settings Screen</Text>
-        </View>
-    );
+
+export default function SettingsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Setting</Text>
+      <Button
+        title="Go to About"
+        onPress={() => navigation.navigate('about')}
+      />
+    </View>
+  );
 }
+
