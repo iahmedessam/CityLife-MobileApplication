@@ -7,16 +7,7 @@ import { View, Text } from "react-native";
 
 export default function SettingsScreen({ navigation }) {
     const navigate = useNavigation()
-    // const index = useNavigationState(state => state.index);
-    // console.warn(index)
-
-
-    // useEffect (()=>{
-    //   if (index>0){
-    //     navigate.goBack()
-    //   }
-    // },[index])
-
+  
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Services</Text>

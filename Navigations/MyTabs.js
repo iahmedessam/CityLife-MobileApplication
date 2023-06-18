@@ -8,14 +8,12 @@ import ProfileScreen from "../Screens/ProfileScreen";
 import About from "../Components/About";
 import SignIn from "../Components/SignIn";
 import Sports from "../Components/Sports";
+import ContactUs from "../Components/ContactUs";
 
 export const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function MyTabs() {
-    // const index = useNavigationState(state => state.index);
-    // console.warn(index)
-
 
   return (
     <Tab.Navigator>
@@ -33,6 +31,7 @@ export default function MyTabs() {
           <Stack.Navigator>
             <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="about" component={About} />
+            <Stack.Screen name="contactus" component={ContactUs} />
           </Stack.Navigator>
         )}
       </Tab.Screen>
