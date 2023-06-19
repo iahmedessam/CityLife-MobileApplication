@@ -152,7 +152,7 @@ export default function HomeScreen() {
                         <TouchableOpacity onPress={handleCategoryPress} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <FontAwesome5 name="utensils" size={24} />
-                                <Text style={{textAlign:"center"}} >Restaurants</Text>
+                                <Text >Restaurants</Text>
                             </View>
                         </TouchableOpacity>
 
@@ -298,7 +298,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
         paddingHorizontal: 10,
-        // paddingVertical: 2,
         borderRadius: 5,
     },
     overlayContainer4: {
@@ -317,6 +316,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
     },
+    
     border: {
         color: 'red',
         fontSize: 16,
