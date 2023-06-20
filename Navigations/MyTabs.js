@@ -24,7 +24,6 @@ import Shopping from "../Components/Shopping";
 import SignIn from "../Components/SignIn";
 import SignUp from "../Components/SignUp";
 import Sports from "../Components/Sports";
-
 import Stores from "../Components/Stores";
 import Transportation from "../Components/Transportation";
 
