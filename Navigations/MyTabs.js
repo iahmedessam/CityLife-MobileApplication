@@ -8,6 +8,8 @@ import ProfileScreen from "../Screens/ProfileScreen";
 import About from "../Components/About";
 import SignIn from "../Components/SignIn";
 import Sports from "../Components/Sports";
+import Banks from "../Components/Banks";
+
 
 export const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -19,7 +21,14 @@ export default function MyTabs() {
 
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="home" options={{ headerShown: false }}>
+      {() => (
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="banks" component={Banks} />
+          </Stack.Navigator>
+        )}
+      </Tab.Screen>
       <Tab.Screen name="services" options={{ headerShown: false }}>
         {() => (
           <Stack.Navigator>
@@ -47,3 +56,9 @@ export default function MyTabs() {
     </Tab.Navigator>
   );
 }
+
+// const apiKey = "&api_key=9813ce01a72ca1bd2ae25f091898b1c7";
+// const url = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=9813ce01a72ca1bd2ae25f091898b1c7";
+// const imgPath = "https://image.tmdb.org/t/p/w500/";
+// const path = "/discover/movie?sort_by=popularity.desc";
+// const apiUrl = url + path + apiKey;

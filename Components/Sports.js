@@ -13,10 +13,20 @@ export default function Sports() {
 
   useEffect(()=>{
     const [{data,error,loading}] = useAxios({
-      url:"http://localhost:3005/sports"
+      url:"https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=9813ce01a72ca1bd2ae25f091898b1c7"
     })
     setGyms (data)
   },[])
+  // useEffect(()=>{
+  //  fetch(" http://localhost:3006/sports")
+  //  .then((res)=>{
+  //   return res.json()
+  //  })
+  //  .then((data)=>{
+  //   setGyms (data)
+  //  }) 
+  // },[])
+
 
   console.warn(gyms)
 
