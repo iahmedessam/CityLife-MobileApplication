@@ -73,25 +73,19 @@ const styles = StyleSheet.create({
     width: '90%',
     marginLeft: '5%',
     marginVertical: 15,
-    shadowColor: '#000',
-    shadowOffset: { width: 1, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 7,
-    overflow: 'visible',
     borderWidth: 0,
-    borderRadius: 15,
+    borderRadius: 5,
     borderStyle: 'solid',
     borderColor: '#112D4E',
-    borderBottomWidth: 0,
     borderRightWidth: 0.2,
     borderLeftWidth: 0.2,
-    borderTopWidth: 0,
+
   },
   img: {
     width: '100%',
     height: 150,
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5
   },
   content: {
     padding: 10
@@ -110,8 +104,8 @@ const styles = StyleSheet.create({
   },
   buttonsSection: {
     backgroundColor: '#112D4E',
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
     paddingTop: 10
   },
   buttons: {
@@ -125,7 +119,7 @@ const styles = StyleSheet.create({
   feedback: {
     backgroundColor: 'white',
     width: '50%',
-    borderRadius: 15,
+    borderRadius: 5,
     marginLeft: '25%',
     marginBottom: 10,
     marginTop: 5,
