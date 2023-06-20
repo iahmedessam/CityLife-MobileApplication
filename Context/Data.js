@@ -37,17 +37,12 @@ export default function Data(props) {
 
 
   const [gyms, setGyms] = useState([]);
-
-
-
-
-  // useEffect(() => {
-  //   axios.get("http://localhost:3005/sports")
-  //   .then((res) => {
-  //     setGyms(res.data);
-  //   });
-  // }, []);
-  // console.warn(gyms)
+  useEffect(()=>{
+    axios.get("https://application-mock-server.loca.lt/sports")
+    .then((res)=>{
+     setGyms(res.data)
+    })
+   },[])
 
   const ExchangedData = { ImgsArr,gyms };
 

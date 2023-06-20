@@ -55,6 +55,7 @@ export default function MyTabs() {
             <Stack.Screen name="sports" component={Sports} />
             <Stack.Screen name="stores" component={Stores} />
             <Stack.Screen name="transportation" component={Transportation} />
+            <Stack.Screen name="maintenancePayment" component={MaintenancePayment} />
           </Stack.Navigator>
         )}
       </Tab.Screen>
@@ -68,7 +69,6 @@ export default function MyTabs() {
             <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="about" component={About} />
             <Stack.Screen name="contactus" component={ContactUs} />
-            <Stack.Screen name="maintenancePayment" component={MaintenancePayment} />
           </Stack.Navigator>
         )}
       </Tab.Screen>
