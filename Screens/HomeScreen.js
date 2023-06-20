@@ -2,9 +2,10 @@ import React from 'react';
 import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, Image, StyleSheet, Platform } from 'react-native';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { SliderBox } from 'react-native-image-slider-box';
+import { Button } from 'native-base';
 
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
     const handleCategoryPress = () => {
         // Function logic goes here
     };
@@ -95,6 +96,7 @@ export default function HomeScreen() {
                     </Text>
                     <View style={styles.imageContainer}>
 
+                        
                         <View style={styles.container}>
                             <Image source={require("../assets/homeImages/bank2.jpg")} style={styles.image} />
                             <Text style={styles.text}>Banks</Text>

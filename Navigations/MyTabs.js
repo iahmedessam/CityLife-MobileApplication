@@ -35,12 +35,12 @@ export default function MyTabs() {
   return (
     <Tab.Navigator>
 
-      <Tab.Screen name="Home" options={{
+      <Tab.Screen name="home" options={{
         headerShown: false, tabBarIcon: ({ color, size }) => 
           <Ionicons name="home-outline" size={size} color={color} /> }} >
         {() => (
           <Stack.Navigator>
-            <Stack.Screen name="home" component={HomeScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="banks" component={Banks} />
             <Stack.Screen name="cinema" component={Cinema} />
             <Stack.Screen name="education" component={Education} />
@@ -65,7 +65,7 @@ export default function MyTabs() {
       }}>
         {() => (
           <Stack.Navigator>
-            <Stack.Screen name="settings" component={SettingsScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="about" component={About} />
             <Stack.Screen name="contactus" component={ContactUs} />
             <Stack.Screen name="maintenancePayment" component={MaintenancePayment} />
@@ -78,7 +78,7 @@ export default function MyTabs() {
           <Ionicons name="person-outline" size={size} color={color} /> }}>
         {() => (
           <Stack.Navigator>
-            <Stack.Screen name="profile" component={ProfileScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="dashboard" component={DashBoard} />
             <Stack.Screen name="signup" component={SignUp} />
             <Stack.Screen name="signin" component={SignIn} />
