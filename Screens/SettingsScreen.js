@@ -6,8 +6,8 @@ import { View, Text } from "react-native";
 export default function SettingsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Contact us" onPress={() => navigation.navigate('contactus')}/>
-      <Button title="About" onPress={() => navigation.navigate('about')}/>
+      <Button title="Maintenance Payment" onPress={() => navigation.navigate('Maintenance Payment')} />
+      <Button title="About" onPress={() => navigation.navigate('About')}/>
     </View>
   );
 }
