@@ -66,7 +66,7 @@ export default function MyTabs() {
       }}>
         {() => (
           <Stack.Navigator>
-            <Stack.Screen name="settings" component={SettingsScreen} />
+            <Stack.Screen name="Settings" component={SettingsScreen} />
             <Stack.Screen name="about" component={About} />
             <Stack.Screen name="contactus" component={ContactUs} />
           </Stack.Navigator>
