@@ -95,6 +95,7 @@ export default function HomeScreen({ navigation }) {
                             </View>
                         </TouchableOpacity>
 
+
                         <TouchableOpacity
                             style={styles.container}
                             onPress={() => navigation.navigate('Hospitals')} >
@@ -132,6 +133,8 @@ export default function HomeScreen({ navigation }) {
                                 <Text style={styles.text}>Payment</Text>
                             </View>
                         </TouchableOpacity>
+
+
                     </View>
                 </View>
 
@@ -234,7 +237,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginBottom: 5,
-        marginRight: 18
+        marginRight:18
     },
     image: {
         width: '113%',
@@ -308,7 +311,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
     },
-
+    
     border: {
         color: 'red',
         fontSize: 16,
