@@ -9,18 +9,13 @@ import { DataContext } from '../Context/Data';
 
 
 export default function Sports() {
-  const {fontsLoaded} = useContext(DataContext)
+  const {fontsLoaded,sports, loadingSports, errorSports} = useContext(DataContext)
 
-  
-  const [{ data, loading, error }] = useAxios({
-    url: `${styles.baseUrl}/sports`
-  });
-
-  if (loading) {
+  if (loadingSports) {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 18 }}>loading...</Text></View>;
   }
 
-  if (error) {
+  if (errorSports) {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text> <Icon name="exclamation-triangle" size={40} color="red" /></Text></View>;
   }
 
@@ -38,7 +33,7 @@ export default function Sports() {
 
   return <>
     <ScrollView>
-      {data.map((ele) =>
+      {sports.map((ele) =>
         <View style={styles.card} key={ele.id}>
 
           {/* Image */}

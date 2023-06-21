@@ -1,27 +1,25 @@
-import axios from 'axios';
-import useAxios from 'axios-hooks';
-import React, { createContext, useMemo } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useFonts } from 'expo-font';
-import styles from '../Styles'
-
+import axios from "axios";
+import useAxios from "axios-hooks";
+import React, { createContext, useMemo } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useFonts } from "expo-font";
+import styles from "../Styles";
 
 export const DataContext = createContext();
 
 export default function Data(props) {
-  
   const baseUrl = "https://application-mock-server.loca.lt";
-  
+
   const [fontsLoaded] = useFonts({
-    'regular': require('../assets/Fonts/Aleo-Regular.ttf'),
-    'bold': require('../assets/Fonts/Aleo-Bold.ttf'),
-    'boldItalic': require('../assets/Fonts/Aleo-BoldItalic.ttf'),
-    'italic': require('../assets/Fonts/Aleo-Italic.ttf'),
-    'light': require('../assets/Fonts/Aleo-Light.ttf'),
-    'lightItalic': require('../assets/Fonts/Aleo-LightItalic.ttf'),
-  }); 
-  
+    regular: require("../assets/Fonts/Aleo-Regular.ttf"),
+    bold: require("../assets/Fonts/Aleo-Bold.ttf"),
+    boldItalic: require("../assets/Fonts/Aleo-BoldItalic.ttf"),
+    italic: require("../assets/Fonts/Aleo-Italic.ttf"),
+    light: require("../assets/Fonts/Aleo-Light.ttf"),
+    lightItalic: require("../assets/Fonts/Aleo-LightItalic.ttf"),
+  });
+
   // Images About Slider
   const ImgsArr = useMemo(
     () => [
@@ -45,14 +43,41 @@ export default function Data(props) {
       "https://www.talaatmoustafa.com/Upload/61rehab%2021.jpg",
       "https://www.talaatmoustafa.com/Upload/41rehab%2023.jpg",
       "https://www.talaatmoustafa.com/Upload/0rehab%2022.jpg",
-    ],[]
-    );
-    
-  const [{ data:trans, loadingtran, errortrans }] = useAxios({
+    ],
+    []
+  );
+
+  const [{ data: transportation, loadingTrans, errorTrans }] = useAxios({
     url: `${baseUrl}/transportation`,
   });
+  const [{ data: banks, loadingBanks, errorBanks }] = useAxios({
+    url: `${baseUrl}/banks`,
+  });
 
-  const ExchangedData = { ImgsArr,fontsLoaded,trans,loadingtran,errortrans };
+  const [{ data: sports, loadingSports, errorSports }] = useAxios({
+    url: `${baseUrl}/sports`,
+  });
+
+  const [{ data: cinema, loadingCinema, errorCinema }] = useAxios({
+    url: `${baseUrl}/cinema`,
+  });
+
+  const ExchangedData = {
+    ImgsArr,
+    fontsLoaded,
+    transportation,
+    loadingTrans,
+    errorTrans,
+    data: banks,
+    loadingBanks,
+    errorBanks,
+    sports,
+    loadingSports,
+    errorSports,
+    cinema,
+    loadingCinema,
+    errorCinema,
+  };
 
   return (
     <DataContext.Provider value={ExchangedData}>

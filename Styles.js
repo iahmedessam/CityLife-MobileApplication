@@ -1,18 +1,7 @@
 import { StyleSheet } from "react-native";
-import * as Font from 'expo-font';
-
-// let loadFonts = async () => {
-//     await Font.loadAsync({
-//       'Regular': require('./assets/Fonts/Aleo-Regular.ttf'),
-//     });
-//   };
-
 
 export default StyleSheet.create({
-  // baseUrl:"https://application-mock-server.loca.lt",
-  mainFont:{
-    // fontFamily:'egular'R
-  },
+
   navyBlue:{
     color:"#112D4E"
   },
