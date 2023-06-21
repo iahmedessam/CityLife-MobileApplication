@@ -8,18 +8,16 @@ import { DataContext } from '../Context/Data';
 
 
 export default function Banks() {
+  
+  const {fontsLoaded,data:banks, loadingBanks, errorBanks } = useContext(DataContext)
+  
+ 
 
-  const { fontsLoaded } = useContext(DataContext)
-
-  const [{ data, loading, error }] = useAxios({
-    url: `${styles.baseUrl}/banks`
-  });
-
-  if (loading) {
+  if (loadingBanks) {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 16 }}>loading...</Text></View>;
   }
 
-  if (error) {
+  if (errorBanks) {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text> <Icon name="exclamation-triangle" size={40} color="red" /></Text></View>;
   }
 
@@ -37,7 +35,7 @@ export default function Banks() {
 
   return <>
     <ScrollView>
-      {data.map((ele) =>
+      {banks.map((ele) =>
         <View style={styles.card} key={ele.id}>
 
           {/* Image */}

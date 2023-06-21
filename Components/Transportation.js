@@ -18,13 +18,10 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Transportation() {
-  const { fontsLoaded,trans,loadingtran,errortrans } = useContext(DataContext);
+  const { fontsLoaded,transportation,loadingTrans,errorTrans } = useContext(DataContext);
 
-  // const [{ data, loading, error }] = useAxios({
-  //   url: `${styles.baseUrl}/transportation`,
-  // });
 
-  if (loadingtran) {
+  if (loadingTrans) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 18 }}>loading...</Text>
@@ -32,7 +29,7 @@ export default function Transportation() {
     );
   }
 
-  if (errortrans) {
+  if (errorTrans) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>
@@ -54,7 +51,7 @@ export default function Transportation() {
   function handlePress() {}
   return (
     <FlatList
-      data={trans}
+      data={transportation}
       renderItem={({ item }) => (
         <>
           <View style={styles.card} key={item.id}>

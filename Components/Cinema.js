@@ -18,13 +18,10 @@ import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Cinema() {
-  const { fontsLoaded } = useContext(DataContext);
+  const { fontsLoaded,cinema, loadingCinema, errorCinema } = useContext(DataContext);
 
-  const [{ data, loading, error }] = useAxios({
-    url: `${styles.baseUrl}/cinema`,
-  });
 
-  if (loading) {
+  if (loadingCinema) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text style={{ fontSize: 18 }}>loading...</Text>
@@ -32,7 +29,7 @@ export default function Cinema() {
     );
   }
 
-  if (error) {
+  if (errorCinema) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>
@@ -55,7 +52,7 @@ export default function Cinema() {
   function handlePress() {}
   return (
     <FlatList
-      data={data}
+      data={cinema}
       renderItem={({ item }) => (
         <View style={Styles.card} key={item.id}>
           {/* Image */}
@@ -133,7 +130,7 @@ export default function Cinema() {
         </>
       }
       ListHeaderComponentStyle={Styles.header}
-      
+
       // ListFooterComponent={<Text>kkkkk</Text>}
 
     ></FlatList>
