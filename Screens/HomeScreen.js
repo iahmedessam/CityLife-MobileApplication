@@ -1,13 +1,9 @@
 import React from 'react';
-import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, Image, StyleSheet, Platform, TouchableWithoutFeedback } from 'react-native';
+import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, Image, StyleSheet, Platform } from 'react-native';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 import { SliderBox } from 'react-native-image-slider-box';
 
-
-export default function HomeScreen({navigation}) {
-    const handleCategoryPress = () => {
-        // Function logic goes here
-    };
+export default function HomeScreen({ navigation }) {
 
     const images = [
         require("../assets/homeImages/slider/slider12.jpg"),
@@ -18,12 +14,13 @@ export default function HomeScreen({navigation}) {
         require("../assets/homeImages/slider/slider5.jpg"),
         require("../assets/homeImages/slider/slider6.jpg"),
         require("../assets/homeImages/slider/slider1.jpg"),
-
     ]
+
     return (
         <SafeAreaView style={{ marginTop: Platform.OS === "android" ? 0 : 0, padding: 15 }}>
             <ScrollView showsVerticalScrollIndicator={false}>
 
+                {/* Slider  */}
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <SliderBox
                         ImageComponent={Image}
@@ -58,180 +55,154 @@ export default function HomeScreen({navigation}) {
                         ImageComponentStyle={{ borderRadius: 15, width: '97%', marginTop: 5 }}
                         imageLoadingColor="#2196F3"
                     />
-
                     {/* Text overlays */}
                     <View style={styles.overlayContainer1}>
                         <Text style={styles.overlayText}>Leave Your Fingerprint</Text>
-                        {/* <Text style={styles.overlayContainer4}></Text> */}
                     </View>
                     <View style={styles.overlayContainer2}>
                         <Text style={styles.overlayText}>Explore New Places and Discover</Text>
-                        {/* <Text style={styles.overlayContainer4}></Text> */}
 
                     </View>
                     <View style={styles.overlayContainer3}>
                         <Text style={styles.overlayText}>Feedback in Al Rehab, Cairo, Egypt</Text>
-                        {/* <Text style={styles.overlayContainer4}></Text> */}
                     </View>
-
-                    {/* Rest of the code */}
                 </View>
 
                 {/* services */}
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    {/* Services Text */}
                     <Text
-                        style={{
-                            textAlign: 'center',
-                            paddingBottom: 5,
-                            fontWeight: 'bold',
-                            fontSize: 24,
-                            marginTop: 16,
-                            opacity:0.4
-                        }}
-                    >
+                        style={{ textAlign: 'center', paddingBottom: 5, fontWeight: 'bold', fontSize: 24, marginTop: 16, opacity: 0.4 }}>
                         Services
                     </Text>
-                    <View style={styles.imageContainer}>
 
+                    <View style={styles.imageContainer}>
                         <TouchableOpacity
-                        style={styles.container}
-                        onPress={()=> navigation.navigate('banks')}
-                        >
+                            style={styles.container}
+                            onPress={() => navigation.navigate('Banks')} >
                             <View>
-                            <Image source={require("../assets/homeImages/bank2.jpg")} style={styles.image} />
-                            <Text style={styles.text}>Banks</Text>
+                                <Image source={require("../assets/homeImages/bank2.jpg")} style={styles.image} />
+                                <Text style={styles.text}>Banks</Text>
                             </View>
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                        style={styles.container}
-                        onPress={()=> navigation.navigate('markets')}
-                        >
-                        <View>
-                            <Image source={require("../assets/homeImages/images.jpeg")} style={styles.image} />
-                            <Text style={styles.text}>Markets</Text>
-                        </View>
+                            style={styles.container}
+                            onPress={() => navigation.navigate('Markets')}>
+                            <View>
+                                <Image source={require("../assets/homeImages/images.jpeg")} style={styles.image} />
+                                <Text style={styles.text}>Markets</Text>
+                            </View>
                         </TouchableOpacity>
 
 
                         <TouchableOpacity
-                        style={styles.container}
-                        onPress={()=> navigation.navigate('hospitals')}
-                        >
-                        <View>
-                            <Image source={require("../assets/homeImages/hos.jpg")} style={styles.image} />
-                            <Text style={styles.text}>Hospital</Text>
-                        </View>
+                            style={styles.container}
+                            onPress={() => navigation.navigate('Hospitals')} >
+                            <View>
+                                <Image source={require("../assets/homeImages/hos.jpg")} style={styles.image} />
+                                <Text style={styles.text}>Hospital</Text>
+                            </View>
                         </TouchableOpacity>
                     </View>
 
                     <View style={styles.imageContainer}>
-                    <TouchableOpacity
-                        style={styles.container}
-                        onPress={()=> navigation.navigate('education')}
-                        >
-                        <View>
-                            <Image source={require("../assets/homeImages/school5.jpg")} style={styles.image} />
-                            <Text style={styles.text}>Education</Text>
-                        </View>
+                        <TouchableOpacity
+                            style={styles.container}
+                            onPress={() => navigation.navigate('Education')} >
+                            <View>
+                                <Image source={require("../assets/homeImages/school5.jpg")} style={styles.image} />
+                                <Text style={styles.text}>Education</Text>
+                            </View>
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                        style={styles.container}
-                        onPress={()=> navigation.navigate('cinema')}
-                        >
-                        <View>
-                            <Image source={require("../assets/homeImages/Cinema.png")} style={styles.image} />
-                            <Text style={styles.text}>Cinema</Text>
-                        </View>
+                            style={styles.container}
+                            onPress={() => navigation.navigate('Cinema')}>
+                            <View>
+                                <Image source={require("../assets/homeImages/Cinema.png")} style={styles.image} />
+                                <Text style={styles.text}>Cinema</Text>
+                            </View>
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                        style={styles.container}
-                        onPress={()=> navigation.navigate('maintenancePayment')}
-                        >
-                        <View>
-                            <Image source={require("../assets/homeImages/2.jpg")} style={styles.image} />
-                            <Text style={styles.text}>Payment</Text>
-                        </View>
+                            style={styles.container}
+                            onPress={() => navigation.navigate('Maintenance Payment')} >
+                            <View>
+                                <Image source={require("../assets/homeImages/2.jpg")} style={styles.image} />
+                                <Text style={styles.text}>Payment</Text>
+                            </View>
                         </TouchableOpacity>
 
 
                     </View>
-
                 </View>
+
                 {/* categories */}
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                    {/* categories Text*/}
                     <Text
-                        style={{
-                            textAlign: 'center',
-                            paddingBottom: 15,
-                            fontWeight: 'bold',
-                            fontSize: 24,
-                            marginTop: 16,
-                            opacity: 0.4
-                        }}
-                    >
+                        style={{ textAlign: 'center', paddingBottom: 15, fontWeight: 'bold', fontSize: 24, marginTop: 16, opacity: 0.4 }}>
                         Categories
                     </Text >
+
                     <View style={styles.categoryContainer}>
-                        <TouchableOpacity onPress={()=> navigation.navigate('restaurants')} style={styles.categoryItem}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Restaurants')} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <FontAwesome5 name="utensils" size={24} />
                                 <Text >Restaurants</Text>
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> navigation.navigate('shopping')} style={styles.categoryItem}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Shopping')} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <MaterialCommunityIcons name="cart" size={24} />
                                 <Text>Shopping</Text>
                             </View>
                         </TouchableOpacity>
 
-                        {/* Add other categories following a similar structure */}
-
-                        <TouchableOpacity onPress={()=> navigation.navigate('fashion')} style={styles.categoryItem}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Fashion')} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <MaterialCommunityIcons name="tshirt-crew" size={24} />
                                 <Text>Fashion</Text>
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> navigation.navigate('health')} style={styles.categoryItem}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Health')} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <FontAwesome5 name="heartbeat" size={24} />
                                 <Text>Health</Text>
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> navigation.navigate('sports')} style={styles.categoryItem}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Sports')} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <FontAwesome5 name="table-tennis" size={24} />
                                 <Text>Sports</Text>
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> navigation.navigate('maintenance')} style={styles.categoryItem}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Maintenance')} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <FontAwesome5 name="wrench" size={24} />
                                 <Text style={styles.textIcon}>Maintenance</Text>
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> navigation.navigate('homeServices')} style={styles.categoryItem}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Home Services')} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <MaterialCommunityIcons name="home-variant" size={24} />
                                 <Text>Home Services</Text>
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=> navigation.navigate('transportation')} style={styles.categoryItem}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Transportation')} style={styles.categoryItem}>
                             <View style={styles.categoryItemContent}>
                                 <MaterialCommunityIcons name="truck-delivery" size={24} />
                                 <Text>Transportation</Text>
                             </View>
                         </TouchableOpacity>
+
                     </View>
                 </View>
             </ScrollView>

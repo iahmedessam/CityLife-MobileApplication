@@ -16,7 +16,7 @@ export default function Banks() {
   });
 
   if (loading) {
-    return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 18 }}>loading...</Text></View>;
+    return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 16 }}>loading...</Text></View>;
   }
 
   if (error) {

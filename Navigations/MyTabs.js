@@ -35,53 +35,93 @@ export default function MyTabs() {
   return (
     <Tab.Navigator>
 
+      {/* Home Tab  */}
       <Tab.Screen name="home" options={{
-        headerShown: false, tabBarIcon: ({ color, size }) => 
-          <Ionicons name="home-outline" size={size} color={color} /> }} >
+        headerShown: false,
+        // tabBarStyle: {backgroundColor: '#112D4E'},
+        tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color="#112D4E" />
+      }} >
         {() => (
-          <Stack.Navigator>
+          <Stack.Navigator screenOptions={{
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#112D4E',
+            }
+          }}>
             <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="banks" component={Banks} />
-            <Stack.Screen name="cinema" component={Cinema} />
-            <Stack.Screen name="education" component={Education} />
-            <Stack.Screen name="fashion" component={Fashion} />
-            <Stack.Screen name="health" component={Health} />
-            <Stack.Screen name="homeServices" component={HomeServices} />
-            <Stack.Screen name="hospitals" component={Hospitals} />
-            <Stack.Screen name="maintenance" component={Maintenance} />
-            <Stack.Screen name="markets" component={Markets} />
-            <Stack.Screen name="restaurants" component={Restaurants} />
-            <Stack.Screen name="shopping" component={Shopping} />
-            <Stack.Screen name="sports" component={Sports} />
-            <Stack.Screen name="stores" component={Stores} />
-            <Stack.Screen name="transportation" component={Transportation} />
-            <Stack.Screen name="maintenancePayment" component={MaintenancePayment} />
+            <Stack.Screen name="Banks" component={Banks} />
+            <Stack.Screen name="Cinema" component={Cinema} />
+            <Stack.Screen name="Education" component={Education} />
+            <Stack.Screen name="Fashion" component={Fashion} />
+            <Stack.Screen name="Health" component={Health} />
+            <Stack.Screen name="Home Services" component={HomeServices} />
+            <Stack.Screen name="Hospitals" component={Hospitals} />
+            <Stack.Screen name="Maintenance" component={Maintenance} />
+            <Stack.Screen name="Markets" component={Markets} />
+            <Stack.Screen name="Restaurants" component={Restaurants} />
+            <Stack.Screen name="Shopping" component={Shopping} />
+            <Stack.Screen name="Sports" component={Sports} />
+            <Stack.Screen name="Stores" component={Stores} />
+            <Stack.Screen name="Transportation" component={Transportation} />
+            <Stack.Screen name="Maintenance Payment" component={MaintenancePayment} />
           </Stack.Navigator>
         )}
       </Tab.Screen>
 
-      <Tab.Screen name="settings" options={{
-        headerShown: false, tabBarIcon: ({ color, size }) =>
-          <Ionicons name="settings-outline" size={size} color={color} />
+      <Tab.Screen name="about us" options={{
+        headerShown: false,
+        // tabBarStyle: {backgroundColor: '#112D4E'},
+        tabBarIcon: ({ color, size }) => <Ionicons name="code-slash-outline" size={size} color="#112D4E" />
       }}>
         {() => (
-          <Stack.Navigator>
-            <Stack.Screen name="Settings" component={SettingsScreen} />
-            <Stack.Screen name="about" component={About} />
-            <Stack.Screen name="contactus" component={ContactUs} />
+          <Stack.Navigator screenOptions={{
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#112D4E',
+            }
+          }}>
+            <Stack.Screen name="About" component={About} />
           </Stack.Navigator>
         )}
       </Tab.Screen>
 
-      <Tab.Screen name="profile" options={{
-        headerShown: false, tabBarIcon: ({ color, size }) => 
-          <Ionicons name="person-outline" size={size} color={color} /> }}>
+      {/* Settings Tab  */}
+      <Tab.Screen name="settings" options={{
+        headerShown: false,
+        // tabBarStyle: {backgroundColor: '#112D4E'},
+        tabBarIcon: ({ color, size }) => <Ionicons name="settings-outline" size={size} color="#112D4E" />
+      }}>
         {() => (
-          <Stack.Navigator>
+          <Stack.Navigator screenOptions={{
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#112D4E',
+            }
+          }}>
+            <Stack.Screen name="Settings" component={SettingsScreen} />
+            <Stack.Screen name="Contact us" component={ContactUs} />
+            <Stack.Screen name="Maintenance Payment" component={MaintenancePayment} />
+          </Stack.Navigator>
+        )}
+      </Tab.Screen>
+
+      {/* Profile Tab  */}
+      <Tab.Screen name="profile" options={{
+        headerShown: false,
+        // tabBarStyle: {backgroundColor: '#112D4E'},
+        tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color="black" />
+      }}>
+        {() => (
+          <Stack.Navigator screenOptions={{
+            headerTintColor: 'white',
+            headerStyle: {
+              backgroundColor: '#112D4E'
+            }
+          }}>
             <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="dashboard" component={DashBoard} />
-            <Stack.Screen name="signup" component={SignUp} />
-            <Stack.Screen name="signin" component={SignIn} />
+            <Stack.Screen name="Dashboard" component={DashBoard} />
+            <Stack.Screen name="Sign up" component={SignUp} />
+            <Stack.Screen name="Sign in" component={SignIn} />
           </Stack.Navigator>
         )}
       </Tab.Screen>
