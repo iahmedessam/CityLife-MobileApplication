@@ -77,8 +77,6 @@ export default function HomeScreen({navigation}) {
                     {/* Rest of the code */}
                 </View>
 
-
-
                 {/* services */}
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <Text
@@ -125,14 +123,9 @@ export default function HomeScreen({navigation}) {
                             <Text style={styles.text}>Hospital</Text>
                         </View>
                         </TouchableOpacity>
-
-
-
-
                     </View>
 
                     <View style={styles.imageContainer}>
-
                     <TouchableOpacity
                         style={styles.container}
                         onPress={()=> navigation.navigate('education')}
