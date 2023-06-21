@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default function Banks() {
 
   const [{ data, loading, error }] = useAxios({
-    url: "https://little-puma-30.loca.lt/banks"
+    url: "https://cowardly-husky-59.loca.lt/banks"
   });
 
   if (loading) {
@@ -58,9 +58,9 @@ export default function Banks() {
               </TouchableOpacity>
             </View>
             {/* Feedback Button */}
-            <TouchableOpacity style={styles.feedback} onPress={handlePress}>
+            {/* <TouchableOpacity style={styles.feedback} onPress={handlePress}>
               <Text style={styles.feedbackText}>Feedback</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
           </View>
         </View>)}
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 5
+    paddingVertical: 15
   },
   buttonsText: {
     color: 'white'
