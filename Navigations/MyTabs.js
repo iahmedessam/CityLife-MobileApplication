@@ -26,6 +26,7 @@ import SignUp from "../Components/SignUp";
 import Sports from "../Components/Sports";
 import Stores from "../Components/Stores";
 import Transportation from "../Components/Transportation";
+import DetailsPage from "../Components/DetailsPage";
 
 export const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -64,6 +65,7 @@ export default function MyTabs() {
             <Stack.Screen name="Stores" component={Stores} />
             <Stack.Screen name="Transportation" component={Transportation} />
             <Stack.Screen name="Maintenance Payment" component={MaintenancePayment} />
+            <Stack.Screen name="Details" component={DetailsPage} />
           </Stack.Navigator>
         )}
       </Tab.Screen>

@@ -4,7 +4,6 @@ import React, { createContext, useMemo } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useFonts } from "expo-font";
-import styles from "../Styles";
 
 export const DataContext = createContext();
 
@@ -62,7 +61,50 @@ export default function Data(props) {
     url: `${baseUrl}/cinema`,
   });
 
+  const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
+    url: `${baseUrl}/centers`,
+  });
+
+
+
+  //Search Bar management
+  const [All, setAll] = useState({})
+  const [categoryNames, setCategoryNames] = useState([])
+  const [AllName, setAllName] = useState([])
+  const [AllIDs, setAllIDs] = useState([])
+  const [AllIDsNames, setAllIDsNames] = useState([])
+
+  useEffect(() => {
+    axios.get(`${baseUrl}/db`)
+      .then((res) => {
+        setAll(res.data)
+      })
+  }, [])
+
+  useEffect(() => {
+    let NamesArr = []
+    let IDsArr = []
+    let NamesIDsArr = []
+    setCategoryNames([...Object.keys(All)])
+    for (let category of Object.values(All)) {
+      for (let ele of category) {
+        NamesArr.push(ele.name)
+        IDsArr.push(ele.id)
+        NamesIDsArr.push({ id: ele.id, name: ele.name })
+      }
+    }
+    setAllName(NamesArr)
+    setAllIDs(IDsArr)
+    setAllIDsNames(NamesIDsArr)
+  }, [All])
+
   const ExchangedData = {
+    All,
+    categoryNames,
+    AllName,
+    AllIDs,
+    AllIDsNames,
+
     ImgsArr,
     fontsLoaded,
     transportation,
@@ -77,6 +119,7 @@ export default function Data(props) {
     cinema,
     loadingCinema,
     errorCinema,
+    centers, loadingCenters, errorCenters
   };
 
   return (
