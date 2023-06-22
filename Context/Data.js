@@ -1,15 +1,16 @@
-import axios from "axios";
 import useAxios from "axios-hooks";
 import React, { createContext, useMemo } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 import { useFonts } from "expo-font";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 export const DataContext = createContext();
 
 export default function Data(props) {
   const baseUrl = "https://modern-turtle-31.loca.lt";
 
+  //Fonts
   const [fontsLoaded] = useFonts({
     regular: require("../assets/Fonts/Aleo-Regular.ttf"),
     bold: require("../assets/Fonts/Aleo-Bold.ttf"),
@@ -53,26 +54,46 @@ export default function Data(props) {
     { name: "Car Washing subscription", fees: "200" },
   ], []);
 
+  //Getting useAxios data from json server
   const [{ data: transportation, loadingTrans, errorTrans }] = useAxios({
     url: `${baseUrl}/transportation`,
   });
+  
   const [{ data: banks, loadingBanks, errorBanks }] = useAxios({
     url: `${baseUrl}/banks`,
   });
-
+  
   const [{ data: sports, loadingSports, errorSports }] = useAxios({
     url: `${baseUrl}/sports`,
   });
-
+  
   const [{ data: cinema, loadingCinema, errorCinema }] = useAxios({
     url: `${baseUrl}/cinema`,
   });
-
+  
   const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
     url: `${baseUrl}/centers`,
   });
+  
+  const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
+    url: `${baseUrl}/fashion`,
+  });
+  
+  const [{ data: maintenance, loadingmaintenance, errormaintenance }] = useAxios({
+    url: `${baseUrl}/maintenance`,
+  });
+  
+  const [{ data: homeservices, loadinghomeservices, errorhomeservices }] = useAxios({
+    url: `${baseUrl}/home_services`,
+  });
+  
+  const [{ data: shopping, loadingshopping, errorshopping }] = useAxios({
+    url: `${baseUrl}/shopping`,
+  });
 
-
+  const [{ data: markets, loadingmarkets, errormarkets }] = useAxios({
+    url: `${baseUrl}/markets`,
+  });
 
   //Search Bar management
   const [All, setAll] = useState({})
@@ -105,46 +126,19 @@ export default function Data(props) {
     setAllIDsNames(NamesIDsArr)
   }, [All])
 
-  const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
-    url: `${baseUrl}/fashion`,
-  });
-
-  const [{ data: maintenance, loadingmaintenance, errormaintenance }] = useAxios({
-    url: `${baseUrl}/maintenance`,
-  });
-
-  const [{ data: homeservices, loadinghomeservices, errorhomeservices }] = useAxios({
-    url: `${baseUrl}/home_services`,
-  });
-
-  const [{ data: shopping, loadingshopping, errorshopping }] = useAxios({
-    url: `${baseUrl}/shopping`,
-  });
-
-  const [{ data: markets, loadingmarkets, errormarkets}] = useAxios({
-    url: `${baseUrl}/markets`,
-  });
+  
   const ExchangedData = {
     All,
     categoryNames,
     AllName,
     AllIDs,
     AllIDsNames,
-
     ImgsArr,
     fontsLoaded,
-    transportation,
-    loadingTrans,
-    errorTrans,
-    banks,
-    loadingBanks,
-    errorBanks,
-    sports,
-    loadingSports,
-    errorSports,
-    cinema,
-    loadingCinema,
-    errorCinema,
+    transportation,loadingTrans,errorTrans,
+    banks,loadingBanks,errorBanks,
+    sports,loadingSports,errorSports,
+    cinema,loadingCinema,errorCinema,
     centers, loadingCenters, errorCenters,
     fashion,loadingfashion, errorfashion,
     maintenance,loadingmaintenance, errormaintenance,

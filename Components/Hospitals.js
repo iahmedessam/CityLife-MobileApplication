@@ -146,7 +146,6 @@ export default function Hospitals() {
       <FlatList
         data={centers}
         renderItem={({ item }) => (
-          <>
             <View style={styles.card} key={item.id}>
               {/* Image */}
               <Image style={styles.img} source={{ uri: item.img1 }}></Image>
@@ -220,7 +219,7 @@ export default function Hospitals() {
                 </View>
               </View>
             </View>
-          </>
+          
         )}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={

@@ -8,6 +8,7 @@ export default function SettingsScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button title="Maintenance Payment" onPress={() => navigation.navigate('Maintenance Payment')} />
       <Button title="About" onPress={() => navigation.navigate('About')}/>
+      <Button title="Contact Us" onPress={() => navigation.navigate('Contact us')}/>
     </View>
   );
 }
