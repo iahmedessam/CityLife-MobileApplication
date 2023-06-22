@@ -1,4 +1,9 @@
-import React from "react";
+
+import React from 'react';
+// import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, Image, StyleSheet, Platform } from 'react-native';
+// import {MaterialCommunityIcons } from '@expo/vector-icons';
+// import { SliderBox } from 'react-native-image-slider-box';
+
 import {
   SafeAreaView,
   View,
@@ -32,7 +37,17 @@ export default function HomeScreen({ navigation }) {
   const [query, setQuery] = useState("");
   const [filterData, setFilterData] = useState([]);
 
-  useEffect(() => {
+    const images = [
+        require("../assets/homeImages/slider/slider12.jpg"),
+        require("../assets/homeImages/slider/slider1.jpg"),
+        require("../assets/homeImages/slider/slider2.jpg"),
+        require("../assets/homeImages/slider/slider3.jpg"),
+        require("../assets/homeImages/slider/slider4.jpg"),
+        require("../assets/homeImages/slider/slider5.jpg"),
+        require("../assets/homeImages/slider/slider6.jpg"),
+        require("../assets/homeImages/slider/slider1.jpg"),
+    ]
+ useEffect(() => {
     if (query.trim() === "") {
       setFilterData([]);
       return;
@@ -43,16 +58,77 @@ export default function HomeScreen({ navigation }) {
     setFilterData(selectedItem);
   }, [query]);
 
-  const images = [
-    require("../assets/homeImages/slider/slider12.jpg"),
-    require("../assets/homeImages/slider/slider1.jpg"),
-    require("../assets/homeImages/slider/slider2.jpg"),
-    require("../assets/homeImages/slider/slider3.jpg"),
-    require("../assets/homeImages/slider/slider4.jpg"),
-    require("../assets/homeImages/slider/slider5.jpg"),
-    require("../assets/homeImages/slider/slider6.jpg"),
-    require("../assets/homeImages/slider/slider1.jpg"),
-  ];
+    // return (
+    //     <SafeAreaView style={{ marginTop: Platform.OS === "android" ? 0 : 0, padding: 15 }}>
+    //         <ScrollView showsVerticalScrollIndicator={false}>
+
+    //             {/* Slider  */}
+    //             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    //                 {/* <SliderBox
+    //                     ImageComponent={Image}
+    //                     images={images}
+    //                     sliderBoxHeight={200}
+    //                     onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
+    //                     dotColor="#FFEE58"
+    //                     inactiveDotColor="#90A4AE"
+    //                     paginationBoxVerticalPadding={20}
+    //                     autoplay
+    //                     circleLoop
+    //                     resizeMethod={'resize'}
+    //                     resizeMode={'cover'}
+    //                     paginationBoxStyle={{
+    //                         position: "absolute",
+    //                         bottom: 0,
+    //                         padding: 0,
+    //                         alignItems: "center",
+    //                         alignSelf: "center",
+    //                         justifyContent: "center",
+    //                         paddingVertical: 10
+    //                     }}
+    //                     dotStyle={{
+    //                         width: 10,
+    //                         height: 10,
+    //                         borderRadius: 5,
+    //                         marginHorizontal: 0,
+    //                         padding: 0,
+    //                         margin: 0,
+    //                         backgroundColor: "rgba(128, 128, 128, 0.92)"
+    //                     }}
+    //                     ImageComponentStyle={{ borderRadius: 15, width: '97%', marginTop: 5 }}
+    //                     imageLoadingColor="#2196F3"
+    //                 /> */}
+    //                 {/* Text overlays */}
+    //                 <View style={styles.overlayContainer1}>
+    //                     <Text style={styles.overlayText}>Leave Your Fingerprint</Text>
+    //                 </View>
+    //                 <View style={styles.overlayContainer2}>
+    //                     <Text style={styles.overlayText}>Explore New Places and Discover</Text>
+
+    //                 </View>
+    //                 <View style={styles.overlayContainer3}>
+    //                     <Text style={styles.overlayText}>Feedback in Al Rehab, Cairo, Egypt</Text>
+    //                 </View>
+    //             </View>
+
+    //             {/* services */}
+    //             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    //                 {/* Services Text */}
+    //                 <Text
+    //                     style={{ textAlign: 'center', paddingBottom: 5, fontWeight: 'bold', fontSize: 24, marginTop: 16, opacity: 0.4 }}>
+    //                     Services
+    //                 </Text>
+
+    //                 <View style={styles.imageContainer}>
+    //                     <TouchableOpacity
+    //                         style={styles.container}
+    //                         onPress={() => navigation.navigate('Banks')} >
+    //                         <View>
+    //                             <Image source={require("../assets/homeImages/bank2.jpg")} style={styles.image} />
+    //                             <Text style={styles.text}>Banks</Text>
+    //                         </View>
+                        // </TouchableOpacity>
+
+
 
   return (
     <>
@@ -262,6 +338,13 @@ export default function HomeScreen({ navigation }) {
               </View>
             </TouchableOpacity>
 
+                {/* categories */}
+                    {/* categories Text*/}
+                    {/* <Text
+                        style={{ textAlign: 'center', paddingBottom: 15, fontWeight: 'bold', fontSize: 24, marginTop: 16, opacity: 0.4 }}>
+                        Categories
+                    </Text> */}
+                {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> */}
             <TouchableOpacity
               style={styles.container}
               onPress={() => navigation.navigate("Maintenance Payment")}
@@ -274,9 +357,9 @@ export default function HomeScreen({ navigation }) {
                 <Text style={styles.text}>Payment</Text>
               </View>
             </TouchableOpacity>
-          </View>
+          {/* </View> */}
         </View>
-
+</View>
         {/* categories */}
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}

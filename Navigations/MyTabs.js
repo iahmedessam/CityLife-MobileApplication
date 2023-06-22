@@ -10,22 +10,30 @@ import ContactUs from "../Components/ContactUs";
 import Banks from "../Components/Banks";
 import Cinema from "../Components/Cinema";
 import DashBoard from "../Components/DashBoard";
-import Education from "../Components/Education";
+import Education from "../Components/Education/Education";
 import Fashion from "../Components/Fashion";
 import Footer from "../Components/Footer";
-import Health from "../Components/Health";
+import Health from "../Components/Health/Health";
 import HomeServices from "../Components/HomeServices";
 import Hospitals from "../Components/Hospitals";
 import Maintenance from "../Components/Maintenance";
 import MaintenancePayment from "../Components/MaintenancePayment";
 import Markets from "../Components/Markets";
-import Restaurants from "../Components/Restaurants";
 import Shopping from "../Components/Shopping";
 import SignIn from "../Components/SignIn";
 import SignUp from "../Components/SignUp";
 import Sports from "../Components/Sports";
 import Stores from "../Components/Stores";
 import Transportation from "../Components/Transportation";
+
+import HomeRestaurants from "../Components/Restaurants/HomeRestaurants";
+import Shawarma from "../Components/Restaurants/shawarma";
+import Fastfood from "../Components/Restaurants/fastfood";
+import Fried from "../Components/Restaurants/fried";
+import Pizza from "../Components/Restaurants/pizza";
+import Seafood from "../Components/Restaurants/seafood";
+import Orientalfood from "../Components/Restaurants/orientalfood";
+
 import DetailsPage from "../Components/DetailsPage";
 
 export const Tab = createBottomTabNavigator();
@@ -39,7 +47,6 @@ export default function MyTabs() {
       {/* Home Tab  */}
       <Tab.Screen name="home" options={{
         headerShown: false,
-        // tabBarStyle: {backgroundColor: '#112D4E'},
         tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color="#112D4E" />
       }} >
         {() => (
@@ -59,7 +66,10 @@ export default function MyTabs() {
             <Stack.Screen name="Hospitals" component={Hospitals} />
             <Stack.Screen name="Maintenance" component={Maintenance} />
             <Stack.Screen name="Markets" component={Markets} />
-            <Stack.Screen name="Restaurants" component={Restaurants} />
+
+            <Stack.Screen name="Restaurants" component={HomeRestaurants} />
+          
+
             <Stack.Screen name="Shopping" component={Shopping} />
             <Stack.Screen name="Sports" component={Sports} />
             <Stack.Screen name="Stores" component={Stores} />
@@ -72,7 +82,6 @@ export default function MyTabs() {
 
       <Tab.Screen name="about us" options={{
         headerShown: false,
-        // tabBarStyle: {backgroundColor: '#112D4E'},
         tabBarIcon: ({ color, size }) => <Ionicons name="code-slash-outline" size={size} color="#112D4E" />
       }}>
         {() => (
@@ -90,7 +99,6 @@ export default function MyTabs() {
       {/* Settings Tab  */}
       <Tab.Screen name="settings" options={{
         headerShown: false,
-        // tabBarStyle: {backgroundColor: '#112D4E'},
         tabBarIcon: ({ color, size }) => <Ionicons name="settings-outline" size={size} color="#112D4E" />
       }}>
         {() => (
@@ -110,7 +118,6 @@ export default function MyTabs() {
       {/* Profile Tab  */}
       <Tab.Screen name="profile" options={{
         headerShown: false,
-        // tabBarStyle: {backgroundColor: '#112D4E'},
         tabBarIcon: ({ color, size }) => <Ionicons name="person-outline" size={size} color="black" />
       }}>
         {() => (

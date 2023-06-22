@@ -58,35 +58,81 @@ export default function Data(props) {
   const [{ data: transportation, loadingTrans, errorTrans }] = useAxios({
     url: `${baseUrl}/transportation`,
   });
-  
+
   const [{ data: banks, loadingBanks, errorBanks }] = useAxios({
     url: `${baseUrl}/banks`,
   });
-  
+
   const [{ data: sports, loadingSports, errorSports }] = useAxios({
     url: `${baseUrl}/sports`,
   });
-  
+
   const [{ data: cinema, loadingCinema, errorCinema }] = useAxios({
     url: `${baseUrl}/cinema`,
   });
-  
-  const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
-    url: `${baseUrl}/centers`,
-  });
-  
+// Restaurants Data
+const [{ data: orientalfood, loadingOrientalfood, errorOrientalfood }] = useAxios({
+  url: `${baseUrl}/orientalfood`,
+});
+const [{ data: fastfood, loadingFastfood, errorFastfood }] = useAxios({
+  url: `${baseUrl}/fastfood`,
+});
+const [{ data: seafood, loadingSeafood, errorSeafood }] = useAxios({
+  url: `${baseUrl}/seafood`,
+});
+const [{ data: pizza, loadingPizza, errorPizza }] = useAxios({
+  url: `${baseUrl}/pizza`,
+});
+const [{ data: fried, loadingFried, errorFried }] = useAxios({
+  url: `${baseUrl}/fried`,
+});
+const [{ data: shawarma, loadingShawarma, errorShawarma }] = useAxios({
+  url: `${baseUrl}/shawarma`,
+});
+const allRestaurants = [
+  orientalfood,
+  fastfood,
+  seafood,
+  pizza,
+  fried,
+  shawarma,
+].reduce((accumulator, currentArray) => accumulator.concat(currentArray), []);
+
+
+
+//Health Data Fetching
+const [{ data: schools, loadingSchools, errorSchools}] = useAxios({
+  url: `${baseUrl}/schools`,
+});
+
+const [{ data: kindergarten, loadingKindergarten, errorKindergarten }] = useAxios({
+  url: `${baseUrl}/kindergarten`,
+});
+
+// Education Data Fetching
+const [{ data: pharmacies, loadingPharmacy, errorPharmacy }] = useAxios({
+  url: `${baseUrl}/pharmacy`,
+});
+const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
+  url: `${baseUrl}/centers`,
+});
+
+  // const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
+  //   url: `${baseUrl}/centers`,
+  // });
+
   const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
     url: `${baseUrl}/fashion`,
   });
-  
+
   const [{ data: maintenance, loadingmaintenance, errormaintenance }] = useAxios({
     url: `${baseUrl}/maintenance`,
   });
-  
+
   const [{ data: homeservices, loadinghomeservices, errorhomeservices }] = useAxios({
     url: `${baseUrl}/home_services`,
   });
-  
+
   const [{ data: shopping, loadingshopping, errorshopping }] = useAxios({
     url: `${baseUrl}/shopping`,
   });
@@ -126,7 +172,7 @@ export default function Data(props) {
     setAllIDsNames(NamesIDsArr)
   }, [All])
 
-  
+
   const ExchangedData = {
     All,
     categoryNames,
@@ -135,15 +181,56 @@ export default function Data(props) {
     AllIDsNames,
     ImgsArr,
     fontsLoaded,
-    transportation,loadingTrans,errorTrans,
-    banks,loadingBanks,errorBanks,
-    sports,loadingSports,errorSports,
-    cinema,loadingCinema,errorCinema,
-    centers, loadingCenters, errorCenters,
-    fashion,loadingfashion, errorfashion,
-    maintenance,loadingmaintenance, errormaintenance,
-    homeservices,loadinghomeservices, errorhomeservices,
-    shopping,loadingshopping, errorshopping,
+
+    transportation,
+    loadingTrans,
+    errorTrans,
+    data: banks,
+    loadingBanks,
+    errorBanks,
+    sports,
+    loadingSports,
+    errorSports,
+    cinema,
+    loadingCinema,
+    errorCinema,
+    orientalfood,
+    loadingOrientalfood,
+    errorOrientalfood,
+    fastfood,
+    loadingFastfood,
+    errorFastfood,
+    seafood,
+    loadingSeafood,
+    errorSeafood,
+    pizza,
+    loadingPizza,
+    errorPizza,
+    fried,
+    loadingFried,
+    errorFried,
+    shawarma,
+    loadingShawarma,
+    errorShawarma,
+    allRestaurants,
+    schools,
+    loadingSchools,
+    errorSchools,
+    kindergarten,
+    loadingKindergarten,
+    errorKindergarten,
+    pharmacies,
+    errorPharmacy,
+    loadingPharmacy,
+    centers,
+    errorCenters,
+    loadingCenters,
+
+   
+    fashion, loadingfashion, errorfashion,
+    maintenance, loadingmaintenance, errormaintenance,
+    homeservices, loadinghomeservices, errorhomeservices,
+    shopping, loadingshopping, errorshopping,
     markets, loadingmarkets, errormarkets,
     PayArr
   };
