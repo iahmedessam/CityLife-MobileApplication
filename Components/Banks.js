@@ -9,7 +9,7 @@ import { DataContext } from '../Context/Data';
 
 export default function Banks() {
   
-  const {fontsLoaded,data:banks, loadingBanks, errorBanks } = useContext(DataContext)
+  const {fontsLoaded,banks, loadingBanks, errorBanks } = useContext(DataContext)
   
  
 

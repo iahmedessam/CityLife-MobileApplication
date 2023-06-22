@@ -45,10 +45,53 @@ export default function HomeScreen({ navigation }) {
   ];
 
   return (
+    <>
+    {/* Search bar */}
+    <View style={styles.autocompleteContainer}>
+        <AutocompleteInput
+        style={{
+        }}
+        
+        placeholder="Search..."
+          data={filterData}
+          value={query}
+          onChangeText={(val) => setQuery(val)}
+          flatListProps={{	
+            keyExtractor: (_, idx) => idx,
+            renderItem: ({ item }) => (
+              <TouchableOpacity
+                onPress={() => {
+                    navigation.navigate("Details", { id: item.id })
+                    setQuery("")
+                }}
+                style={{
+                  paddingVertical: 10,
+                  paddingLeft:5
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 15,
+                  }}
+                >
+                  {item.name}
+                </Text>
+              </TouchableOpacity>
+            ),
+          }}
+        />
+      </View>
     <SafeAreaView
       style={{ marginTop: Platform.OS === "android" ? 0 : 0, padding: 15 }}
     >
-      <ScrollView showsVerticalScrollIndicator={false}>
+      
+      <ScrollView
+      keyboardShouldPersistTaps='always' 
+        showsVerticalScrollIndicator={false}
+        style={{
+          marginTop: 50,
+        }}
+      >
         {/* Slider  */}
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -106,33 +149,6 @@ export default function HomeScreen({ navigation }) {
               Feedback in Al Rehab, Cairo, Egypt
             </Text>
           </View>
-        </View>
-
-        {/* Search bar */}
-        <View
-        style={{
-            marginTop:30
-        }}>
-        <AutocompleteInput
-        
-          data={filterData}
-          value={query}
-          onChangeText={(val) => setQuery(val)}
-          flatListProps={{
-            keyExtractor: (_, idx) => idx,
-            renderItem: ({ item }) => (
-              <TouchableOpacity onPress={()=>navigation.navigate("Details",{ id: item.id })} style={{
-                paddingVertical:10,
-              }}>
-                <Text
-                style={{
-                    fontSize:15
-                }}
-                >{item.name}</Text>
-              </TouchableOpacity>
-            ),
-          }}
-        />
         </View>
 
         {/* services */}
@@ -338,6 +354,7 @@ export default function HomeScreen({ navigation }) {
         </View>
       </ScrollView>
     </SafeAreaView>
+    </>
   );
 }
 
@@ -446,5 +463,15 @@ const styles = StyleSheet.create({
   border: {
     color: "red",
     fontSize: 16,
+  },
+  autocompleteContainer: {
+    flex: 1,
+    left: 0,
+    position: "absolute",
+    right: 0,
+    top: 0,
+    zIndex: 1,
+    marginHorizontal: 20,
+    marginTop: 10,
   },
 });
