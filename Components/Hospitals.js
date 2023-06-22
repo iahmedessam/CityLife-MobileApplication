@@ -34,6 +34,7 @@ import DateTimePicker, {
   DateTimePickerAndroid,
 } from "@react-native-community/datetimepicker";
 import { Pressable } from "react-native";
+import { Platform } from "react-native";
 
 export default function Hospitals() {
   const { fontsLoaded, centers, loadingCenters, errorCenters } =
@@ -51,7 +52,6 @@ export default function Hospitals() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>
-          {" "}
           <Icon name="exclamation-triangle" size={40} color="red" />
         </Text>
       </View>
@@ -66,19 +66,20 @@ export default function Hospitals() {
   }
 
   const [date, setDate] = useState(new Date(1687383374089));
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
+    setShow(false);
     setDate(currentDate);
   };
 
   const showMode = (currentMode) => {
-    DateTimePickerAndroid.open({
-      value: date,
-      onChange,
-      mode: currentMode,
-      is24Hour: true,
-    });
+    if (Platform.OS === "android") {
+      setShow(true);
+    }
+    setMode(currentMode);
   };
 
   const showDatepicker = () => {
@@ -88,6 +89,29 @@ export default function Hospitals() {
   const showTimepicker = () => {
     showMode("time");
   };
+  // const [date, setDate] = useState(new Date(1687383374089));
+
+  // const onChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate;
+  //   setDate(currentDate);
+  // };
+
+  // const showMode = (currentMode) => {
+  //   DateTimePickerAndroid.open({
+  //     value: date,
+  //     onChange,
+  //     mode: currentMode,
+  //     is24Hour: true,
+  //   });
+  // };
+
+  // const showDatepicker = () => {
+  //   showMode("date");
+  // };
+
+  // const showTimepicker = () => {
+  //   showMode("time");
+  // };
 
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
@@ -106,7 +130,6 @@ export default function Hospitals() {
     [appointDetails]
   );
 
-
   const handleClear = useCallback(() => {
     setAppointDetails({
       name: "",
@@ -123,7 +146,6 @@ export default function Hospitals() {
       <FlatList
         data={centers}
         renderItem={({ item }) => (
-          <>
             <View style={styles.card} key={item.id}>
               {/* Image */}
               <Image style={styles.img} source={{ uri: item.img1 }}></Image>
@@ -170,7 +192,7 @@ export default function Hospitals() {
                     onPress={() => Linking.openURL(item.location)}
                   >
                     <Text style={styles.buttonsText}>
-                      Location{" "}
+                      Location
                       <Icon name="map-marker" size={15} color="white" />
                     </Text>
                   </TouchableOpacity>
@@ -197,7 +219,7 @@ export default function Hospitals() {
                 </View>
               </View>
             </View>
-          </>
+          
         )}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={
@@ -228,7 +250,13 @@ export default function Hospitals() {
             <FormControl isRequired>
               <Stack mx="4">
                 <FormControl.Label>Name:</FormControl.Label>
-                <Input type="text" value={appointDetails.name} onChangeText={(val)=>setAppointDetails({ ...appointDetails, name: val })}/>
+                <Input
+                  type="text"
+                  value={appointDetails.name}
+                  onChangeText={(val) =>
+                    setAppointDetails({ ...appointDetails, name: val })
+                  }
+                />
                 {/* <FormControl.HelperText>
                   Must be atleast 6 characters
                 </FormControl.HelperText>
@@ -238,70 +266,117 @@ export default function Hospitals() {
                   Atleast 6 characters are required.
                 </FormControl.ErrorMessage> */}
 
-                
                 <View
-              style={{
-                marginBottom: 20,
-                marginTop: 10,
+                  style={{
+                    marginBottom: 20,
+                    marginTop: 10,
+                  }}
+                >
+                  <Text>Choose Specialty:</Text>
+                  <Select
+                    selectedValue={appointDetails.specialty}
+                    minWidth="200"
+                    accessibilityLabel="Choose specialty"
+                    placeholder="Choose"
+                    _selectedItem={{
+                      bg: "gray.300",
+                      endIcon: <CheckIcon size="5" />,
+                    }}
+                    mt={1}
+                    onValueChange={(itemValue) =>
+                      setAppointDetails({
+                        ...appointDetails,
+                        specialty: itemValue,
+                      })
+                    }
+                  >
+                    <Select.Item
+                      label="Internal Medicine"
+                      value="Internal Medicine"
+                    />
+                    <Select.Item
+                      label="Gastroenterology"
+                      value="Gastroenterology"
+                    />
+                    <Select.Item label="Orthopedic" value="Orthopedic" />
+                    <Select.Item
+                      label="Ear, nose and throat (ENT)"
+                      value="Ear, nose and throat (ENT)"
+                    />
+                    <Select.Item label="Cardiology" value="Cardiology" />
+                    <Select.Item label="Ophthalmology" value="Ophthalmology" />
+                    <Select.Item label="Pediatrics" value="Pediatrics" />
+                    <Select.Item label="Dentistry" value="Dentistry" />
+                  </Select>
+                </View>
 
-              }}
-            >
-              <Text>Choose Specialty:</Text>
-              <Select
-                selectedValue={appointDetails.specialty}
-                minWidth="200"
-                accessibilityLabel="Choose specialty"
-                placeholder="Choose"
-                _selectedItem={{
-                  bg: "gray.300",
-                  endIcon: <CheckIcon size="5" />,
-                }}
-                mt={1}
-                onValueChange={(itemValue) => setAppointDetails({ ...appointDetails, specialty: itemValue })}
-              >
-                <Select.Item label="Internal Medicine" value="Internal Medicine" />
-                <Select.Item label="Gastroenterology" value="Gastroenterology" />
-                <Select.Item label="Orthopedic" value="Orthopedic" />
-                <Select.Item label="Ear, nose and throat (ENT)" value="Ear, nose and throat (ENT)" />
-                <Select.Item label="Cardiology" value="Cardiology" />
-                <Select.Item label="Ophthalmology" value="Ophthalmology" />
-                <Select.Item label="Pediatrics" value="Pediatrics" />
-                <Select.Item label="Dentistry" value="Dentistry" />
-
-              </Select>
-            </View>
-            <View style={{marginVertical:10}}>
-                  <TouchableOpacity style={Styles.dateTimeButton} onPress={showDatepicker} ><Text style={Styles.dateTimeText}>Choose Day</Text></TouchableOpacity>
-                  </View>
-                  <View style={{marginVertical:10}}>
-                  <TouchableOpacity style={Styles.dateTimeButton} onPress={showTimepicker}><Text style={Styles.dateTimeText}>Choose Time</Text></TouchableOpacity>
+                {/* date picker */}
+                <View style={{ marginVertical: 10 }}>
+                  {/* <TouchableOpacity
+                    style={Styles.dateTimeButton}
+                    onPress={showDatepicker}
+                  >
+                    <Text style={Styles.dateTimeText}>Choose Day</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{ marginVertical: 10 }}>
+                  <TouchableOpacity
+                    style={Styles.dateTimeButton}
+                    onPress={showTimepicker}
+                  >
+                    <Text style={Styles.dateTimeText}>Choose Time</Text>
+                  </TouchableOpacity> */}
                   {/* <Text>selected: {date.toLocaleString()}</Text> */}
+                  {/* <Button onPress={showDatepicker} title="Show date picker!" />
+      <Button onPress={showTimepicker} title="Show time picker!" /> */}
+
+                  <TouchableOpacity
+                    style={Styles.dateTimeButton}
+                    onPress={showDatepicker}
+                  >
+                    <Text style={Styles.dateTimeText}>Choose Day</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{ marginVertical: 10 }}>
+                  <TouchableOpacity
+                    style={Styles.dateTimeButton}
+                    onPress={showTimepicker}
+                  >
+                    <Text style={Styles.dateTimeText}>Choose Time</Text>
+                  </TouchableOpacity>
+                  {show && (
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      value={date}
+                      mode={mode}
+                      is24Hour={false}
+                      onChange={onChange}
+                    />
+                  )}
                 </View>
               </Stack>
             </FormControl>
           </Modal.Body>
           <Modal.Footer>
             <Button
-            disabled={appointDetails.name? false:true}
+              disabled={appointDetails.name ? false : true}
               flex="1"
               onPress={() => {
                 setShowModal2(true);
                 setShowModal(false);
               }}
               title="Confirm"
-            >
-            </Button>
+            ></Button>
           </Modal.Footer>
         </Modal.Content>
       </Modal>
-
 
       <Modal
         isOpen={showModal2}
         onClose={() => {
           setShowModal2(false);
-          handleClear()
-          setDate(new Date(1687383374089))
+          handleClear();
+          setDate(new Date(1687383374089));
         }}
         size="lg"
       >
@@ -310,8 +385,18 @@ export default function Hospitals() {
           <Modal.Header>Appointment details</Modal.Header>
           <Modal.Body>
             <Text style={{ textAlign: "center", fontSize: 18 }}>
-            {appointDetails.name},your appointment {date.toLocaleString()} in {appointDetails.centerName} and  specialty: {appointDetails.specialty}
+            Name: {appointDetails.name}              
             </Text>
+            <Text style={{ textAlign: "center", fontSize: 18 }}>
+            Date: {date.toLocaleString()}
+            </Text>
+            <Text style={{ textAlign: "center", fontSize: 18 }}>
+            specialty: {appointDetails.specialty}
+            </Text>
+            <Text style={{ textAlign: "center", fontSize: 18 }}>
+            {appointDetails.centerName}  
+            </Text>
+
           </Modal.Body>
         </Modal.Content>
       </Modal>
@@ -338,14 +423,14 @@ const Styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
-  dateTimeButton:{
-    backgroundColor:"#3F72AF",
-    padding:10,
-    borderRadius:5
+  dateTimeButton: {
+    backgroundColor: "#3F72AF",
+    padding: 10,
+    borderRadius: 5,
   },
-  dateTimeText:{
+  dateTimeText: {
     color: "white",
-    textAlign:"center",
-    fontWeight:"600",
-  }
+    textAlign: "center",
+    fontWeight: "600",
+  },
 });

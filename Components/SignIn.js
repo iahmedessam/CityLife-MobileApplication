@@ -68,7 +68,7 @@ export default function SignIn({ navigation }) {
             style={[styles.input, styles.submitButton]}
             onPress={formik.handleSubmit}
             disabled={formik.dirty && formik.isValid ? false : true}>
-            <Text style={styles.submitText}>Submit</Text>
+            <Text style={styles.submitText}>Login</Text>
           </TouchableOpacity>}
 
       </View>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#112D4E',
-    borderRadius: '5%',
+    borderRadius: 5,
     width: '90%',
     marginLeft: '5%',
     padding: 10,
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   inputError: {
     borderWidth: 1,
     borderColor: '#112D4E',
-    borderRadius: '5%',
+    borderRadius: 5,
     width: '90%',
     marginLeft: '5%',
     padding: 10,

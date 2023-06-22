@@ -16,7 +16,6 @@ export default function SignIn({ navigation }) {
 
   const handleSelectFile = async () => {
     let result = await DocumentPicker.getDocumentAsync({});
-
     if (!result.cancelled) {
       setFile(result);
     }
@@ -126,7 +125,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: '#112D4E',
-    borderRadius: '5%',
+    borderRadius: 5,
     width: '90%',
     marginLeft: '5%',
     padding: 10,
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
   inputError: {
     borderWidth: 1,
     borderColor: '#112D4E',
-    borderRadius: '5%',
+    borderRadius: 5,
     width: '90%',
     marginLeft: '5%',
     padding: 10,

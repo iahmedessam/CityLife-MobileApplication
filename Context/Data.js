@@ -47,6 +47,13 @@ export default function Data(props) {
     []
   );
 
+  const PayArr = useMemo(() => [
+    { name: "City Maintenance Bills", fees: "10000" },
+    { name: "El-Rehab club subscription", fees: "2000" },
+    { name: "Water Bills", fees: "900" },
+    { name: "Car Washing subscription", fees: "200" },
+  ], []);
+
   //Getting useAxios data from json server
   const [{ data: transportation, loadingTrans, errorTrans }] = useAxios({
     url: `${baseUrl}/transportation`,
@@ -138,6 +145,7 @@ export default function Data(props) {
     homeservices, loadinghomeservices, errorhomeservices,
     shopping, loadingshopping, errorshopping,
     markets, loadingmarkets, errormarkets,
+    PayArr
   };
 
   return (

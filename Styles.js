@@ -29,7 +29,8 @@ export default StyleSheet.create({
     borderColor: '#112D4E',
     borderRightWidth: 0.2,
     borderLeftWidth: 0.2,
-    flex: 1
+    borderTopWidth: 0.2,
+    flex:1
   },
   img: {
     width: '100%',

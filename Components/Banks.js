@@ -7,7 +7,7 @@ import { DataContext } from '../Context/Data';
 
 export default function Banks() {
   
-  const {fontsLoaded, banks, loadingBanks, errorBanks } = useContext(DataContext)
+  const {fontsLoaded,banks, loadingBanks, errorBanks } = useContext(DataContext)
   
   if (loadingBanks) {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 16 }}>loading...</Text></View>;
