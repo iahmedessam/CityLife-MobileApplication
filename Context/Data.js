@@ -70,56 +70,56 @@ export default function Data(props) {
   const [{ data: cinema, loadingCinema, errorCinema }] = useAxios({
     url: `${baseUrl}/cinema`,
   });
-// Restaurants Data
-const [{ data: orientalfood, loadingOrientalfood, errorOrientalfood }] = useAxios({
-  url: `${baseUrl}/orientalfood`,
-});
-const [{ data: fastfood, loadingFastfood, errorFastfood }] = useAxios({
-  url: `${baseUrl}/fastfood`,
-});
-const [{ data: seafood, loadingSeafood, errorSeafood }] = useAxios({
-  url: `${baseUrl}/seafood`,
-});
-const [{ data: pizza, loadingPizza, errorPizza }] = useAxios({
-  url: `${baseUrl}/pizza`,
-});
-const [{ data: fried, loadingFried, errorFried }] = useAxios({
-  url: `${baseUrl}/fried`,
-});
-const [{ data: shawarma, loadingShawarma, errorShawarma }] = useAxios({
-  url: `${baseUrl}/shawarma`,
-});
-const allRestaurants = [
-  orientalfood,
-  fastfood,
-  seafood,
-  pizza,
-  fried,
-  shawarma,
-].reduce((accumulator, currentArray) => accumulator.concat(currentArray), []);
+  // Restaurants Data
+  const [{ data: orientalfood, loadingOrientalfood, errorOrientalfood }] = useAxios({
+    url: `${baseUrl}/orientalfood`,
+  });
+ 
+  const [{ data: fastfood, loadingFastfood, errorFastfood }] = useAxios({
+    url: `${baseUrl}/fastfood`,
+  });
+ 
+  const [{ data: seafood, loadingSeafood, errorSeafood }] = useAxios({
+    url: `${baseUrl}/seafood`,
+  });
+ 
+  const [{ data: pizza, loadingPizza, errorPizza }] = useAxios({
+    url: `${baseUrl}/pizza`,
+  });
+ 
+  const [{ data: fried, loadingFried, errorFried }] = useAxios({
+    url: `${baseUrl}/fried`,
+  });
+ 
+  const [{ data: shawarma, loadingShawarma, errorShawarma }] = useAxios({
+    url: `${baseUrl}/shawarma`,
+  });
+ 
+  const allRestaurants = [
+    orientalfood,
+    fastfood,
+    seafood,
+    pizza,
+    fried,
+    shawarma,
+  ].reduce((accumulator, currentArray) => accumulator.concat(currentArray), []);
 
+  //Health Data Fetching
+  const [{ data: schools, loadingSchools, errorSchools }] = useAxios({
+    url: `${baseUrl}/schools`,
+  });
 
+  const [{ data: kindergarten, loadingKindergarten, errorKindergarten }] = useAxios({
+    url: `${baseUrl}/kindergarten`,
+  });
 
-//Health Data Fetching
-const [{ data: schools, loadingSchools, errorSchools}] = useAxios({
-  url: `${baseUrl}/schools`,
-});
-
-const [{ data: kindergarten, loadingKindergarten, errorKindergarten }] = useAxios({
-  url: `${baseUrl}/kindergarten`,
-});
-
-// Education Data Fetching
-const [{ data: pharmacies, loadingPharmacy, errorPharmacy }] = useAxios({
-  url: `${baseUrl}/pharmacy`,
-});
-const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
-  url: `${baseUrl}/centers`,
-});
-
-  // const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
-  //   url: `${baseUrl}/centers`,
-  // });
+  // Education Data Fetching
+  const [{ data: pharmacies, loadingPharmacy, errorPharmacy }] = useAxios({
+    url: `${baseUrl}/pharmacy`,
+  });
+  const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
+    url: `${baseUrl}/centers`,
+  });
 
   const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
     url: `${baseUrl}/fashion`,
@@ -181,7 +181,6 @@ const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
     AllIDsNames,
     ImgsArr,
     fontsLoaded,
-
     transportation,
     loadingTrans,
     errorTrans,
@@ -225,8 +224,6 @@ const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
     centers,
     errorCenters,
     loadingCenters,
-
-   
     fashion, loadingfashion, errorfashion,
     maintenance, loadingmaintenance, errormaintenance,
     homeservices, loadinghomeservices, errorhomeservices,
