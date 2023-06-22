@@ -62,13 +62,32 @@ export default function Data(props) {
     url: `${baseUrl}/cinema`,
   });
 
+  const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
+    url: `${baseUrl}/fashion`,
+  });
+
+  const [{ data: maintenance, loadingmaintenance, errormaintenance }] = useAxios({
+    url: `${baseUrl}/maintenance`,
+  });
+
+  const [{ data: homeservices, loadinghomeservices, errorhomeservices }] = useAxios({
+    url: `${baseUrl}/home_services`,
+  });
+
+  const [{ data: shopping, loadingshopping, errorshopping }] = useAxios({
+    url: `${baseUrl}/shopping`,
+  });
+
+  const [{ data: markets, loadingmarkets, errormarkets}] = useAxios({
+    url: `${baseUrl}/markets`,
+  });
   const ExchangedData = {
     ImgsArr,
     fontsLoaded,
     transportation,
     loadingTrans,
     errorTrans,
-    data: banks,
+    banks,
     loadingBanks,
     errorBanks,
     sports,
@@ -77,6 +96,11 @@ export default function Data(props) {
     cinema,
     loadingCinema,
     errorCinema,
+    fashion,
+    maintenance,
+    homeservices,
+    shopping,
+    markets,
   };
 
   return (
