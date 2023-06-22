@@ -1,6 +1,5 @@
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Linking, Image } from 'react-native';
 import React from 'react'
-import useAxios from 'axios-hooks'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from'../Styles'
 import { useContext } from 'react';

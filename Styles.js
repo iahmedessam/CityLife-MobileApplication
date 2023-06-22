@@ -1,24 +1,23 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-
-  navyBlue:{
-    color:"#112D4E"
+  navyBlue: {
+    color: "#112D4E"
   },
-  lightBlue:{
-    color:"#3F72AF"
+  lightBlue: {
+    color: "#3F72AF"
   },
-  lightGrey:{
-    color:"#DBE2EF"
+  lightGrey: {
+    color: "#DBE2EF"
   },
-  navyBlueBG:{
-    backgroundColor:"#112D4E"
+  navyBlueBG: {
+    backgroundColor: "#112D4E"
   },
-  lightBlueBG:{
-    backgroundColor:"#3F72AF"
+  lightBlueBG: {
+    backgroundColor: "#3F72AF"
   },
-  lightGreyBG:{
-    backgroundColor:"#DBE2EF"
+  lightGreyBG: {
+    backgroundColor: "#DBE2EF"
   },
   card: {
     width: '90%',
@@ -30,8 +29,8 @@ export default StyleSheet.create({
     borderColor: '#112D4E',
     borderRightWidth: 0.2,
     borderLeftWidth: 0.2,
+    borderTopWidth: 0.2,
     flex:1
-
   },
   img: {
     width: '100%',
@@ -90,11 +89,8 @@ export default StyleSheet.create({
 // light blue -> #3F72AF   -> Font weight Bold
 // Navy Blue  -> #112D4E
 // -----------------------------------------------------
-
 // - Font -
 // Font Family -> https://fonts.google.com/specimen/Aleo
-
 // -----------------------------------------------------
-
 // - Border -
-// Border Raduis -> 15px
+// Border Raduis -> 5px

@@ -1,18 +1,14 @@
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Linking, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Linking, Image } from 'react-native';
 import React from 'react'
-import useAxios from 'axios-hooks'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../Styles'
 import { useContext } from 'react';
 import { DataContext } from '../Context/Data';
 
-
 export default function Banks() {
   
-  const {fontsLoaded,data:banks, loadingBanks, errorBanks } = useContext(DataContext)
+  const {fontsLoaded,banks, loadingBanks, errorBanks } = useContext(DataContext)
   
- 
-
   if (loadingBanks) {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 16 }}>loading...</Text></View>;
   }

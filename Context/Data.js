@@ -1,16 +1,16 @@
-import axios from "axios";
 import useAxios from "axios-hooks";
 import React, { createContext, useMemo } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 import { useFonts } from "expo-font";
-import styles from "../Styles";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 export const DataContext = createContext();
 
 export default function Data(props) {
-  const baseUrl = "https://application-mock-server.loca.lt";
+  const baseUrl = "https://twenty-crabs-know.loca.lt/";
 
+  //Fonts
   const [fontsLoaded] = useFonts({
     regular: require("../assets/Fonts/Aleo-Regular.ttf"),
     bold: require("../assets/Fonts/Aleo-Bold.ttf"),
@@ -47,9 +47,18 @@ export default function Data(props) {
     []
   );
 
+  const PayArr = useMemo(() => [
+    { name: "City Maintenance Bills", fees: "10000" },
+    { name: "El-Rehab club subscription", fees: "2000" },
+    { name: "Water Bills", fees: "900" },
+    { name: "Car Washing subscription", fees: "200" },
+  ], []);
+
+  //Getting useAxios data from json server
   const [{ data: transportation, loadingTrans, errorTrans }] = useAxios({
     url: `${baseUrl}/transportation`,
   });
+
   const [{ data: banks, loadingBanks, errorBanks }] = useAxios({
     url: `${baseUrl}/banks`,
   });
@@ -61,7 +70,7 @@ export default function Data(props) {
   const [{ data: cinema, loadingCinema, errorCinema }] = useAxios({
     url: `${baseUrl}/cinema`,
   });
-// Restaurants DATA MANAGEMENT
+// Restaurants Data
 const [{ data: orientalfood, loadingOrientalfood, errorOrientalfood }] = useAxios({
   url: `${baseUrl}/orientalfood`,
 });
@@ -108,9 +117,71 @@ const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
   url: `${baseUrl}/centers`,
 });
 
+  // const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
+  //   url: `${baseUrl}/centers`,
+  // });
+
+  const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
+    url: `${baseUrl}/fashion`,
+  });
+
+  const [{ data: maintenance, loadingmaintenance, errormaintenance }] = useAxios({
+    url: `${baseUrl}/maintenance`,
+  });
+
+  const [{ data: homeservices, loadinghomeservices, errorhomeservices }] = useAxios({
+    url: `${baseUrl}/home_services`,
+  });
+
+  const [{ data: shopping, loadingshopping, errorshopping }] = useAxios({
+    url: `${baseUrl}/shopping`,
+  });
+
+  const [{ data: markets, loadingmarkets, errormarkets }] = useAxios({
+    url: `${baseUrl}/markets`,
+  });
+
+  //Search Bar management
+  const [All, setAll] = useState({})
+  const [categoryNames, setCategoryNames] = useState([])
+  const [AllName, setAllName] = useState([])
+  const [AllIDs, setAllIDs] = useState([])
+  const [AllIDsNames, setAllIDsNames] = useState([])
+
+  useEffect(() => {
+    axios.get(`${baseUrl}/db`)
+      .then((res) => {
+        setAll(res.data)
+      })
+  }, [])
+
+  useEffect(() => {
+    let NamesArr = []
+    let IDsArr = []
+    let NamesIDsArr = []
+    setCategoryNames([...Object.keys(All)])
+    for (let category of Object.values(All)) {
+      for (let ele of category) {
+        NamesArr.push(ele.name)
+        IDsArr.push(ele.id)
+        NamesIDsArr.push({ id: ele.id, name: ele.name })
+      }
+    }
+    setAllName(NamesArr)
+    setAllIDs(IDsArr)
+    setAllIDsNames(NamesIDsArr)
+  }, [All])
+
+
   const ExchangedData = {
+    All,
+    categoryNames,
+    AllName,
+    AllIDs,
+    AllIDsNames,
     ImgsArr,
     fontsLoaded,
+
     transportation,
     loadingTrans,
     errorTrans,
@@ -153,7 +224,15 @@ const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
     loadingPharmacy,
     centers,
     errorCenters,
-    loadingCenters
+    loadingCenters,
+
+   
+    fashion, loadingfashion, errorfashion,
+    maintenance, loadingmaintenance, errormaintenance,
+    homeservices, loadinghomeservices, errorhomeservices,
+    shopping, loadingshopping, errorshopping,
+    markets, loadingmarkets, errormarkets,
+    PayArr
   };
 
   return (
