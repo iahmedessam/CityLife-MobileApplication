@@ -1,16 +1,15 @@
-import axios from "axios";
 import useAxios from "axios-hooks";
 import React, { createContext, useMemo } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 import { useFonts } from "expo-font";
-import styles from "../Styles";
 
 export const DataContext = createContext();
 
 export default function Data(props) {
+
+  //Localtunnel URL
   const baseUrl = "https://application-mock-server.loca.lt";
 
+  //Fonts
   const [fontsLoaded] = useFonts({
     regular: require("../assets/Fonts/Aleo-Regular.ttf"),
     bold: require("../assets/Fonts/Aleo-Bold.ttf"),
@@ -47,6 +46,7 @@ export default function Data(props) {
     []
   );
 
+  //Getting useAxios data from json server
   const [{ data: transportation, loadingTrans, errorTrans }] = useAxios({
     url: `${baseUrl}/transportation`,
   });
