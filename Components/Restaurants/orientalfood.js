@@ -52,7 +52,7 @@ const Orientalfood = () => {
     return (
         <>
         <ScrollView style={{backgroundColor:"white"}} >
-        <Text style={{ fontSize: 20, fontWeight: "bold", marginLeft: 21, color:"#112D4E", marginTop:20}}>All Restaurants</Text>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginLeft: 21, color:"#112D4E", marginTop:20}}>Oriental Food Restaurants</Text>
         {orientalfood.map((ele) => (
           <View style={[styles.card, stylesArr.RestaurantStyle]} key={ele.id}>
             <ScrollView horizontal={true} style={{ marginHorizontal: 10, marginBottom: 10 }}>
@@ -193,7 +193,6 @@ const stylesArr = StyleSheet.create({
       width:"100%",
       justifyContent:"center",
       
-      borderBottomColor:"#DBE2EF"
       // ...Platform.select({
       //   ios: {
       //     shadowColor: 'black',

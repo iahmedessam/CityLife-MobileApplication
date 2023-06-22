@@ -52,7 +52,7 @@ const Pizza = () => {
     return (
         <>
        <ScrollView style={{backgroundColor:"white"}} >
-        <Text style={{ fontSize: 20, fontWeight: "bold", marginLeft: 21, color:"#112D4E", marginTop:20}}>All Restaurants</Text>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginLeft: 21, color:"#112D4E", marginTop:20}}>Pizza Restaurants</Text>
         {pizza.map((ele) => (
           <View style={[styles.card, stylesArr.RestaurantStyle]} key={ele.id}>
             <ScrollView horizontal={true} style={{ marginHorizontal: 10, marginBottom: 10 }}>

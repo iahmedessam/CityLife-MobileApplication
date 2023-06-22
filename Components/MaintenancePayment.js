@@ -74,9 +74,9 @@ export default function MaintenancePayment() {
     <>
       <FlatList
         data={PayArr}
-        renderItem={({ item }) => (
+        renderItem={({ item,idx }) => (
           
-            <View style={styles.card} key={item.id}>
+            <View style={styles.card} key={idx}>
               {/* Body */}
               <View style={[styles.content, { alignItems: "center" }]}>
                 <Text style={[styles.title]}>{item.name}</Text>

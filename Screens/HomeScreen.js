@@ -520,6 +520,7 @@ const styles = StyleSheet.create({
     top: 80,
     width: "100%",
     zIndex: 1,
+    marginLeft:6
   },
 
   overlayContainer1: {

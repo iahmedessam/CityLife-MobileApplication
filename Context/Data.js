@@ -8,7 +8,7 @@ import axios from "axios";
 export const DataContext = createContext();
 
 export default function Data(props) {
-  const baseUrl = "https://weak-donkey-83.loca.lt";
+  const baseUrl = "https://application-mock-server.loca.lt";
 
   //Fonts
   const [fontsLoaded] = useFonts({
@@ -185,7 +185,7 @@ const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
     transportation,
     loadingTrans,
     errorTrans,
-    data: banks,
+    banks,
     loadingBanks,
     errorBanks,
     sports,
