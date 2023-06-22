@@ -8,18 +8,18 @@ import uuid from "react-native-uuid";
 import { Dimensions } from "react-native";
 
 export default function About() {
-  const { ImgsArr } = useContext(DataContext);
+  const { ImgsArr,fontsLoaded } = useContext(DataContext);
   return (
     <>
       <ScrollView style={{ backgroundColor: "white" }}>
-        <Text style={styles.textAbout}>About </Text>
+        <Text style={[styles.textAbout,{fontFamily:fontsLoaded? "boldItalic" :null}]}>About </Text>
         <Image
           style={styles.topImg}
           source={{
             uri: "https://www.talaatmoustafa.com/Upload/43alrehab%201%20850%20x%20350%20px.jpg",
           }}
         ></Image>
-        <Text style={styles.textAbout}>A New Vision For Life In Egypt</Text>
+        <Text style={[styles.textAbout,{fontFamily:fontsLoaded? "boldItalic" :null}]}>A New Vision For Life In Egypt</Text>
         <Text style={styles.textP}>
           The first fully-fledged community, creating a comprehensive integrated
           residential scheme within the New Cairo plan. AL-Rehab is the hub of
@@ -44,11 +44,11 @@ export default function About() {
           An Internal and external Transportation Network, Banks and Money
           Exchange Services.
         </Text>
-        <Text style={styles.textAbout}>Al-Rehab Images Gallery: </Text>
+        <Text style={[styles.textAbout,{fontFamily:fontsLoaded? "boldItalic" :null}]}>Al-Rehab Images Gallery: </Text>
         <View style={{ backgroundColor: "white", height: 25 }}></View>
         <ScrollView horizontal={true} style={{
           marginHorizontal:17,
-          marginBottom:10
+          marginBottom:30
         }}>
           {ImgsArr.map((img) => (
             <Image
@@ -71,10 +71,10 @@ const styles = StyleSheet.create({
   },
   textAbout: {
     fontSize: 22,
-    fontWeight: "bold",
+    // fontWeight: "bold",
     marginVertical: 5,
     marginHorizontal: 18,
-    color: "#09913C",
+    color: "#112D4E",
   },
   topImg: {
     width: "90%",

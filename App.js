@@ -3,9 +3,12 @@ import Data from './Context/Data';
 import Dashboard from './Context/Dashboard';
 import { NavigationContainer } from '@react-navigation/native';
 import MyTabs from './Navigations/MyTabs';
+import { NativeBaseProvider } from "native-base";
+
 
 export default function App() {
   return (
+    <NativeBaseProvider>
     <Dashboard>
       <Data>
         <NavigationContainer>
@@ -15,5 +18,6 @@ export default function App() {
         </NavigationContainer>
       </Data >
     </Dashboard>
+    </NativeBaseProvider>
   );
 }
