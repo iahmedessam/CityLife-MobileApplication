@@ -8,7 +8,7 @@ import axios from "axios";
 export const DataContext = createContext();
 
 export default function Data(props) {
-  const baseUrl = "https://modern-turtle-31.loca.lt";
+  const baseUrl = "https://application-mock-server.loca.lt";
 
   //Fonts
   const [fontsLoaded] = useFonts({
