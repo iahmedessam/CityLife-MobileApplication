@@ -1,11 +1,14 @@
 import useAxios from "axios-hooks";
 import React, { createContext, useMemo } from "react";
 import { useFonts } from "expo-font";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 export const DataContext = createContext();
 
 export default function Data(props) {
-  const baseUrl = "https://modern-turtle-31.loca.lt";
+  const baseUrl = "https://twenty-crabs-know.loca.lt/";
 
   //Fonts
   const [fontsLoaded] = useFonts({
@@ -48,35 +51,35 @@ export default function Data(props) {
   const [{ data: transportation, loadingTrans, errorTrans }] = useAxios({
     url: `${baseUrl}/transportation`,
   });
-  
+
   const [{ data: banks, loadingBanks, errorBanks }] = useAxios({
     url: `${baseUrl}/banks`,
   });
-  
+
   const [{ data: sports, loadingSports, errorSports }] = useAxios({
     url: `${baseUrl}/sports`,
   });
-  
+
   const [{ data: cinema, loadingCinema, errorCinema }] = useAxios({
     url: `${baseUrl}/cinema`,
   });
-  
+
   const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
     url: `${baseUrl}/centers`,
   });
-  
+
   const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
     url: `${baseUrl}/fashion`,
   });
-  
+
   const [{ data: maintenance, loadingmaintenance, errormaintenance }] = useAxios({
     url: `${baseUrl}/maintenance`,
   });
-  
+
   const [{ data: homeservices, loadinghomeservices, errorhomeservices }] = useAxios({
     url: `${baseUrl}/home_services`,
   });
-  
+
   const [{ data: shopping, loadingshopping, errorshopping }] = useAxios({
     url: `${baseUrl}/shopping`,
   });
@@ -116,7 +119,7 @@ export default function Data(props) {
     setAllIDsNames(NamesIDsArr)
   }, [All])
 
-  
+
   const ExchangedData = {
     All,
     categoryNames,
@@ -125,15 +128,15 @@ export default function Data(props) {
     AllIDsNames,
     ImgsArr,
     fontsLoaded,
-    transportation,loadingTrans,errorTrans,
-    banks,loadingBanks,errorBanks,
-    sports,loadingSports,errorSports,
-    cinema,loadingCinema,errorCinema,
+    transportation, loadingTrans, errorTrans,
+    banks, loadingBanks, errorBanks,
+    sports, loadingSports, errorSports,
+    cinema, loadingCinema, errorCinema,
     centers, loadingCenters, errorCenters,
-    fashion,loadingfashion, errorfashion,
-    maintenance,loadingmaintenance, errormaintenance,
-    homeservices,loadinghomeservices, errorhomeservices,
-    shopping,loadingshopping, errorshopping,
+    fashion, loadingfashion, errorfashion,
+    maintenance, loadingmaintenance, errormaintenance,
+    homeservices, loadinghomeservices, errorhomeservices,
+    shopping, loadingshopping, errorshopping,
     markets, loadingmarkets, errormarkets,
   };
 
