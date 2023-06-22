@@ -75,7 +75,7 @@ export default function MaintenancePayment() {
       <FlatList
         data={PayArr}
         renderItem={({ item }) => (
-          <>
+          
             <View style={styles.card} key={item.id}>
               {/* Body */}
               <View style={[styles.content, { alignItems: "center" }]}>
@@ -145,7 +145,7 @@ export default function MaintenancePayment() {
                 </View>
               </View>
             </View>
-          </>
+          
         )}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={
