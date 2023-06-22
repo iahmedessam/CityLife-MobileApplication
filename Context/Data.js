@@ -8,7 +8,7 @@ import { useFonts } from "expo-font";
 export const DataContext = createContext();
 
 export default function Data(props) {
-  const baseUrl = "https://application-mock-server.loca.lt";
+  const baseUrl = "https://modern-turtle-31.loca.lt";
 
   const [fontsLoaded] = useFonts({
     regular: require("../assets/Fonts/Aleo-Regular.ttf"),
@@ -98,6 +98,25 @@ export default function Data(props) {
     setAllIDsNames(NamesIDsArr)
   }, [All])
 
+  const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
+    url: `${baseUrl}/fashion`,
+  });
+
+  const [{ data: maintenance, loadingmaintenance, errormaintenance }] = useAxios({
+    url: `${baseUrl}/maintenance`,
+  });
+
+  const [{ data: homeservices, loadinghomeservices, errorhomeservices }] = useAxios({
+    url: `${baseUrl}/home_services`,
+  });
+
+  const [{ data: shopping, loadingshopping, errorshopping }] = useAxios({
+    url: `${baseUrl}/shopping`,
+  });
+
+  const [{ data: markets, loadingmarkets, errormarkets}] = useAxios({
+    url: `${baseUrl}/markets`,
+  });
   const ExchangedData = {
     All,
     categoryNames,
@@ -110,7 +129,7 @@ export default function Data(props) {
     transportation,
     loadingTrans,
     errorTrans,
-    data: banks,
+    banks,
     loadingBanks,
     errorBanks,
     sports,
@@ -119,7 +138,12 @@ export default function Data(props) {
     cinema,
     loadingCinema,
     errorCinema,
-    centers, loadingCenters, errorCenters
+    centers, loadingCenters, errorCenters,
+    fashion,loadingfashion, errorfashion,
+    maintenance,loadingmaintenance, errormaintenance,
+    homeservices,loadinghomeservices, errorhomeservices,
+    shopping,loadingshopping, errorshopping,
+    markets, loadingmarkets, errormarkets,
   };
 
   return (

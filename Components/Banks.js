@@ -2,7 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Linking, Image } 
 import React from 'react'
 import useAxios from 'axios-hooks'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from'../Styles'
+import styles from '../Styles'
 import { useContext } from 'react';
 import { DataContext } from '../Context/Data';
 
@@ -44,7 +44,7 @@ export default function Banks() {
           {/* Body */}
           <View style={styles.content}>
             <Text style={[styles.title]}>{ele.name}</Text>
-            <Text style={[styles.overview,{fontFamily: fontsLoaded? 'italic' : null}]}>{ele.overview}</Text>
+            <Text style={[styles.overview, { fontFamily: fontsLoaded ? 'italic' : null }]}>{ele.overview}</Text>
           </View>
 
           {/* Buttons Section */}
@@ -71,4 +71,3 @@ export default function Banks() {
     </ScrollView>
   </>
 };
-
