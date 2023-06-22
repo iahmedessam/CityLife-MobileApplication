@@ -19,6 +19,17 @@ export default function HomeRestaurants() {
     const [showFried, setShowFried] = useState(false);
     const [showPizza, setShowPizza] = useState(false);
 
+
+    const handleAllPress = () => {
+      setShowShawarma(false);
+      setShowFastfood(false);
+      setShowFried(false);
+      setShowPizza(false);
+      setShowOriental(false);
+      setShowSeafood(false);
+      setShowAll(true);
+    };
+
     const handleShawarmaPress = () => {
       setShowShawarma(true);
       setShowFastfood(false);
@@ -111,6 +122,15 @@ export default function HomeRestaurants() {
         showsHorizontalScrollIndicator={true}
         indicatorStyle="white" >
         <View style={[styles.imageContainer]}>
+
+        <TouchableOpacity
+            style={styles.container}
+            onPress={handleAllPress} >
+            <View style={styles.myViewStyle}>
+              <Image source={require("../../assets/alldishes.png")} style={styles.image} />
+              <Text style={styles.imageTitle}>All</Text>
+            </View>
+          </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.container}
@@ -223,7 +243,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 8,
-    borderRightWidth:0.6,
+    borderRightWidth:0,
     borderRightColor:"#3F72AF",
   
   },
@@ -249,12 +269,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     // elevation: 5,
-    marginTop:15,
-    marginBottom:15
+    marginTop:0,
+    marginBottom:0
   },
   image: {
-    height: 40,
-    width: 40,
+    height: 35,
+    width: 35,
     borderRadius: 100,
     marginTop:10
   },

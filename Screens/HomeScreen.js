@@ -15,14 +15,23 @@ import {
   Platform,
 } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
-import { SliderBox } from "react-native-image-slider-box";
+// import { SliderBox } from "react-native-image-slider-box";
 import AutocompleteInput from "react-native-autocomplete-input";
 import { useContext } from "react";
 import { DataContext } from "../Context/Data";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Video, ResizeMode } from 'expo-av';
+import { useRef } from "react";
+import { Dimensions } from "react-native";
+
 
 export default function HomeScreen({ navigation }) {
+    const video = useRef(null);
+    const [status, setStatus] = useState({});
+
+
+
 
   const { AllIDsNames } = useContext(DataContext);
   const [query, setQuery] = useState("");
@@ -170,7 +179,7 @@ export default function HomeScreen({ navigation }) {
         }}
       >
         {/* Slider  */}
-        <View
+        {/* <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <SliderBox
@@ -212,7 +221,6 @@ export default function HomeScreen({ navigation }) {
             }}
             imageLoadingColor="#2196F3"
           />
-          {/* Text overlays */}
           <View style={styles.overlayContainer1}>
             <Text style={styles.overlayText}>Leave Your Fingerprint</Text>
           </View>
@@ -226,7 +234,23 @@ export default function HomeScreen({ navigation }) {
               Feedback in Al Rehab, Cairo, Egypt
             </Text>
           </View>
-        </View>
+        </View> */}
+      <Video
+        ref={video}
+        style={{    alignSelf: 'center',
+        width: Dimensions.get("window").width,
+        height: 200,}}
+        source={
+            require("../assets/videos/video1.mp4")
+        }
+        
+        resizeMode={ResizeMode.CONTAIN}
+        isLooping
+        isMuted
+        shouldPlay 
+        useNativeControls = {false}
+        onPlaybackStatusUpdate={status => setStatus(() => status)}
+      />
 
         {/* services */}
         <View
@@ -496,6 +520,7 @@ const styles = StyleSheet.create({
     top: 80,
     width: "100%",
     zIndex: 1,
+    marginLeft:6
   },
 
   overlayContainer1: {

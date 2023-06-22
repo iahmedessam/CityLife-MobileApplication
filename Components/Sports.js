@@ -39,8 +39,31 @@ export default function Sports() {
           <Image style={styles.img} source={{ uri: ele.img1 }}></Image>
 
           {/* Body */}
-          <View style={[styles.content,{alignItems:"center"}]}>
+          <View 
+          // style={[styles.content,{alignItems:"center"}]}
+          style={{
+              backgroundColor: "#F5F8FC",
+              borderBottomColor:"#DBE2EF",
+              borderBottomWidth:0.9,
+              padding: 10,
+              borderRadius: 5,
+              alignItems: "center",
+              marginBottom: 10,
+              flexDirection: "row",
+              width:"100%",
+              justifyContent:"center",
+          }}
+          >
+          <Image
+          //  style={stylesArr.logo} 
+          style={{ width: 40,
+            height: 40,
+            borderRadius: 20,}}
+          source={{ uri: ele.logo }} />
             <Text style={[styles.title]}>{ele.name}</Text>
+          </View>
+
+          <View style={[styles.content,{alignItems:"center"}]}>
             <Text style={[styles.overview,{fontFamily: fontsLoaded? 'boldItalic' : null}]}>Address: {ele.address}</Text>
           </View>
 

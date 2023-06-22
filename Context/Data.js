@@ -8,7 +8,7 @@ import axios from "axios";
 export const DataContext = createContext();
 
 export default function Data(props) {
-  const baseUrl = "https://twenty-crabs-know.loca.lt/";
+  const baseUrl = "https://application-mock-server.loca.lt";
 
   //Fonts
   const [fontsLoaded] = useFonts({
@@ -184,7 +184,7 @@ export default function Data(props) {
     transportation,
     loadingTrans,
     errorTrans,
-    data: banks,
+    banks,
     loadingBanks,
     errorBanks,
     sports,

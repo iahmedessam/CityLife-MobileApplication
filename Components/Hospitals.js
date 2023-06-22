@@ -146,80 +146,96 @@ export default function Hospitals() {
       <FlatList
         data={centers}
         renderItem={({ item }) => (
-            <View style={styles.card} key={item.id}>
-              {/* Image */}
-              <Image style={styles.img} source={{ uri: item.img1 }}></Image>
+          <View style={styles.card} key={item.id}>
+            {/* Image */}
+            <Image style={styles.img} source={{ uri: item.img1 }}></Image>
 
-              {/* Body */}
-              <View style={[styles.content, { alignItems: "center" }]}>
-                <Text style={[styles.title]}>{item.name}</Text>
-                <Text
-                  style={[
-                    styles.overview,
-                    { fontFamily: fontsLoaded ? "boldItalic" : null },
-                  ]}
+            {/* Body */}
+            <View
+              // style={[styles.content,{alignItems:"center"}]}
+              style={{
+                backgroundColor: "#F5F8FC",
+                borderBottomColor: "#DBE2EF",
+                borderBottomWidth: 0.9,
+                padding: 10,
+                borderRadius: 5,
+                alignItems: "center",
+                marginBottom: 10,
+                flexDirection: "row",
+                width: "100%",
+                justifyContent: "center",
+              }}
+            >
+              <Image
+                //  style={stylesArr.logo}
+                style={{ width: 40, height: 40, borderRadius: 20 }}
+                source={{ uri: item.logo }}
+              />
+              <Text style={[styles.title]}>{item.name}</Text>
+            </View>
+            <View style={[styles.content, { alignItems: "center" }]}>
+              {/* <Text style={[styles.title]}>{item.name}</Text> */}
+              <Text
+                style={[
+                  styles.overview,
+                  { fontFamily: fontsLoaded ? "boldItalic" : null },
+                ]}
+              >
+                Clinics and Labs No.: {item.clinicAndLabsNum}
+              </Text>
+              <Text
+                style={[
+                  styles.overview,
+                  {
+                    fontFamily: fontsLoaded ? "boldItalic" : null,
+                    textAlign: "center",
+                  },
+                ]}
+              >
+                Address: {item.address}
+              </Text>
+            </View>
+            <View
+              style={{
+                marginBottom: 20,
+              }}
+            ></View>
+            {/* Buttons Section */}
+            <View style={styles.buttonsSection}>
+              <View style={styles.buttons}>
+                <TouchableOpacity onPress={() => handlePhonePress(item.number)}>
+                  <Text style={styles.buttonsText}>
+                    Phone <Icon name="phone" size={15} color="white" />
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL(item.location)}
                 >
-                  Clinics and Labs No.: {item.clinicAndLabsNum}
-                </Text>
-                <Text
-                  style={[
-                    styles.overview,
-                    {
-                      fontFamily: fontsLoaded ? "boldItalic" : null,
-                      textAlign: "center",
-                    },
-                  ]}
-                >
-                  Address: {item.address}
-                </Text>
+                  <Text style={styles.buttonsText}>
+                    Location
+                    <Icon name="map-marker" size={15} color="white" />
+                  </Text>
+                </TouchableOpacity>
               </View>
+              {/* Feedback Button */}
               <View
                 style={{
-                  marginBottom: 20,
+                  flexDirection: "row",
+                  justifyContent: "space-around",
                 }}
-              ></View>
-              {/* Buttons Section */}
-              <View style={styles.buttonsSection}>
-                <View style={styles.buttons}>
-                  <TouchableOpacity
-                    onPress={() => handlePhonePress(item.number)}
-                  >
-                    <Text style={styles.buttonsText}>
-                      Phone <Icon name="phone" size={15} color="white" />
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => Linking.openURL(item.location)}
-                  >
-                    <Text style={styles.buttonsText}>
-                      Location
-                      <Icon name="map-marker" size={15} color="white" />
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                {/* Feedback Button */}
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                  }}
+              >
+                <TouchableOpacity
+                  style={Styles.feedback}
+                  onPress={() => handleCenterName(item.name)}
                 >
-                  <TouchableOpacity
-                    style={Styles.feedback}
-                    onPress={() => handleCenterName(item.name)}
-                  >
-                    <Text style={styles.feedbackText}>Appointment</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={Styles.feedback}
-                    onPress={handlePress}
-                  >
-                    <Text style={styles.feedbackText}>Feedback</Text>
-                  </TouchableOpacity>
-                </View>
+                  <Text style={styles.feedbackText}>Appointment</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.feedback} onPress={handlePress}>
+                  <Text style={styles.feedbackText}>Feedback</Text>
+                </TouchableOpacity>
               </View>
             </View>
-          
+          </View>
         )}
         keyExtractor={(item) => item.id}
         ListHeaderComponent={
@@ -385,18 +401,17 @@ export default function Hospitals() {
           <Modal.Header>Appointment details</Modal.Header>
           <Modal.Body>
             <Text style={{ textAlign: "center", fontSize: 18 }}>
-            Name: {appointDetails.name}              
+              Name: {appointDetails.name}
             </Text>
             <Text style={{ textAlign: "center", fontSize: 18 }}>
-            Date: {date.toLocaleString()}
+              Date: {date.toLocaleString()}
             </Text>
             <Text style={{ textAlign: "center", fontSize: 18 }}>
-            specialty: {appointDetails.specialty}
+              specialty: {appointDetails.specialty}
             </Text>
             <Text style={{ textAlign: "center", fontSize: 18 }}>
-            {appointDetails.centerName}  
+              {appointDetails.centerName}
             </Text>
-
           </Modal.Body>
         </Modal.Content>
       </Modal>
