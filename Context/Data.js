@@ -61,6 +61,52 @@ export default function Data(props) {
   const [{ data: cinema, loadingCinema, errorCinema }] = useAxios({
     url: `${baseUrl}/cinema`,
   });
+// Restaurants DATA MANAGEMENT
+const [{ data: orientalfood, loadingOrientalfood, errorOrientalfood }] = useAxios({
+  url: `${baseUrl}/orientalfood`,
+});
+const [{ data: fastfood, loadingFastfood, errorFastfood }] = useAxios({
+  url: `${baseUrl}/fastfood`,
+});
+const [{ data: seafood, loadingSeafood, errorSeafood }] = useAxios({
+  url: `${baseUrl}/seafood`,
+});
+const [{ data: pizza, loadingPizza, errorPizza }] = useAxios({
+  url: `${baseUrl}/pizza`,
+});
+const [{ data: fried, loadingFried, errorFried }] = useAxios({
+  url: `${baseUrl}/fried`,
+});
+const [{ data: shawarma, loadingShawarma, errorShawarma }] = useAxios({
+  url: `${baseUrl}/shawarma`,
+});
+const allRestaurants = [
+  orientalfood,
+  fastfood,
+  seafood,
+  pizza,
+  fried,
+  shawarma,
+].reduce((accumulator, currentArray) => accumulator.concat(currentArray), []);
+
+
+
+//Health Data Fetching
+const [{ data: schools, loadingSchools, errorSchools}] = useAxios({
+  url: `${baseUrl}/schools`,
+});
+
+const [{ data: kindergarten, loadingKindergarten, errorKindergarten }] = useAxios({
+  url: `${baseUrl}/kindergarten`,
+});
+
+// Education Data Fetching
+const [{ data: pharmacies, loadingPharmacy, errorPharmacy }] = useAxios({
+  url: `${baseUrl}/pharmacy`,
+});
+const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
+  url: `${baseUrl}/centers`,
+});
 
   const ExchangedData = {
     ImgsArr,
@@ -77,6 +123,37 @@ export default function Data(props) {
     cinema,
     loadingCinema,
     errorCinema,
+    orientalfood,
+    loadingOrientalfood,
+    errorOrientalfood,
+    fastfood,
+    loadingFastfood,
+    errorFastfood,
+    seafood,
+    loadingSeafood,
+    errorSeafood,
+    pizza,
+    loadingPizza,
+    errorPizza,
+    fried,
+    loadingFried,
+    errorFried,
+    shawarma,
+    loadingShawarma,
+    errorShawarma,
+    allRestaurants,
+    schools,
+    loadingSchools,
+    errorSchools,
+    kindergarten,
+    loadingKindergarten,
+    errorKindergarten,
+    pharmacies,
+    errorPharmacy,
+    loadingPharmacy,
+    centers,
+    errorCenters,
+    loadingCenters
   };
 
   return (

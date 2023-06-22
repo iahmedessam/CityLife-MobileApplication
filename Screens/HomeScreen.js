@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, Text, ScrollView, TouchableOpacity, Image, StyleSheet, Platform } from 'react-native';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
-import { SliderBox } from 'react-native-image-slider-box';
+// import { SliderBox } from 'react-native-image-slider-box';
 
 export default function HomeScreen({ navigation }) {
 
@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }) {
 
                 {/* Slider  */}
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <SliderBox
+                    {/* <SliderBox
                         ImageComponent={Image}
                         images={images}
                         sliderBoxHeight={200}
@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation }) {
                         }}
                         ImageComponentStyle={{ borderRadius: 15, width: '97%', marginTop: 5 }}
                         imageLoadingColor="#2196F3"
-                    />
+                    /> */}
                     {/* Text overlays */}
                     <View style={styles.overlayContainer1}>
                         <Text style={styles.overlayText}>Leave Your Fingerprint</Text>
@@ -144,7 +144,7 @@ export default function HomeScreen({ navigation }) {
                     <Text
                         style={{ textAlign: 'center', paddingBottom: 15, fontWeight: 'bold', fontSize: 24, marginTop: 16, opacity: 0.4 }}>
                         Categories
-                    </Text >
+                    </Text>
 
                     <View style={styles.categoryContainer}>
                         <TouchableOpacity onPress={() => navigation.navigate('Restaurants')} style={styles.categoryItem}>

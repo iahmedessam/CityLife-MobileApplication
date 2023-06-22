@@ -10,22 +10,28 @@ import ContactUs from "../Components/ContactUs";
 import Banks from "../Components/Banks";
 import Cinema from "../Components/Cinema";
 import DashBoard from "../Components/DashBoard";
-import Education from "../Components/Education";
+import Education from "../Components/Education/Education";
 import Fashion from "../Components/Fashion";
 import Footer from "../Components/Footer";
-import Health from "../Components/Health";
+import Health from "../Components/Health/Health";
 import HomeServices from "../Components/HomeServices";
 import Hospitals from "../Components/Hospitals";
 import Maintenance from "../Components/Maintenance";
 import MaintenancePayment from "../Components/MaintenancePayment";
 import Markets from "../Components/Markets";
-import Restaurants from "../Components/Restaurants";
 import Shopping from "../Components/Shopping";
 import SignIn from "../Components/SignIn";
 import SignUp from "../Components/SignUp";
 import Sports from "../Components/Sports";
 import Stores from "../Components/Stores";
 import Transportation from "../Components/Transportation";
+import HomeRestaurants from "../Components/Restaurants/HomeRestaurants";
+import Shawarma from "../Components/Restaurants/shawarma";
+import Fastfood from "../Components/Restaurants/fastfood";
+import Fried from "../Components/Restaurants/fried";
+import Pizza from "../Components/Restaurants/pizza";
+import Seafood from "../Components/Restaurants/seafood";
+import Orientalfood from "../Components/Restaurants/orientalfood";
 
 export const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -58,7 +64,10 @@ export default function MyTabs() {
             <Stack.Screen name="Hospitals" component={Hospitals} />
             <Stack.Screen name="Maintenance" component={Maintenance} />
             <Stack.Screen name="Markets" component={Markets} />
-            <Stack.Screen name="Restaurants" component={Restaurants} />
+
+            <Stack.Screen name="Restaurants" component={HomeRestaurants} />
+          
+
             <Stack.Screen name="Shopping" component={Shopping} />
             <Stack.Screen name="Sports" component={Sports} />
             <Stack.Screen name="Stores" component={Stores} />
