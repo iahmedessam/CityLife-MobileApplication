@@ -8,7 +8,6 @@ import axios from 'axios';
 import { TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-
 export default function SignIn({ navigation }) {
 
   const [isLoading, setIsLoading] = useState(false)
@@ -42,7 +41,7 @@ export default function SignIn({ navigation }) {
   return (
     <ScrollView>
       <View>
-
+        {errorMsg ? <Text> {errorMsg} </Text> : null}
         {/* Email */}
         <TextInput
           style={formik.errors.email && formik.touched.email ? styles.inputError : styles.input}

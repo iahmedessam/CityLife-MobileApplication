@@ -53,7 +53,7 @@ export default function SignIn({ navigation }) {
   return (
     <ScrollView>
       <View>
-
+        {errorMsg ? <Text> {errorMsg} </Text> : null}
         {/* Name */}
         <TextInput
           style={formik.errors.name && formik.touched.name ? styles.inputError : styles.input}
