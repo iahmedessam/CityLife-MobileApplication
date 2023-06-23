@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { Image } from 'react-native';
 
 export default function SignIn({ navigation }) {
 
@@ -41,7 +42,12 @@ export default function SignIn({ navigation }) {
   return (
     <ScrollView>
       <View>
+
+        
+
+        {/* Error message  */}
         {errorMsg ? <Text> {errorMsg} </Text> : null}
+
         {/* Email */}
         <TextInput
           style={formik.errors.email && formik.touched.email ? styles.inputError : styles.input}

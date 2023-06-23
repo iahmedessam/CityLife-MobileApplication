@@ -53,9 +53,9 @@ export default function Restaurants() {
 
   return (
     <>
-    
-      <ScrollView style={{backgroundColor:"white"}} >
-        <Text style={{ fontSize: 20, fontWeight: "bold", marginLeft: 21, color:"#112D4E", marginTop:20}}>All Restaurants</Text>
+
+      <ScrollView style={{ backgroundColor: "white" }} >
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginLeft: 21, color: "#112D4E", marginTop: 20 }}>All Restaurants</Text>
         {allRestaurants.map((ele) => (
           <View style={[styles.card, stylesArr.RestaurantStyle]} key={ele.id}>
             <ScrollView horizontal={true} style={{ marginHorizontal: 10, marginBottom: 10 }}>
@@ -71,15 +71,15 @@ export default function Restaurants() {
                 </TouchableOpacity>
               </View>
             </ScrollView>
-              <View style={stylesArr.logoContainer}>
-                <Image style={stylesArr.logo} source={{ uri: ele.logo }} />
-                <Text style={[styles.title]}>{ele.name}</Text>
-                <View style={stylesArr.divider} />
-              </View>
+            <View style={stylesArr.logoContainer}>
+              <Image style={stylesArr.logo} source={{ uri: ele.logo }} />
+              <Text style={[styles.title]}>{ele.name}</Text>
+              <View style={stylesArr.divider} />
+            </View>
 
             <View style={[styles.content, { alignItems: "center" }]}>
               <Text style={[styles.overview, { fontFamily: fontsLoaded ? 'boldItalic' : null }]}>Overview: {ele.overview}</Text>
-              <Text style={[styles.overview, { fontFamily: fontsLoaded ? 'boldItalic' : null }, {textAlign:"center"}]}>Address: {ele.address}</Text>
+              <Text style={[styles.overview, { fontFamily: fontsLoaded ? 'boldItalic' : null }, { textAlign: "center" }]}>Address: {ele.address}</Text>
             </View>
 
             <View style={styles.buttonsSection}>
@@ -102,60 +102,60 @@ export default function Restaurants() {
           </View>
         ))}
 
-            <Modal visible={showModal} animationType="slide">
-  <View style={stylesArr.modalContainer}>
-    <View style={stylesArr.modalHeader}>
-      <Text style={stylesArr.modalTitle}>Leave Feedback</Text>
-      <TouchableOpacity onPress={handleCloseModal}>
-        <Text style={stylesArr.modalCloseButton}>X</Text>
-      </TouchableOpacity>
-    </View>
-    <View style={stylesArr.modalBody}>
-      <TextInput
-        style={stylesArr.modalInput}
-        placeholder="Your Name"
-        value={feedbackName}
-        onChangeText={handlefeedbackName}
-      />
-      <TextInput
-        style={[stylesArr.modalInput, stylesArr.feedbackMessage]}
-        placeholder="Your Feedback"
-        value={feedbackMessage}
-        onChangeText={handlefeedbackMessage}
-        multiline
-      />
-      <TouchableOpacity style={stylesArr.modalSubmitButton} onPress={handleSubmit}
-      disabled={feedbackName === '' || feedbackMessage === ''}
-      >
-        <Text style={stylesArr.modalSubmitButtonText}>Submit</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-</Modal>
+        <Modal visible={showModal} animationType="slide">
+          <View style={stylesArr.modalContainer}>
+            <View style={stylesArr.modalHeader}>
+              <Text style={stylesArr.modalTitle}>Leave Feedback</Text>
+              <TouchableOpacity onPress={handleCloseModal}>
+                <Text style={stylesArr.modalCloseButton}>X</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={stylesArr.modalBody}>
+              <TextInput
+                style={stylesArr.modalInput}
+                placeholder="Your Name"
+                value={feedbackName}
+                onChangeText={handlefeedbackName}
+              />
+              <TextInput
+                style={[stylesArr.modalInput, stylesArr.feedbackMessage]}
+                placeholder="Your Feedback"
+                value={feedbackMessage}
+                onChangeText={handlefeedbackMessage}
+                multiline
+              />
+              <TouchableOpacity style={stylesArr.modalSubmitButton} onPress={handleSubmit}
+                disabled={feedbackName === '' || feedbackMessage === ''}
+              >
+                <Text style={stylesArr.modalSubmitButtonText}>Submit</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
 
-<Modal  visible={showThankYouModal} animationType="slide">
-  <View style={stylesArr.modalContainer}>
-    <View style={stylesArr.modalHeader}>
-    <View style={stylesArr.checkCircle}>
-  <Icon  name="check" size={20} color="#FFF" />
-</View>
-      <TouchableOpacity onPress={handleCloseModal}>
-        <Text style={stylesArr.modalCloseButton}>X</Text>
-      </TouchableOpacity>
-    </View>
-    <View style={stylesArr.modalBody}>
-      <Text style={stylesArr.modalThankYouText}>Thank you for your feedback!</Text>
-    </View>
-  </View>
-</Modal>
+        <Modal visible={showThankYouModal} animationType="slide">
+          <View style={stylesArr.modalContainer}>
+            <View style={stylesArr.modalHeader}>
+              <View style={stylesArr.checkCircle}>
+                <Icon name="check" size={20} color="#FFF" />
+              </View>
+              <TouchableOpacity onPress={handleCloseModal}>
+                <Text style={stylesArr.modalCloseButton}>X</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={stylesArr.modalBody}>
+              <Text style={stylesArr.modalThankYouText}>Thank you for your feedback!</Text>
+            </View>
+          </View>
+        </Modal>
       </ScrollView>
       {selectedImg && (
-  <Modal visible={true} transparent={true}>
-    <TouchableOpacity style={stylesArr.modalBackground} onPress={() => setSelectedImg(null)}>
-      <Image source={{ uri: selectedImg }} style={stylesArr.modalImage} resizeMode="contain" />
-    </TouchableOpacity>
-  </Modal>
-)}
+        <Modal visible={true} transparent={true}>
+          <TouchableOpacity style={stylesArr.modalBackground} onPress={() => setSelectedImg(null)}>
+            <Image source={{ uri: selectedImg }} style={stylesArr.modalImage} resizeMode="contain" />
+          </TouchableOpacity>
+        </Modal>
+      )}
 
     </>
   );
@@ -164,7 +164,7 @@ export default function Restaurants() {
 const stylesArr = StyleSheet.create({
   imagesContainer: {
     flexDirection: "row",
-    marginLeft:17
+    marginLeft: 17
   },
   image: {
     width: 80,
@@ -175,26 +175,26 @@ const stylesArr = StyleSheet.create({
     borderRadius: 10,
   },
 
-  RestaurantStyle:{
-    borderTopWidth:1,
-    borderTopColor:'#112D4E',
-    borderTopWidth:0.2,
-    paddingTop:10,
-  
+  RestaurantStyle: {
+    borderTopWidth: 1,
+    borderTopColor: '#112D4E',
+    borderTopWidth: 0.2,
+    paddingTop: 10,
+
   },
   logoContainer: {
     backgroundColor: "#F5F8FC",
-    borderBottomColor:"#DBE2EF",
-    borderBottomWidth:0.9,
+    borderBottomColor: "#DBE2EF",
+    borderBottomWidth: 0.9,
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
     marginBottom: 10,
     flexDirection: "row",
-    width:"100%",
-    justifyContent:"center",
-    
-    borderBottomColor:"#DBE2EF"
+    width: "100%",
+    justifyContent: "center",
+
+    borderBottomColor: "#DBE2EF"
     // ...Platform.select({
     //   ios: {
     //     shadowColor: 'black',
@@ -212,8 +212,8 @@ const stylesArr = StyleSheet.create({
   },
 
 
-  modalViewStyle:{
-    height:10
+  modalViewStyle: {
+    height: 10
   },
   modalBackground: {
     flex: 1,
@@ -225,15 +225,15 @@ const stylesArr = StyleSheet.create({
     width: '90%',
     height: '90%',
   },
-  
+
   logo: {
     width: 40,
     height: 40,
     borderRadius: 20,
   },
   checkCircle: {
-    marginTop:"10%",
-    marginLeft:"45%",
+    marginTop: "10%",
+    marginLeft: "45%",
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -241,7 +241,7 @@ const stylesArr = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  
+
 
 
 
@@ -272,10 +272,10 @@ const stylesArr = StyleSheet.create({
   modalCloseButton: {
     fontSize: 15,
     fontWeight: 'bold',
-backgroundColor: '#112D4E',
-color:"white",
-borderRadius:5,
-paddingHorizontal:7,
+    backgroundColor: '#112D4E',
+    color: "white",
+    borderRadius: 5,
+    paddingHorizontal: 7,
 
 
   },
@@ -312,7 +312,7 @@ paddingHorizontal:7,
   modalThankYouText: {
     fontSize: 16,
     textAlign: 'center',
-    marginBottom:"10%"
+    marginBottom: "10%"
   },
   modalBackground: {
     flex: 1,
