@@ -30,6 +30,7 @@ import {
 } from "native-base";
 import { useCallback } from "react";
 import { useState } from "react";
+import uuid from 'react-native-uuid';
 import DateTimePicker, {
   DateTimePickerAndroid,
 } from "@react-native-community/datetimepicker";
@@ -74,9 +75,9 @@ export default function MaintenancePayment() {
     <>
       <FlatList
         data={PayArr}
-        renderItem={({ item,idx }) => (
+        renderItem={({ item }) => (
           
-            <View style={styles.card} key={idx}>
+            <View style={styles.card} key={uuid.v4()}>
               {/* Body */}
               <View style={[styles.content, { alignItems: "center" }]}>
                 <Text style={[styles.title]}>{item.name}</Text>
@@ -85,27 +86,28 @@ export default function MaintenancePayment() {
                   style={{
                     marginTop: 15,
                   }}
+                  key={uuid.v4()}
                 >
                   {(() => {
                     switch (item.name) {
                       case "City Maintenance Bills":
                         return (
-                          <Icon name="screwdriver" size={50} color="#900" />
+                          <Icon key={uuid.v4()} name="screwdriver" size={50} color="#900" />
                         );
                       case "El-Rehab club subscription":
                         return (
-                          <Icon name="basketball-ball" size={50} color="#900" />
+                          <Icon key={uuid.v4()} name="basketball-ball" size={50} color="#900" />
                         );
                       case "Water Bills":
                         return (
-                          <Icon
+                          <Icon key={uuid.v4()}
                             name="hand-holding-water"
                             size={50}
                             color="#900"
                           />
                         );
                       case "Car Washing subscription":
-                        return <Icon name="car" size={50} color="#900" />;
+                        return <Icon key={uuid.v4()} name="car" size={50} color="#900" />;
                       default:
                         return null;
                     }
@@ -147,9 +149,10 @@ export default function MaintenancePayment() {
             </View>
           
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={uuid.v4()}
         ListHeaderComponent={
           <Text
+          key={uuid.v4()}
             style={{
               textAlign: "center",
               fontSize: 20,
