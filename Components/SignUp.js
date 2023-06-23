@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Image } from 'react-native';
@@ -122,7 +122,11 @@ export default function Signup({ navigation }) {
                 style={[styles.input, styles.submitButton]}
                 onPress={handleSubmit}
                 disabled={dirty && isValid ? false : true}>
-                <Text style={styles.submitText}>Loading</Text>
+                <ActivityIndicator
+                  size={20}
+                  color='white'
+                  animating={true}
+                />
               </TouchableOpacity>
               :
               <TouchableOpacity

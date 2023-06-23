@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Image } from 'react-native';
@@ -14,26 +14,15 @@ export default function SignIn({ navigation }) {
   const [errorMsg, seterrorMsg] = useState('')
   const [userData, setUserData] = useState(null);
 
-  //Set Value
+  //Set userdata Token
   const saveUserData = async () => {
     try {
       const encodedToken = await AsyncStorage.getItem('token');
       const decodedToken = jwtDecode(encodedToken);
       setUserData(decodedToken);
+      return decodedToken;
     } catch (error) {
       console.error('Error saving user data:', error);
-    }
-  };
-
-  //Read Value
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('token');
-      if (value !== null) {
-        // value previously stored
-      }
-    } catch (e) {
-      // error reading value
     }
   };
 
@@ -47,9 +36,11 @@ export default function SignIn({ navigation }) {
           .then(async (res) => {
             if (res.data.message === "success") {
               const token = res.data.token;
-              await saveUserData(token);
+              AsyncStorage.setItem('token', token);
+              saveUserData(token);
               setIsLoading(false)
               navigation.navigate("Home")
+              console.warn(token)
             }
           })
           .catch((error) => {
@@ -57,7 +48,6 @@ export default function SignIn({ navigation }) {
             seterrorMsg(error.response.data.message)
           })
       }}
-
 
       validationSchema={Yup.object({
         email: Yup.string().required('Email is required').email('Example: exa@gmail.com'),
@@ -96,7 +86,11 @@ export default function SignIn({ navigation }) {
               style={[styles.input, styles.submitButton]}
               onPress={handleSubmit}
               disabled={dirty && isValid ? false : true}>
-              <Text style={styles.submitText}>Loading</Text>
+              <ActivityIndicator
+                size={20}
+                color='white'
+                animating={true}
+              />
             </TouchableOpacity>
             :
             <TouchableOpacity

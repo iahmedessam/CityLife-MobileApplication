@@ -63,10 +63,7 @@ export default function MyTabs() {
             <Stack.Screen name="Hospitals" component={Hospitals} />
             <Stack.Screen name="Maintenance" component={Maintenance} />
             <Stack.Screen name="Markets" component={Markets} />
-
             <Stack.Screen name="Restaurants" component={HomeRestaurants} />
-          
-
             <Stack.Screen name="Shopping" component={Shopping} />
             <Stack.Screen name="Sports" component={Sports} />
             <Stack.Screen name="Stores" component={Stores} />
@@ -79,7 +76,7 @@ export default function MyTabs() {
 
       <Tab.Screen name="about us" options={{
         headerShown: false,
-        tabBarIcon: ({ color, size }) => <Ionicons name="code-slash-outline" size={size} color="#112D4E" />
+        tabBarIcon: ({ color, size }) => <Ionicons name="images-outline" size={size} color="#112D4E" />
       }}>
         {() => (
           <Stack.Navigator screenOptions={{

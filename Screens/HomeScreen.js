@@ -132,25 +132,6 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <>
-      <Video
-        ref={video}
-        style={{
-          alignSelf: 'center',
-          width: Dimensions.get("window").width,
-          height: 200,
-        }}
-        source={
-          require("../assets/videos/video1.mp4")
-        }
-
-        resizeMode={ResizeMode.CONTAIN}
-        isLooping
-        isMuted
-        shouldPlay
-        useNativeControls={false}
-        onPlaybackStatusUpdate={status => setStatus(() => status)}
-      />
-
       {/* Search bar */}
       <View style={styles.autocompleteContainer}>
         <AutocompleteInput
@@ -254,7 +235,25 @@ export default function HomeScreen({ navigation }) {
             </Text>
           </View>
         </View> */}
-          
+          <Video
+            ref={video}
+            style={{
+              alignSelf: 'center',
+              width: Dimensions.get("window").width,
+              height: 200,
+            }}
+            source={
+              require("../assets/videos/video1.mp4")
+            }
+
+            resizeMode={ResizeMode.CONTAIN}
+            isLooping
+            isMuted
+            shouldPlay
+            useNativeControls={false}
+            onPlaybackStatusUpdate={status => setStatus(() => status)}
+          />
+
           {/* services */}
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
