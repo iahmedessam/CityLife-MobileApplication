@@ -1,87 +1,126 @@
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
-import { ScrollView } from 'react-native-gesture-handler';
-import { TextInput } from 'react-native';
-import { useFormik } from 'formik'
+import React from 'react';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
-import { TouchableOpacity } from 'react-native';
-import { StyleSheet } from 'react-native';
 import { Image } from 'react-native';
+import axios from 'axios';
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
 
 export default function SignIn({ navigation }) {
 
   const [isLoading, setIsLoading] = useState(false)
   const [errorMsg, seterrorMsg] = useState('')
+  const [userData, setUserData] = useState(null);
 
-  const validationSchema = Yup.object({
-    email: Yup.string().required('Email is required').email('Example: exa@gmail.com'),
-    password: Yup.string().required('Password is required').matches(/^[A-Za-z0-9-_.]{5,15}/, 'Password must be letters or numbers from 10 to 15 '),
-  })
+  //Set Value
+  const saveUserData = async () => {
+    try {
+      const encodedToken = await AsyncStorage.getItem('token');
+      const decodedToken = jwtDecode(encodedToken);
+      setUserData(decodedToken);
+    } catch (error) {
+      console.error('Error saving user data:', error);
+    }
+  };
 
-  function handleSubmit(values) {
-    setIsLoading(true)
-    axios.post("https://route-ecommerce.onrender.com/api/v1/auth/signin", values)
-      .then((res) => {
-        if (res.data.message === "success") {
-          setIsLoading(false)
-        }
-      })
-      .catch((error) => {
-        console.warn(error)
-        setIsLoading(false)
-        seterrorMsg(error.response.data.message)
-      })
-  }
-  let formik = useFormik({
-    initialValues: { name: "", email: "", phone: "", password: "", rePassword: "", },
-    onSubmit: handleSubmit,
-    validationSchema
-  })
+  //Read Value
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('token');
+      if (value !== null) {
+        // value previously stored
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
 
-  return (
-    <ScrollView>
-      <View>
+  return <>
+    <Formik
+      initialValues={{ email: '', password: '' }}
 
-        
+      onSubmit={values => {
+        setIsLoading(true)
+        axios.post("https://route-ecommerce.onrender.com/api/v1/auth/signin", values)
+          .then(async (res) => {
+            if (res.data.message === "success") {
+              const token = res.data.token;
+              await saveUserData(token);
+              setIsLoading(false)
+              navigation.navigate("Home")
+            }
+          })
+          .catch((error) => {
+            setIsLoading(false)
+            seterrorMsg(error.response.data.message)
+          })
+      }}
 
-        {/* Error message  */}
-        {errorMsg ? <Text> {errorMsg} </Text> : null}
 
-        {/* Email */}
-        <TextInput
-          style={formik.errors.email && formik.touched.email ? styles.inputError : styles.input}
-          placeholder='Email' name='email' id='email'
-          value={formik.values.email} onChangeText={formik.handleChange('email')} onBlur={formik.handleBlur('email')}
-        />
-        {/* Passwrod */}
-        <TextInput
-          style={formik.errors.password && formik.touched.password ? styles.inputError : styles.input}
-          placeholder='Password' name='password' id='password' secureTextEntry={true}
-          value={formik.values.password} onChangeText={formik.handleChange('password')} onBlur={formik.handleBlur('password')}
-        />
-        {/* Submit Button  */}
-        {isLoading ?
-          <TouchableOpacity
-            style={[styles.input, styles.submitButton]}
-            onPress={formik.handleSubmit}
-            disabled={formik.dirty && formik.isValid ? false : true}>
-            <Text style={styles.submitText}>Loading</Text>
-          </TouchableOpacity>
-          :
-          <TouchableOpacity
-            style={[styles.input, styles.submitButton]}
-            onPress={formik.handleSubmit}
-            disabled={formik.dirty && formik.isValid ? false : true}>
-            <Text style={styles.submitText}>Login</Text>
-          </TouchableOpacity>}
+      validationSchema={Yup.object({
+        email: Yup.string().required('Email is required').email('Example: exa@gmail.com'),
+        password: Yup.string().required('Password is required').matches(/^[A-Za-z0-9-_.]{5,15}/, 'Password must be letters or numbers from 10 to 15 '),
+      })}
+    >
+      {({ handleChange, setFieldTouched, handleSubmit, values, errors, touched, dirty, isValid }) => (
+        <View>
 
-      </View>
-    </ScrollView>
-  )
-}
+          <Image style={styles.img} source={require("../assets/signin.png")}></Image>
+
+          {errorMsg ? <Text style={styles.errorText}> {errorMsg} </Text> : null}
+
+          {/* Email  */}
+          <TextInput
+            style={errors.email && touched.email ? styles.inputError : styles.input}
+            placeholder='Email'
+            value={values.email}
+            onChangeText={handleChange('email')}
+            onBlur={() => setFieldTouched('email')}
+          />
+          {errors.email && touched.email ? <Text style={{ color: 'red', marginLeft: '5%' }}>{errors.email}</Text> : null}
+          {/* Password */}
+          <TextInput
+            style={errors.password && touched.password ? styles.inputError : styles.input}
+            placeholder='Password'
+            secureTextEntry={true}
+            value={values.password}
+            onChangeText={handleChange('password')}
+            onBlur={() => setFieldTouched('password')}
+          />
+          {errors.password && touched.password ? <Text style={{ color: 'red', marginLeft: '5%' }}>{errors.password}</Text> : null}
+          {/* Login Button  */}
+          {isLoading ?
+            <TouchableOpacity
+              style={[styles.input, styles.submitButton]}
+              onPress={handleSubmit}
+              disabled={dirty && isValid ? false : true}>
+              <Text style={styles.submitText}>Loading</Text>
+            </TouchableOpacity>
+            :
+            <TouchableOpacity
+              style={[styles.input, styles.submitButton]}
+              onPress={handleSubmit}
+              disabled={dirty && isValid ? false : true}>
+              <Text style={styles.submitText}>Login</Text>
+            </TouchableOpacity>}
+
+        </View>
+      )}
+    </Formik >
+  </>
+
+};
 
 const styles = StyleSheet.create({
+  img: {
+    width: 250,
+    height: 200,
+    marginTop: 50,
+    marginBottom: 30,
+    alignSelf: 'center'
+  },
   input: {
     borderWidth: 1,
     borderColor: '#112D4E',
@@ -107,5 +146,9 @@ const styles = StyleSheet.create({
   submitText: {
     textAlign: 'center',
     color: 'white'
+  },
+  errorText: {
+    color: 'red',
+    textAlign: "center"
   }
 })

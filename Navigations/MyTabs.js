@@ -9,10 +9,8 @@ import About from "../Components/About";
 import ContactUs from "../Components/ContactUs";
 import Banks from "../Components/Banks";
 import Cinema from "../Components/Cinema";
-import DashBoard from "../Components/DashBoard";
 import Education from "../Components/Education/Education";
 import Fashion from "../Components/Fashion";
-import Footer from "../Components/Footer";
 import Health from "../Components/Health/Health";
 import HomeServices from "../Components/HomeServices";
 import Hospitals from "../Components/Hospitals";
@@ -25,7 +23,6 @@ import SignUp from "../Components/SignUp";
 import Sports from "../Components/Sports";
 import Stores from "../Components/Stores";
 import Transportation from "../Components/Transportation";
-
 import HomeRestaurants from "../Components/Restaurants/HomeRestaurants";
 import Shawarma from "../Components/Restaurants/shawarma";
 import Fastfood from "../Components/Restaurants/fastfood";
@@ -128,7 +125,6 @@ export default function MyTabs() {
             }
           }}>
             <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="Dashboard" component={DashBoard} />
             <Stack.Screen name="Sign up" component={SignUp} />
             <Stack.Screen name="Sign in" component={SignIn} />
           </Stack.Navigator>

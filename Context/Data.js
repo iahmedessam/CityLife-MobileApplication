@@ -74,27 +74,27 @@ export default function Data(props) {
   const [{ data: orientalfood, loadingOrientalfood, errorOrientalfood }] = useAxios({
     url: `${baseUrl}/orientalfood`,
   });
- 
+
   const [{ data: fastfood, loadingFastfood, errorFastfood }] = useAxios({
     url: `${baseUrl}/fastfood`,
   });
- 
+
   const [{ data: seafood, loadingSeafood, errorSeafood }] = useAxios({
     url: `${baseUrl}/seafood`,
   });
- 
+
   const [{ data: pizza, loadingPizza, errorPizza }] = useAxios({
     url: `${baseUrl}/pizza`,
   });
- 
+
   const [{ data: fried, loadingFried, errorFried }] = useAxios({
     url: `${baseUrl}/fried`,
   });
- 
+
   const [{ data: shawarma, loadingShawarma, errorShawarma }] = useAxios({
     url: `${baseUrl}/shawarma`,
   });
- 
+
   const allRestaurants = [
     orientalfood,
     fastfood,
@@ -155,22 +155,22 @@ export default function Data(props) {
       })
   }, [])
 
-  useEffect(() => {
-    let NamesArr = []
-    let IDsArr = []
-    let NamesIDsArr = []
-    setCategoryNames([...Object.keys(All)])
-    for (let category of Object.values(All)) {
-      for (let ele of category) {
-        NamesArr.push(ele.name)
-        IDsArr.push(ele.id)
-        NamesIDsArr.push({ id: ele.id, name: ele.name })
-      }
-    }
-    setAllName(NamesArr)
-    setAllIDs(IDsArr)
-    setAllIDsNames(NamesIDsArr)
-  }, [All])
+  // useEffect(() => {
+  //   let NamesArr = []
+  //   let IDsArr = []
+  //   let NamesIDsArr = []
+  //   setCategoryNames([...Object.keys(All)])
+  //   for (let category of Object.values(All)) {
+  //     for (let ele of category) {
+  //       NamesArr.push(ele.name)
+  //       IDsArr.push(ele.id)
+  //       NamesIDsArr.push({ id: ele.id, name: ele.name })
+  //     }
+  //   }
+  //   setAllName(NamesArr)
+  //   setAllIDs(IDsArr)
+  //   setAllIDsNames(NamesIDsArr)
+  // }, [All])
 
 
   const ExchangedData = {
