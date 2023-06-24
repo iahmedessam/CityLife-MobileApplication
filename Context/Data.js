@@ -58,15 +58,15 @@ export default function Data(props) {
   const [{ data: transportation, loadingTrans, errorTrans }] = useAxios({
     url: `${baseUrl}/transportation`,
   });
-
+  // Banks Data
   const [{ data: banks, loadingBanks, errorBanks }] = useAxios({
     url: `${baseUrl}/banks`,
   });
-
+  // Sports Data
   const [{ data: sports, loadingSports, errorSports }] = useAxios({
     url: `${baseUrl}/sports`,
   });
-
+  // Cinema Data
   const [{ data: cinema, loadingCinema, errorCinema }] = useAxios({
     url: `${baseUrl}/cinema`,
   });
@@ -103,40 +103,40 @@ export default function Data(props) {
     fried,
     shawarma,
   ].reduce((accumulator, currentArray) => accumulator.concat(currentArray), []);
-
-  //Health Data Fetching
+  
+  // Education Data Fetching
   const [{ data: schools, loadingSchools, errorSchools }] = useAxios({
     url: `${baseUrl}/schools`,
   });
-
+  
   const [{ data: kindergarten, loadingKindergarten, errorKindergarten }] = useAxios({
     url: `${baseUrl}/kindergarten`,
   });
-
-  // Education Data Fetching
+  
+  //Health Data Fetching
   const [{ data: pharmacies, loadingPharmacy, errorPharmacy }] = useAxios({
     url: `${baseUrl}/pharmacy`,
   });
   const [{ data: centers, loadingCenters, errorCenters }] = useAxios({
     url: `${baseUrl}/centers`,
   });
-
+  // fashion Data
   const [{ data: fashion, loadingfashion, errorfashion }] = useAxios({
     url: `${baseUrl}/fashion`,
   });
-
+  // maintenance Data
   const [{ data: maintenance, loadingmaintenance, errormaintenance }] = useAxios({
     url: `${baseUrl}/maintenance`,
   });
-
+  // home services Data
   const [{ data: homeservices, loadinghomeservices, errorhomeservices }] = useAxios({
     url: `${baseUrl}/home_services`,
   });
-
+  // shopping Data
   const [{ data: shopping, loadingshopping, errorshopping }] = useAxios({
     url: `${baseUrl}/shopping`,
   });
-
+  // markets Data
   const [{ data: markets, loadingmarkets, errormarkets }] = useAxios({
     url: `${baseUrl}/markets`,
   });

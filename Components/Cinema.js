@@ -30,8 +30,7 @@ import uuid from 'react-native-uuid';
 
 
 export default function Cinema() {
-  const { fontsLoaded, cinema, loadingCinema, errorCinema } =
-    useContext(DataContext);
+  const { fontsLoaded, cinema, loadingCinema, errorCinema } = useContext(DataContext);
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [day, setDay] = useState("");
