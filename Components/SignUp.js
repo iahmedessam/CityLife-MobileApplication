@@ -98,7 +98,7 @@ export default function Signup({ navigation }) {
             {/* rePassword */}
             <TextInput
               style={errors.rePassword && touched.rePassword ? styles.inputError : styles.input}
-              placeholder='Re Password'
+              placeholder='Re-Password'
               secureTextEntry={true}
               value={values.rePassword}
               onChangeText={handleChange('rePassword')}

@@ -6,25 +6,14 @@ import { Image } from 'react-native';
 import axios from 'axios';
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from 'jwt-decode';
+import { useContext } from 'react';
+import { DataContext } from '../Context/Data';
 
 export default function SignIn({ navigation }) {
 
   const [isLoading, setIsLoading] = useState(false)
   const [errorMsg, seterrorMsg] = useState('')
-  const [userData, setUserData] = useState(null);
-
-  //Set userdata Token
-  const saveUserData = async () => {
-    try {
-      const encodedToken = await AsyncStorage.getItem('token');
-      const decodedToken = jwtDecode(encodedToken);
-      setUserData(decodedToken);
-      return decodedToken;
-    } catch (error) {
-      console.error('Error saving user data:', error);
-    }
-  };
+  const { saveUserData } = useContext(DataContext)
 
   return <>
     <Formik
@@ -37,7 +26,7 @@ export default function SignIn({ navigation }) {
             if (res.data.message === "success") {
               const token = res.data.token;
               AsyncStorage.setItem('token', token);
-              saveUserData(token);
+              await saveUserData();
               setIsLoading(false)
               navigation.navigate("Home")
               console.warn(token)
@@ -104,7 +93,6 @@ export default function SignIn({ navigation }) {
       )}
     </Formik >
   </>
-
 };
 
 const styles = StyleSheet.create({

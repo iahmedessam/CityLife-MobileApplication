@@ -245,7 +245,7 @@ export default function Data(props) {
     shopping, loadingshopping, errorshopping,
     markets, loadingmarkets, errormarkets,
     PayArr,
-    saveUserData
+    userData, setUserData, saveUserData
   };
 
   return (
