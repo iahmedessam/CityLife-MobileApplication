@@ -27,8 +27,8 @@ import { Dimensions } from "react-native";
 
 
 export default function HomeScreen({ navigation }) {
-    const video = useRef(null);
-    const [status, setStatus] = useState({});
+  const video = useRef(null);
+  const [status, setStatus] = useState({});
 
 
 
@@ -37,122 +37,54 @@ export default function HomeScreen({ navigation }) {
   const [query, setQuery] = useState("");
   const [filterData, setFilterData] = useState([]);
 
-    const images = [
-        require("../assets/homeImages/slider/slider12.jpg"),
-        require("../assets/homeImages/slider/slider1.jpg"),
-        require("../assets/homeImages/slider/slider2.jpg"),
-        require("../assets/homeImages/slider/slider3.jpg"),
-        require("../assets/homeImages/slider/slider4.jpg"),
-        require("../assets/homeImages/slider/slider5.jpg"),
-        require("../assets/homeImages/slider/slider6.jpg"),
-        require("../assets/homeImages/slider/slider1.jpg"),
-    ]
- useEffect(() => {
-    if (query.trim() === "") {
-      setFilterData([]);
-      return;
-    }
+  // console.warn(AllIDsNames)
+
+  const images = [
+    require("../assets/homeImages/slider/slider12.jpg"),
+    require("../assets/homeImages/slider/slider1.jpg"),
+    require("../assets/homeImages/slider/slider2.jpg"),
+    require("../assets/homeImages/slider/slider3.jpg"),
+    require("../assets/homeImages/slider/slider4.jpg"),
+    require("../assets/homeImages/slider/slider5.jpg"),
+    require("../assets/homeImages/slider/slider6.jpg"),
+    require("../assets/homeImages/slider/slider1.jpg"),
+  ]
+  useEffect(() => {
+    // console.warn(query)
+    // if (query.trim() === "") {
+    //   setFilterData([]);
+    //   return;
+    // }
     const selectedItem = AllIDsNames.filter((ele) =>
-      ele["name"].toLowerCase().includes(query.toLowerCase())
+      ele.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilterData(selectedItem);
   }, [query]);
 
-    // return (
-    //     <SafeAreaView style={{ marginTop: Platform.OS === "android" ? 0 : 0, padding: 15 }}>
-    //         <ScrollView showsVerticalScrollIndicator={false}>
-
-    //             {/* Slider  */}
-    //             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    //                 {/* <SliderBox
-    //                     ImageComponent={Image}
-    //                     images={images}
-    //                     sliderBoxHeight={200}
-    //                     onCurrentImagePressed={index => console.warn(`image ${index} pressed`)}
-    //                     dotColor="#FFEE58"
-    //                     inactiveDotColor="#90A4AE"
-    //                     paginationBoxVerticalPadding={20}
-    //                     autoplay
-    //                     circleLoop
-    //                     resizeMethod={'resize'}
-    //                     resizeMode={'cover'}
-    //                     paginationBoxStyle={{
-    //                         position: "absolute",
-    //                         bottom: 0,
-    //                         padding: 0,
-    //                         alignItems: "center",
-    //                         alignSelf: "center",
-    //                         justifyContent: "center",
-    //                         paddingVertical: 10
-    //                     }}
-    //                     dotStyle={{
-    //                         width: 10,
-    //                         height: 10,
-    //                         borderRadius: 5,
-    //                         marginHorizontal: 0,
-    //                         padding: 0,
-    //                         margin: 0,
-    //                         backgroundColor: "rgba(128, 128, 128, 0.92)"
-    //                     }}
-    //                     ImageComponentStyle={{ borderRadius: 15, width: '97%', marginTop: 5 }}
-    //                     imageLoadingColor="#2196F3"
-    //                 /> */}
-    //                 {/* Text overlays */}
-    //                 <View style={styles.overlayContainer1}>
-    //                     <Text style={styles.overlayText}>Leave Your Fingerprint</Text>
-    //                 </View>
-    //                 <View style={styles.overlayContainer2}>
-    //                     <Text style={styles.overlayText}>Explore New Places and Discover</Text>
-
-    //                 </View>
-    //                 <View style={styles.overlayContainer3}>
-    //                     <Text style={styles.overlayText}>Feedback in Al Rehab, Cairo, Egypt</Text>
-    //                 </View>
-    //             </View>
-
-    //             {/* services */}
-    //             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    //                 {/* Services Text */}
-    //                 <Text
-    //                     style={{ textAlign: 'center', paddingBottom: 5, fontWeight: 'bold', fontSize: 24, marginTop: 16, opacity: 0.4 }}>
-    //                     Services
-    //                 </Text>
-
-    //                 <View style={styles.imageContainer}>
-    //                     <TouchableOpacity
-    //                         style={styles.container}
-    //                         onPress={() => navigation.navigate('Banks')} >
-    //                         <View>
-    //                             <Image source={require("../assets/homeImages/bank2.jpg")} style={styles.image} />
-    //                             <Text style={styles.text}>Banks</Text>
-    //                         </View>
-                        // </TouchableOpacity>
-
-
 
   return (
     <>
-    {/* Search bar */}
-    <View style={styles.autocompleteContainer}>
+      {/* Search bar */}
+      <View style={styles.autocompleteContainer}>
         <AutocompleteInput
-        style={{
-        }}
-        
-        placeholder="Search..."
+          style={{
+          }}
+
+          placeholder="Search..."
           data={filterData}
           value={query}
           onChangeText={(val) => setQuery(val)}
-          flatListProps={{	
+          flatListProps={{
             keyExtractor: (_, idx) => idx,
             renderItem: ({ item }) => (
               <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate("Details", { id: item.id })
-                    setQuery("")
+                  navigation.navigate("Details", { id: item.id })
+                  setQuery("")
                 }}
                 style={{
                   paddingVertical: 10,
-                  paddingLeft:5
+                  paddingLeft: 5
                 }}
               >
                 <Text
@@ -167,301 +99,214 @@ export default function HomeScreen({ navigation }) {
           }}
         />
       </View>
-    <SafeAreaView
-      style={{ marginTop: Platform.OS === "android" ? 0 : 0, padding: 15 }}
-    >
-      
-      <ScrollView
-      keyboardShouldPersistTaps='always' 
-        showsVerticalScrollIndicator={false}
-        style={{
-          marginTop: 50,
-        }}
+      <SafeAreaView
+        style={{ marginTop: Platform.OS === "android" ? 0 : 0, padding: 15 }}
       >
-        {/* Slider  */}
-        {/* <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <SliderBox
-            ImageComponent={Image}
-            images={images}
-            sliderBoxHeight={200}
-            onCurrentImagePressed={(index) =>
-              console.warn(`image ${index} pressed`)
-            }
-            dotColor="#FFEE58"
-            inactiveDotColor="#90A4AE"
-            paginationBoxVerticalPadding={20}
-            autoplay
-            circleLoop
-            resizeMethod={"resize"}
-            resizeMode={"cover"}
-            paginationBoxStyle={{
-              position: "absolute",
-              bottom: 0,
-              padding: 0,
-              alignItems: "center",
-              alignSelf: "center",
-              justifyContent: "center",
-              paddingVertical: 10,
-            }}
-            dotStyle={{
-              width: 10,
-              height: 10,
-              borderRadius: 5,
-              marginHorizontal: 0,
-              padding: 0,
-              margin: 0,
-              backgroundColor: "rgba(128, 128, 128, 0.92)",
-            }}
-            ImageComponentStyle={{
-              borderRadius: 15,
-              width: "97%",
-              marginTop: 5,
-            }}
-            imageLoadingColor="#2196F3"
-          />
-          <View style={styles.overlayContainer1}>
-            <Text style={styles.overlayText}>Leave Your Fingerprint</Text>
-          </View>
-          <View style={styles.overlayContainer2}>
-            <Text style={styles.overlayText}>
-              Explore New Places and Discover
-            </Text>
-          </View>
-          <View style={styles.overlayContainer3}>
-            <Text style={styles.overlayText}>
-              Feedback in Al Rehab, Cairo, Egypt
-            </Text>
-          </View>
-        </View> */}
-      <Video
-        ref={video}
-        style={{    alignSelf: 'center',
-        width: Dimensions.get("window").width,
-        height: 200,}}
-        source={
-            require("../assets/videos/video1.mp4")
-        }
-        
-        resizeMode={ResizeMode.CONTAIN}
-        isLooping
-        isMuted
-        shouldPlay 
-        useNativeControls = {false}
-        onPlaybackStatusUpdate={status => setStatus(() => status)}
-      />
 
-        {/* services */}
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        <ScrollView
+          keyboardShouldPersistTaps='always'
+          showsVerticalScrollIndicator={false}
+          style={{
+            marginTop: 50,
+          }}
         >
-          {/* Services Text */}
-          <Text
+          <Video
+            ref={video}
             style={{
-              textAlign: "center",
-              paddingBottom: 5,
-              fontWeight: "bold",
-              fontSize: 24,
-              marginTop: 16,
-              opacity: 0.4,
+              alignSelf: 'center',
+              width: Dimensions.get("window").width,
+              height: 200,
             }}
+            source={
+              require("../assets/videos/video1.mp4")
+            }
+
+            resizeMode={ResizeMode.CONTAIN}
+            isLooping
+            isMuted
+            shouldPlay
+            useNativeControls={false}
+            onPlaybackStatusUpdate={status => setStatus(() => status)}
+          />
+
+          {/* services */}
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           >
-            Services
-          </Text>
-
-          <View style={styles.imageContainer}>
-            <TouchableOpacity
-              style={styles.container}
-              onPress={() => navigation.navigate("Banks")}
+            {/* Services Text */}
+            <Text
+              style={{
+                textAlign: "center",
+                paddingBottom: 5,
+                fontWeight: "bold",
+                fontSize: 24,
+                marginTop: 16,
+                opacity: 0.4,
+              }}
             >
-              <View>
-                <Image
-                  source={require("../assets/homeImages/bank2.jpg")}
-                  style={styles.image}
-                />
-                <Text style={styles.text}>Banks</Text>
-              </View>
-            </TouchableOpacity>
+              Services
+            </Text>
 
-            <TouchableOpacity
-              style={styles.container}
-              onPress={() => navigation.navigate("Markets")}
-            >
-              <View>
-                <Image
-                  source={require("../assets/homeImages/images.jpeg")}
-                  style={styles.image}
-                />
-                <Text style={styles.text}>Markets</Text>
-              </View>
-            </TouchableOpacity>
+            <View style={styles.imageContainer}>
+              <TouchableOpacity
+                style={styles.container}
+                onPress={() => navigation.navigate("Banks")}
+              >
+                <View>
+                  <Image
+                    source={require("../assets/homeImages/bank2.jpg")}
+                    style={styles.image}
+                  />
+                  <Text style={styles.text}>Banks</Text>
+                </View>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.container}
-              onPress={() => navigation.navigate("Hospitals")}
-            >
-              <View>
-                <Image
-                  source={require("../assets/homeImages/hos.jpg")}
-                  style={styles.image}
-                />
-                <Text style={styles.text}>Hospital</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity
+                style={styles.container}
+                onPress={() => navigation.navigate("Markets")}
+              >
+                <View>
+                  <Image
+                    source={require("../assets/homeImages/images.jpeg")}
+                    style={styles.image}
+                  />
+                  <Text style={styles.text}>Markets</Text>
+                </View>
+              </TouchableOpacity>
 
-          <View style={styles.imageContainer}>
-            <TouchableOpacity
-              style={styles.container}
-              onPress={() => navigation.navigate("Education")}
-            >
-              <View>
-                <Image
-                  source={require("../assets/homeImages/school5.jpg")}
-                  style={styles.image}
-                />
-                <Text style={styles.text}>Education</Text>
-              </View>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.container}
+                onPress={() => navigation.navigate("Hospitals")}
+              >
+                <View>
+                  <Image
+                    source={require("../assets/homeImages/hos.jpg")}
+                    style={styles.image}
+                  />
+                  <Text style={styles.text}>Hospital</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
 
-            <TouchableOpacity
-              style={styles.container}
-              onPress={() => navigation.navigate("Cinema")}
-            >
-              <View>
-                <Image
-                  source={require("../assets/homeImages/Cinema.png")}
-                  style={styles.image}
-                />
-                <Text style={styles.text}>Cinema</Text>
-              </View>
-            </TouchableOpacity>
+            <View style={styles.imageContainer}>
+              <TouchableOpacity
+                style={styles.container}
+                onPress={() => navigation.navigate("Education")}
+              >
+                <View>
+                  <Image
+                    source={require("../assets/homeImages/school5.jpg")}
+                    style={styles.image}
+                  />
+                  <Text style={styles.text}>Education</Text>
+                </View>
+              </TouchableOpacity>
 
-                {/* categories */}
-                    {/* categories Text*/}
-                    {/* <Text
+              <TouchableOpacity
+                style={styles.container}
+                onPress={() => navigation.navigate("Cinema")}
+              >
+                <View>
+                  <Image
+                    source={require("../assets/homeImages/Cinema.png")}
+                    style={styles.image}
+                  />
+                  <Text style={styles.text}>Cinema</Text>
+                </View>
+              </TouchableOpacity>
+
+              {/* categories */}
+              {/* categories Text*/}
+              {/* <Text
                         style={{ textAlign: 'center', paddingBottom: 15, fontWeight: 'bold', fontSize: 24, marginTop: 16, opacity: 0.4 }}>
                         Categories
                     </Text> */}
-                {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> */}
-            <TouchableOpacity
-              style={styles.container}
-              onPress={() => navigation.navigate("Maintenance Payment")}
-            >
-              <View>
-                <Image
-                  source={require("../assets/homeImages/2.jpg")}
-                  style={styles.image}
-                />
-                <Text style={styles.text}>Payment</Text>
-              </View>
-            </TouchableOpacity>
-          {/* </View> */}
-        </View>
-</View>
-        {/* categories */}
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          {/* categories Text*/}
-          <Text
-            style={{
-              textAlign: "center",
-              paddingBottom: 15,
-              fontWeight: "bold",
-              fontSize: 24,
-              marginTop: 16,
-              opacity: 0.4,
-            }}
-          >
-            Categories
-          </Text>
-
-          <View style={styles.categoryContainer}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Restaurants")}
-              style={styles.categoryItem}
-            >
-              <View style={styles.categoryItemContent}>
-                <FontAwesome5 name="utensils" size={24} />
-                <Text>Restaurants</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Shopping")}
-              style={styles.categoryItem}
-            >
-              <View style={styles.categoryItemContent}>
-                <MaterialCommunityIcons name="cart" size={24} />
-                <Text>Shopping</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Fashion")}
-              style={styles.categoryItem}
-            >
-              <View style={styles.categoryItemContent}>
-                <MaterialCommunityIcons name="tshirt-crew" size={24} />
-                <Text>Fashion</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Health")}
-              style={styles.categoryItem}
-            >
-              <View style={styles.categoryItemContent}>
-                <FontAwesome5 name="heartbeat" size={24} />
-                <Text>Health</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Sports")}
-              style={styles.categoryItem}
-            >
-              <View style={styles.categoryItemContent}>
-                <FontAwesome5 name="table-tennis" size={24} />
-                <Text>Sports</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Maintenance")}
-              style={styles.categoryItem}
-            >
-              <View style={styles.categoryItemContent}>
-                <FontAwesome5 name="wrench" size={24} />
-                <Text style={styles.textIcon}>Maintenance</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Home Services")}
-              style={styles.categoryItem}
-            >
-              <View style={styles.categoryItemContent}>
-                <MaterialCommunityIcons name="home-variant" size={24} />
-                <Text>Home Services</Text>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Transportation")}
-              style={styles.categoryItem}
-            >
-              <View style={styles.categoryItemContent}>
-                <MaterialCommunityIcons name="truck-delivery" size={24} />
-                <Text>Transportation</Text>
-              </View>
-            </TouchableOpacity>
+              {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}> */}
+              <TouchableOpacity
+                style={styles.container}
+                onPress={() => navigation.navigate("Maintenance Payment")}
+              >
+                <View>
+                  <Image
+                    source={require("../assets/homeImages/2.jpg")}
+                    style={styles.image}
+                  />
+                  <Text style={styles.text}>Payment</Text>
+                </View>
+              </TouchableOpacity>
+              {/* </View> */}
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+
+          {/* categories */}
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            {/* categories Text*/}
+            <Text
+              style={{ textAlign: 'center', paddingBottom: 15, fontWeight: 'bold', fontSize: 24, marginTop: 16, opacity: 0.4 }}>
+              Categories
+            </Text >
+
+            <View style={styles.categoryContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate('Restaurants')} style={styles.categoryItem}>
+                <View style={styles.categoryItemContent}>
+                  <FontAwesome5 style={{ textAlign: 'center' }} name="utensils" size={24} />
+                  <Text style={{ textAlign: 'center' }}>Restaurants</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Shopping')} style={styles.categoryItem}>
+                <View style={styles.categoryItemContent}>
+                  <MaterialCommunityIcons style={{ textAlign: 'center' }} name="cart" size={24} />
+                  <Text style={{ textAlign: 'center' }}>Shopping</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Fashion')} style={styles.categoryItem}>
+                <View style={styles.categoryItemContent}>
+                  <MaterialCommunityIcons style={{ textAlign: 'center' }} name="tshirt-crew" size={24} />
+                  <Text style={{ textAlign: 'center' }}>Fashion</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Health')} style={styles.categoryItem}>
+                <View style={styles.categoryItemContent}>
+                  <FontAwesome5 style={{ textAlign: 'center' }} name="heartbeat" size={24} />
+                  <Text style={{ textAlign: 'center' }}>Health</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Sports')} style={styles.categoryItem}>
+                <View style={styles.categoryItemContent}>
+                  <FontAwesome5 style={{ textAlign: 'center' }} name="table-tennis" size={24} />
+                  <Text style={{ textAlign: 'center' }}>Sports</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Maintenance')} style={styles.categoryItem}>
+                <View style={styles.categoryItemContent}>
+                  <FontAwesome5 style={{ textAlign: 'center' }} name="wrench" size={24} />
+                  <Text style={{ textAlign: 'center' }}>Maintenance</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Home Services')} style={styles.categoryItem}>
+                <View style={styles.categoryItemContent}>
+                  <MaterialCommunityIcons style={{ textAlign: 'center' }} name="home-variant" size={24} />
+                  <Text style={{ textAlign: 'center' }}>Home Services</Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Transportation')} style={styles.categoryItem}>
+                <View style={styles.categoryItemContent}>
+                  <MaterialCommunityIcons style={{ textAlign: 'center' }} name="truck-delivery" size={24} />
+                  <Text style={{ textAlign: 'center' }}>Transportation</Text>
+                </View>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </>
   );
 }
@@ -484,7 +329,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 5,
     backgroundColor: "#FFF",
-    borderRadius: 10,
+    borderRadius: 5,
     margin: 8,
     width: "75%",
     textAlign: "center",
@@ -504,7 +349,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-    borderRadius: 10,
+    borderRadius: 5,
   },
   container: {
     flex: 1,
@@ -520,7 +365,7 @@ const styles = StyleSheet.create({
     top: 80,
     width: "100%",
     zIndex: 1,
-    marginLeft:6
+    marginLeft: 6
   },
 
   overlayContainer1: {
@@ -582,5 +427,16 @@ const styles = StyleSheet.create({
     zIndex: 1,
     marginHorizontal: 20,
     marginTop: 10,
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    position: 'absolute',
+    top: 80,
+    width: '100%',
+    zIndex: 1,
+    left: 10,
   },
 });

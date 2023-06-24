@@ -4,6 +4,8 @@ import { useFonts } from "expo-font";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
 
 export const DataContext = createContext();
 
@@ -19,6 +21,19 @@ export default function Data(props) {
     light: require("../assets/Fonts/Aleo-Light.ttf"),
     lightItalic: require("../assets/Fonts/Aleo-LightItalic.ttf"),
   });
+
+  //Set userdata Token
+  const [userData, setUserData] = useState(null);
+  const saveUserData = async () => {
+    try {
+      const encodedToken = await AsyncStorage.getItem('token');
+      const decodedToken = jwtDecode(encodedToken);
+      setUserData(decodedToken);
+      return decodedToken;
+    } catch (error) {
+      console.error('Error saving user data:', error);
+    }
+  };
 
   // Images About Slider
   const ImgsArr = useMemo(
@@ -74,27 +89,27 @@ export default function Data(props) {
   const [{ data: orientalfood, loadingOrientalfood, errorOrientalfood }] = useAxios({
     url: `${baseUrl}/orientalfood`,
   });
- 
+
   const [{ data: fastfood, loadingFastfood, errorFastfood }] = useAxios({
     url: `${baseUrl}/fastfood`,
   });
- 
+
   const [{ data: seafood, loadingSeafood, errorSeafood }] = useAxios({
     url: `${baseUrl}/seafood`,
   });
- 
+
   const [{ data: pizza, loadingPizza, errorPizza }] = useAxios({
     url: `${baseUrl}/pizza`,
   });
- 
+
   const [{ data: fried, loadingFried, errorFried }] = useAxios({
     url: `${baseUrl}/fried`,
   });
- 
+
   const [{ data: shawarma, loadingShawarma, errorShawarma }] = useAxios({
     url: `${baseUrl}/shawarma`,
   });
- 
+
   const allRestaurants = [
     orientalfood,
     fastfood,
@@ -170,7 +185,7 @@ export default function Data(props) {
     setAllName(NamesArr)
     setAllIDs(IDsArr)
     setAllIDsNames(NamesIDsArr)
-  }, [All])
+  }, [])
 
 
   const ExchangedData = {
@@ -229,7 +244,8 @@ export default function Data(props) {
     homeservices, loadinghomeservices, errorhomeservices,
     shopping, loadingshopping, errorshopping,
     markets, loadingmarkets, errormarkets,
-    PayArr
+    PayArr,
+    userData, setUserData, saveUserData
   };
 
   return (

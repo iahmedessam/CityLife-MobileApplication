@@ -9,10 +9,8 @@ import About from "../Components/About";
 import ContactUs from "../Components/ContactUs";
 import Banks from "../Components/Banks";
 import Cinema from "../Components/Cinema";
-import DashBoard from "../Components/DashBoard";
 import Education from "../Components/Education/Education";
 import Fashion from "../Components/Fashion";
-import Footer from "../Components/Footer";
 import Health from "../Components/Health/Health";
 import HomeServices from "../Components/HomeServices";
 import Hospitals from "../Components/Hospitals";
@@ -25,7 +23,6 @@ import SignUp from "../Components/SignUp";
 import Sports from "../Components/Sports";
 import Stores from "../Components/Stores";
 import Transportation from "../Components/Transportation";
-
 import HomeRestaurants from "../Components/Restaurants/HomeRestaurants";
 import Shawarma from "../Components/Restaurants/shawarma";
 import Fastfood from "../Components/Restaurants/fastfood";
@@ -66,10 +63,7 @@ export default function MyTabs() {
             <Stack.Screen name="Hospitals" component={Hospitals} />
             <Stack.Screen name="Maintenance" component={Maintenance} />
             <Stack.Screen name="Markets" component={Markets} />
-
             <Stack.Screen name="Restaurants" component={HomeRestaurants} />
-          
-
             <Stack.Screen name="Shopping" component={Shopping} />
             <Stack.Screen name="Sports" component={Sports} />
             <Stack.Screen name="Stores" component={Stores} />
@@ -82,7 +76,7 @@ export default function MyTabs() {
 
       <Tab.Screen name="about us" options={{
         headerShown: false,
-        tabBarIcon: ({ color, size }) => <Ionicons name="code-slash-outline" size={size} color="#112D4E" />
+        tabBarIcon: ({ color, size }) => <Ionicons name="images-outline" size={size} color="#112D4E" />
       }}>
         {() => (
           <Stack.Navigator screenOptions={{
@@ -128,7 +122,6 @@ export default function MyTabs() {
             }
           }}>
             <Stack.Screen name="Profile" component={ProfileScreen} />
-            <Stack.Screen name="Dashboard" component={DashBoard} />
             <Stack.Screen name="Sign up" component={SignUp} />
             <Stack.Screen name="Sign in" component={SignIn} />
           </Stack.Navigator>
