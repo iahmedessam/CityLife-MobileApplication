@@ -24,42 +24,22 @@ import {
 import uuid from "react-native-uuid";
 
 
-export default function Feedback_Complains({message}) {
+export default function Feedback_Complains({message,setclose,setShow}) {
   const {addFeedback} = useContext(DataContext)
-  const [isLoading, setIsLoading] = useState(false)
-  const [errorMsg, seterrorMsg] = useState('')
-  const [showModal,setShowModal] = useState(false)
+  const [showModal3, setShowModal3] = useState(false);
+  const [showModal4, setShowModal4] = useState(false);
 
-  
+
   return (
     <>
     <Formik
-      initialValues={{ Name: '', email: '', phone: '', message: '' }}
+      initialValues={{ Name: "", email: "", phone: "", message: "" }}
       
-      onSubmit={ async (values) => {
-        console.warn(values)
-         await addFeedback(values,message)
-            // let ID = uuid.v4().slice(0,4)
-            // axios.post("https://application-mock-server.loca.lt/feedback", {...values,id: ID ,place: message, type:"FeedBack"})
-            // .catch((err)=>{
-            //   console.warn(err)
-            // })
-            // try {
-            //   const response = await fetch("https://application-mock-server.loca.lt/feedback", {
-            //     method: "POST",
-            //     headers: {
-            //       "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify({ id: ID, place: "cairo", type: "FeedBack", Name:"ahmed", email: "Akram@gmail.com",phone: "01112590070"}),
-            //   });
-        
-            //   if (!response.ok) {
-            //     throw new Error("Something went wrong");
-            //   }
-            // } catch (error) {
-            //   console.error(error);
-            // }
-      }}
+      onSubmit={ async (values) =>{
+        await addFeedback(values,message)
+         setclose(false)
+         setShow(true)
+      } }
 
       validationSchema={Yup.object({
         Name: Yup.string().required('Name is required').min(5, "Name must be more than 5 characters").max(20, "Name must be less than 20 characters"),
@@ -123,12 +103,10 @@ export default function Feedback_Complains({message}) {
             
               <TouchableOpacity
                 style={[styles.input, styles.submitButton]}
-                onPress={()=>{
-                  handleSubmit
+                onPress={handleSubmit}
                   // setShowModal(true)
                   // setShowModal3(false)
-                }}
-                disabled={dirty && isValid ? false : true}>
+                  disabled={dirty && isValid ? false : true}>
                 <Text style={styles.submitText}>Submit</Text>
               </TouchableOpacity>
 
@@ -137,11 +115,10 @@ export default function Feedback_Complains({message}) {
       )}
     </Formik>
 
-     {/* FeedBack Modal */}
-     {/* <Modal
-        isOpen={showModal}
+    {/* <Modal
+        isOpen={showModal4}
         onClose={() => {
-          setShowModal(false);
+          setShowModal4(false);
         }}
         size="lg"
       >
@@ -149,7 +126,8 @@ export default function Feedback_Complains({message}) {
           <Modal.CloseButton />
           <Modal.Header>Your FeedBack</Modal.Header>
           <Modal.Body>
-           <Text>Good</Text>
+          <CheckCircleIcon size="20" my="2" mx="auto" color="emerald.500" />
+           <Text style={{fontSize:20,textAlign:"center"}}>We Received your Feedback, Thanks</Text>
           </Modal.Body>
         </Modal.Content>
       </Modal> */}

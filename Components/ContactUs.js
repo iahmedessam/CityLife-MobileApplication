@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { useFormik } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useContext } from 'react';
+import { DataContext } from '../Context/Data';
 
 const ContactUs = () => {
   const [showModal, setShowModal] = useState(false);
+  const {addContact} = useContext(DataContext)
+
 
   let validationSchema = Yup.object({
     name: Yup.string().required().min(3, 'Name must be between 3 and 40 characters').max(40),
@@ -21,7 +26,8 @@ const ContactUs = () => {
       message: '',
     },
     validationSchema,
-    onSubmit: () => {
+    onSubmit: async () => {
+      await addFeedback(values,message)
       setShowModal(true);
     },
   });

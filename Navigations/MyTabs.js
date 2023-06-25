@@ -32,11 +32,14 @@ import Seafood from "../Components/Restaurants/seafood";
 import Orientalfood from "../Components/Restaurants/orientalfood";
 
 import DetailsPage from "../Components/DetailsPage";
+import { useContext } from "react";
+import { DataContext } from "../Context/Data";
 
 export const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 export default function MyTabs() {
+const {userData} = useContext(DataContext)
 
   return (
     <Tab.Navigator>
@@ -68,7 +71,7 @@ export default function MyTabs() {
             <Stack.Screen name="Sports" component={Sports} />
             <Stack.Screen name="Stores" component={Stores} />
             <Stack.Screen name="Transportation" component={Transportation} />
-            <Stack.Screen name="Maintenance Payment" component={MaintenancePayment} />
+            <Stack.Screen name="Maintenance Payment" component={userData ===null ? SignIn : MaintenancePayment} />
             <Stack.Screen name="Details" component={DetailsPage} options={({route})=> ({title: route.params.name})} />
           </Stack.Navigator>
         )}

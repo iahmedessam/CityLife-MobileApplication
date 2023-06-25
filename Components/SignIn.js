@@ -29,7 +29,7 @@ export default function SignIn({ navigation }) {
               await saveUserData();
               setIsLoading(false)
               navigation.navigate("Home")
-              console.warn(token)
+              // console.warn(token)
             }
           })
           .catch((error) => {

@@ -11,6 +11,9 @@ export default function SettingsScreen({ navigation }) {
       <View style={styles.buttonContainer}>
         <Button title="About" onPress={() => navigation.navigate('About')} color="#3F72AF" />
       </View>
+      <View style={styles.buttonContainer}>
+        <Button title="Contact us" onPress={() => navigation.navigate('Contact us')} color="#3F72AF" />
+      </View>
     </View>
   );
 }

@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import { DataContext } from "../../Context/Data";
 import Feedback_Complains from "../Feedback_Complains";
-import {Modal as Model} from "native-base";
+import {Modal as Model,CheckCircleIcon} from "native-base";
 import styles from "../../Styles";
 
 export default function Restaurants() {
@@ -24,6 +24,8 @@ export default function Restaurants() {
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [selectedImg, setSelectedImg] = useState(null);
   const [showModal3, setShowModal3] = useState(false);
+  const [showModal4, setShowModal4] = useState(false);
+
   const [message, setMessage] = useState('')
 
   const handlefeedbackName = (value) => {
@@ -165,8 +167,8 @@ export default function Restaurants() {
 
 
 
- {/* FeedBack Modal */}
- <Model
+  {/* FeedBack Modal */}
+  <Model
         isOpen={showModal3}
         onClose={() => {
           setShowModal3(false);
@@ -177,7 +179,24 @@ export default function Restaurants() {
           <Model.CloseButton />
           <Model.Header>Your FeedBack</Model.Header>
           <Model.Body>
-           <Feedback_Complains message={message}></Feedback_Complains>
+           <Feedback_Complains setclose={setShowModal3} setShow={setShowModal4}  message={message}></Feedback_Complains>
+          </Model.Body>
+        </Model.Content>
+      </Model>
+
+      <Model
+        isOpen={showModal4}
+        onClose={() => {
+          setShowModal4(false);
+        }}
+        size="lg"
+      >
+        <Model.Content maxWidth="350">
+          <Model.CloseButton />
+          {/* <Model.Header>Your FeedBack</Model.Header> */}
+          <Model.Body>
+          <CheckCircleIcon size="20" my="2" mx="auto" color="emerald.500" />
+           <Text style={{fontSize:20,textAlign:"center"}}>We Received your Feedback, Thanks</Text>
           </Model.Body>
         </Model.Content>
       </Model>

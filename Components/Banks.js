@@ -5,12 +5,13 @@ import styles from '../Styles'
 import { useContext } from 'react';
 import { DataContext } from '../Context/Data';
 import Feedback_Complains from "./Feedback_Complains";
-import {Modal} from "native-base";
+import {Modal,  CheckCircleIcon} from "native-base";
 
 export default function Banks() {
   
   const {fontsLoaded,banks, loadingBanks, errorBanks } = useContext(DataContext)
   const [showModal3, setShowModal3] = useState(false);
+  const [showModal4, setShowModal4] = useState(false);
   const [message, setMessage] = useState('')
 
 
@@ -87,7 +88,24 @@ export default function Banks() {
           <Modal.CloseButton />
           <Modal.Header>Your FeedBack</Modal.Header>
           <Modal.Body>
-           <Feedback_Complains message={message}></Feedback_Complains>
+           <Feedback_Complains setclose={setShowModal3} setShow={setShowModal4}  message={message}></Feedback_Complains>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+
+      <Modal
+        isOpen={showModal4}
+        onClose={() => {
+          setShowModal4(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          {/* <Modal.Header>Your FeedBack</Modal.Header> */}
+          <Modal.Body>
+          <CheckCircleIcon size="20" my="2" mx="auto" color="emerald.500" />
+           <Text style={{fontSize:20,textAlign:"center"}}>We Received your Feedback, Thanks</Text>
           </Modal.Body>
         </Modal.Content>
       </Modal>

@@ -13,38 +13,25 @@ import React from "react";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import styles from "../Styles";
 import { DataContext } from "../Context/Data";
-import {
-  Modal,
-  VStack,
-  HStack,
-  Select,
-  CheckIcon,
-  CheckCircleIcon,
-  Radio,
-  Center,
-  FormControl,
-  Stack,
-  WarningOutlineIcon,
-  Input,
-} from "native-base";
-import { useState, useRef, useCallback, useContext } from "react";
+import { Modal,  CheckCircleIcon} from "native-base";
+import { useState, useCallback, useContext } from "react";
 import uuid from "react-native-uuid";
-// import DateTimePicker, {
-//   DateTimePickerAndroid,
-// } from "@react-native-community/datetimepicker";
 // import { Pressable } from "react-native";
 // import { Platform } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 import { TextInput } from "react-native";
 import { Camera, CameraType } from "expo-camera";
+import * as ImagePicker from 'expo-image-picker';
 import { Dimensions } from "react-native";
 import { createRef } from "react";
+import { MaterialIcons } from '@expo/vector-icons'; 
+
 
 export default function MaintenancePayment() {
   const { PayArr, fontsLoaded, addComplain} = useContext(DataContext);
   const [hasPermission, setHasPermission] = Camera.useCameraPermissions();
   const [type, setType] = useState(CameraType.back);
   const [openCamera, setOpenCamera] = useState(false);
-  // const ref = useRef(null);
   const ref = createRef()
   const [photo,setPhoto] = useState("")
   const [selectedName, setSelectedName] = useState("");
@@ -70,20 +57,27 @@ export default function MaintenancePayment() {
   //   return <Text>No access to camera</Text>;
   // }
 
-  const toggleCameraType = () => {
-    setType((current) =>
-      current === CameraType.back ? CameraType.front : CameraType.back
-    );
-  };
+  // const toggleCameraType = () => {
+  //   setType((current) =>
+  //     current === CameraType.back ? CameraType.front : CameraType.back
+  //   );
+  // };
   const takePhoto = async () => {
     if (ref.current) {
       const options = { quality: 0.5, base64: true };
       const img = await ref.current.takePictureAsync(options);
-      // setPhoto(img)
       setNewFeedback({...newFeedBack, photo:img["uri"]})
     }
   };
-  // console.warn (newFeedBack)
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1,
+    });
+    setNewFeedback({...newFeedBack, photo: result.assets[0].uri})
+  }
  
   const handleSubmit = async ()=>{
    await addComplain(newFeedBack)
@@ -109,14 +103,7 @@ export default function MaintenancePayment() {
     setSelectedFees("");
   }, []);
 
-  //Feedback Function
-  // const handleChange = useCallback((val, key) => {
-  //   const myState = newFeedBack;
-  //   myState[key] = val;
-  //   setNewFeedback(myState);
-  //   // setNewFeedback({ ...newFeedBack, ["name"]: val });
-  //   console.warn(newFeedBack);
-  // }, []);
+
   const handleClear2 = useCallback(() => {
     setNewFeedback({
       Name: "",
@@ -305,7 +292,6 @@ export default function MaintenancePayment() {
               value={newFeedBack.Name}
               onChangeText={(val) =>{
                 setNewFeedback({ ...newFeedBack, Name: val })
-                // console.warn(newFeedBack.Name)
               }}
             />
              <TextInput
@@ -367,9 +353,8 @@ export default function MaintenancePayment() {
                   <Text style={{textAlign:"center"}} >Or</Text>
                   <TouchableOpacity
                     style={Styles.photoButton}
-                    onPress={() =>
-                      setOpenCamera((current) => (current === false ? true : false))
-                    } >
+                    onPress={pickImage}
+                     >
                     <Text style={Styles.photoText}>Upload photo</Text>
                   </TouchableOpacity>
           </Modal.Body>
@@ -400,7 +385,8 @@ export default function MaintenancePayment() {
           <Modal.CloseButton />
           {/* <Modal.Header>Your FeedBack</Modal.Header> */}
           <Modal.Body>
-           <Text>We Received your complain, within 48 hours will be resolved</Text>
+          <CheckCircleIcon size="20" my="2" mx="auto" color="emerald.500" />
+           <Text style={{fontSize:20,textAlign:"center"}}>We Received your complain, within 48 hours will be resolved</Text>
           </Modal.Body>
         </Modal.Content>
       </Modal>
@@ -435,7 +421,7 @@ export default function MaintenancePayment() {
                   {/* <TouchableOpacity style={Styles.button} onPress={toggleCameraType}>
             <Text style={Styles.text}>Flip Camera</Text>
           </TouchableOpacity> */}
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                     style={{
                       flex: 1,
                       alignSelf: "flex-end",
@@ -454,20 +440,24 @@ export default function MaintenancePayment() {
                     >
                       Flip
                     </Text>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                   <TouchableOpacity
-                    onPress={takePhoto}
+                    onPress={async ()=> {
+                    await takePhoto()
+                    setOpenCamera(false)
+                  }}
                     style={{
                       flex: 1,
                       alignSelf: "flex-end",
                       alignItems: "center",
                     }}
                   >
-                    <Text
+                    <MaterialIcons name="photo-camera" size={75} color="white"  style={{marginBottom: 30}} />
+                    {/* <Text
                       style={{ fontSize: 18, marginBottom: 30, color: "white" }}
                     >
                       take Photo
-                    </Text>
+                    </Text> */}
                   </TouchableOpacity>
                 </View>
               </Camera>

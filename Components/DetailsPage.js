@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { DataContext } from "../Context/Data";
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Linking, Image } from 'react-native';
 import styles from'../Styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Modal,  CheckCircleIcon} from "native-base";
+import Feedback_Complains from "./Feedback_Complains";
+
 
 
 
 export default function DetailsPage({ route }) {
+  const [showModal3, setShowModal3] = useState(false);
+  const [showModal4, setShowModal4] = useState(false);
+  const [message, setMessage] = useState('')
   const { All,fontsLoaded } = useContext(DataContext);
   const { id,name } = route.params;
 
@@ -32,7 +38,7 @@ export default function DetailsPage({ route }) {
             <ScrollView>
                 <View style={styles.card} key={ele.id}>
                   {/* Image */}
-                  <Image style={styles.img} source={{ uri: ele.img1 }}></Image>
+                  <Image style={styles.img} source={{ uri: ele.img1 || ele.img }}></Image>
 
                   {/* Body */}
                   <View style={styles.content}>
@@ -40,7 +46,7 @@ export default function DetailsPage({ route }) {
                     <Text
                       style={[
                         styles.overview,
-                        { fontFamily: fontsLoaded ? "italic" : null },
+                        { fontFamily: fontsLoaded ? "italic" : null,textAlign:"center" },
                       ]}
                     >
                       {ele.overview}
@@ -51,7 +57,7 @@ export default function DetailsPage({ route }) {
                   <View style={styles.buttonsSection}>
                     <View style={styles.buttons}>
                       <Text style={styles.buttonsText}>
-                        {ele.Rating}{" "}
+                        {ele.Rating}
                         <Icon name="star" size={15} color="#C3801B" />
                       </Text>
                       <TouchableOpacity
@@ -70,7 +76,7 @@ export default function DetailsPage({ route }) {
                         onPress={() => Linking.openURL(ele.location)}
                       >
                         <Text style={styles.buttonsText}>
-                          Location{" "}
+                          Location
                           <Icon name="map-marker" size={15} color="white" />
                         </Text>
                       </TouchableOpacity>
@@ -78,7 +84,10 @@ export default function DetailsPage({ route }) {
                     {/* Feedback Button */}
                     <TouchableOpacity
                       style={styles.feedback}
-                      onPress={handlePress}
+                      onPress={()=>{
+                        setMessage(ele.name)
+                        setShowModal3(true)
+                      }}
                     >
                       <Text style={styles.feedbackText}>Feedback</Text>
                     </TouchableOpacity>
@@ -86,6 +95,39 @@ export default function DetailsPage({ route }) {
                 </View>
               
             </ScrollView>
+             {/* FeedBack Modal */}
+      <Modal
+        isOpen={showModal3}
+        onClose={() => {
+          setShowModal3(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          <Modal.Header>Your FeedBack</Modal.Header>
+          <Modal.Body>
+           <Feedback_Complains setclose={setShowModal3} setShow={setShowModal4}  message={message}></Feedback_Complains>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+
+      <Modal
+        isOpen={showModal4}
+        onClose={() => {
+          setShowModal4(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          {/* <Modal.Header>Your FeedBack</Modal.Header> */}
+          <Modal.Body>
+          <CheckCircleIcon size="20" my="2" mx="auto" color="emerald.500" />
+           <Text style={{fontSize:20,textAlign:"center"}}>We Received your Feedback, Thanks</Text>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
           </>
         );
       }

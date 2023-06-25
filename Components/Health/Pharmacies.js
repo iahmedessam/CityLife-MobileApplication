@@ -7,11 +7,13 @@ import { useContext } from 'react';
 import { DataContext } from '../../Context/Data';
 import { useState } from 'react';
 import Feedback_Complains from "../Feedback_Complains";
-import {Modal as Model} from "native-base";
+import {Modal as Model,CheckCircleIcon} from "native-base";
 
 const Pharmacies = () => {
     const {fontsLoaded,pharmacies, loadingPharmacies, errorPharmacies} = useContext(DataContext)
     const [showModal3, setShowModal3] = useState(false);
+    const [showModal4, setShowModal4] = useState(false);
+
     const [message, setMessage] = useState('')
     if (loadingPharmacies) {
       return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 18 }}>loading...</Text></View>;
@@ -72,7 +74,7 @@ const Pharmacies = () => {
         </View>)}
     </ScrollView>
          {/* FeedBack Modal */}
-         <Model
+      <Model
         isOpen={showModal3}
         onClose={() => {
           setShowModal3(false);
@@ -83,7 +85,24 @@ const Pharmacies = () => {
           <Model.CloseButton />
           <Model.Header>Your FeedBack</Model.Header>
           <Model.Body>
-           <Feedback_Complains message={message}></Feedback_Complains>
+           <Feedback_Complains setclose={setShowModal3} setShow={setShowModal4}  message={message}></Feedback_Complains>
+          </Model.Body>
+        </Model.Content>
+      </Model>
+
+      <Model
+        isOpen={showModal4}
+        onClose={() => {
+          setShowModal4(false);
+        }}
+        size="lg"
+      >
+        <Model.Content maxWidth="350">
+          <Model.CloseButton />
+          {/* <Model.Header>Your FeedBack</Model.Header> */}
+          <Model.Body>
+          <CheckCircleIcon size="20" my="2" mx="auto" color="emerald.500" />
+           <Text style={{fontSize:20,textAlign:"center"}}>We Received your Feedback, Thanks</Text>
           </Model.Body>
         </Model.Content>
       </Model>

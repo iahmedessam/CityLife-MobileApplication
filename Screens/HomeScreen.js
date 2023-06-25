@@ -53,11 +53,9 @@ export default  function HomeScreen  ({ navigation }) {
       setFilterData([]);
       return;
     }
-      const selectedItem = (AllIDsNames && AllIDsNames.filter((ele) =>{
-         ele["name"].toLowerCase().includes(query.toLowerCase())
-      }));
+      const selectedItem = (AllIDsNames && AllIDsNames.filter((ele) =>ele["name"]?.toLowerCase().includes(query.toLowerCase())));
     setFilterData(selectedItem);
-    console.warn(selectedItem)
+    // console.warn(selectedItem)
 
   }, [query]);
 
@@ -66,7 +64,7 @@ export default  function HomeScreen  ({ navigation }) {
     <>
       {/* Search bar */}
       <View style={styles.autocompleteContainer}>
-       <TextInput
+       {/* <TextInput
          style={{
           paddingVertical: 10,
           paddingLeft: 5
@@ -104,8 +102,8 @@ export default  function HomeScreen  ({ navigation }) {
         )}
        >
 
-       </FlatList>
-{/* 
+       </FlatList> */}
+
         <AutocompleteInput
           style={{
           }}
@@ -137,7 +135,7 @@ export default  function HomeScreen  ({ navigation }) {
               </TouchableOpacity>
             ),
           }}
-        /> */}
+        />
       </View>
       <SafeAreaView
         style={{ marginTop: Platform.OS === "android" ? 0 : 0, padding: 15 }}

@@ -4,21 +4,18 @@ import { useFonts } from "expo-font";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import jwtDecode from 'jwt-decode';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode';
 import uuid from "react-native-uuid";
 
 
 export const DataContext = createContext();
 
 export default function Data(props) {
-  const baseUrl = "https://application-mock-server.loca.lt";
+  const baseUrl = "https://application-mock-server.loca.lt/";
 
     //Search Bar management
     const [All, setAll] = useState({})
-    // const [categoryNames, setCategoryNames] = useState([])
-    // const [AllName, setAllName] = useState([])
-    // const [AllIDs, setAllIDs] = useState([])
     const [AllIDsNames, setAllIDsNames] = useState([])
   
     useEffect(() => {
@@ -29,21 +26,14 @@ export default function Data(props) {
     }, [])
   
     useEffect(() => {
-      // let NamesArr = []
-      // let IDsArr = []
+
       let NamesIDsArr = []
-      // setCategoryNames([...Object.keys(All)])
       for (let category of Object.values(All)) {
         for (let ele of category) {
-          // NamesArr.push(ele.name)
-          // IDsArr.push(ele.id)
           NamesIDsArr.push({ id: ele.id, name: ele.name })
         }
       }
-      // setAllName(NamesArr)
-      // setAllIDs(IDsArr)
       setAllIDsNames(NamesIDsArr)
-      // console.warn(AllIDsNames)
     }, [All])
 
   //Fonts
@@ -205,6 +195,13 @@ export default function Data(props) {
       await axios.post(`${baseUrl}/feedback`, { ...AddedObj, id: ID, type: "Complain" });
    }
 
+   const addContact = 
+   async (AddedObj) => {
+     let ID = uuid.v4().slice(0, 4);
+       await axios.post(`${baseUrl}/feedback`, { ...AddedObj, id: ID, type: "Contact" });
+    }
+ 
+
 //  const addContact = useCallback(
 //    (AddedObj) => {
 //      let ID = uuid().slice(0,4)
@@ -221,6 +218,7 @@ export default function Data(props) {
   const ExchangedData = {
     addFeedback,
     addComplain,
+    addContact,
     All,
     // categoryNames,
     // AllName,
