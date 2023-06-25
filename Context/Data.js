@@ -1,16 +1,50 @@
 import useAxios from "axios-hooks";
-import React, { createContext, useMemo } from "react";
+import React, { createContext, useCallback, useMemo } from "react";
 import { useFonts } from "expo-font";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from 'jwt-decode';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import jwtDecode from 'jwt-decode';
+import uuid from "react-native-uuid";
+
 
 export const DataContext = createContext();
 
 export default function Data(props) {
   const baseUrl = "https://application-mock-server.loca.lt";
+
+    //Search Bar management
+    const [All, setAll] = useState({})
+    // const [categoryNames, setCategoryNames] = useState([])
+    // const [AllName, setAllName] = useState([])
+    // const [AllIDs, setAllIDs] = useState([])
+    const [AllIDsNames, setAllIDsNames] = useState([])
+  
+    useEffect(() => {
+      axios.get(`${baseUrl}/db`)
+        .then( (res) => {
+          setAll(res.data)
+        })
+    }, [])
+  
+    useEffect(() => {
+      // let NamesArr = []
+      // let IDsArr = []
+      let NamesIDsArr = []
+      // setCategoryNames([...Object.keys(All)])
+      for (let category of Object.values(All)) {
+        for (let ele of category) {
+          // NamesArr.push(ele.name)
+          // IDsArr.push(ele.id)
+          NamesIDsArr.push({ id: ele.id, name: ele.name })
+        }
+      }
+      // setAllName(NamesArr)
+      // setAllIDs(IDsArr)
+      setAllIDsNames(NamesIDsArr)
+      // console.warn(AllIDsNames)
+    }, [All])
 
   //Fonts
   const [fontsLoaded] = useFonts({
@@ -22,18 +56,18 @@ export default function Data(props) {
     lightItalic: require("../assets/Fonts/Aleo-LightItalic.ttf"),
   });
 
-  //Set userdata Token
-  const [userData, setUserData] = useState(null);
-  const saveUserData = async () => {
-    try {
-      const encodedToken = await AsyncStorage.getItem('token');
-      const decodedToken = jwtDecode(encodedToken);
-      setUserData(decodedToken);
-      return decodedToken;
-    } catch (error) {
-      console.error('Error saving user data:', error);
-    }
-  };
+      // Set userdata Token
+      const [userData, setUserData] = useState(null);
+      const saveUserData = async () => {
+        try {
+          const encodedToken = await AsyncStorage.getItem('token');
+          const decodedToken = jwtDecode(encodedToken);
+          setUserData(decodedToken);
+          return decodedToken;
+        } catch (error) {
+          console.error('Error saving user data:', error);
+        }
+      };
 
   // Images About Slider
   const ImgsArr = useMemo(
@@ -156,43 +190,41 @@ export default function Data(props) {
     url: `${baseUrl}/markets`,
   });
 
-  //Search Bar management
-  const [All, setAll] = useState({})
-  const [categoryNames, setCategoryNames] = useState([])
-  const [AllName, setAllName] = useState([])
-  const [AllIDs, setAllIDs] = useState([])
-  const [AllIDsNames, setAllIDsNames] = useState([])
+ // Dashboard [ Feed Back , Complain ]
 
-  useEffect(() => {
-    axios.get(`${baseUrl}/db`)
-      .then((res) => {
-        setAll(res.data)
-      })
-  }, [])
 
-  useEffect(() => {
-    let NamesArr = []
-    let IDsArr = []
-    let NamesIDsArr = []
-    setCategoryNames([...Object.keys(All)])
-    for (let category of Object.values(All)) {
-      for (let ele of category) {
-        NamesArr.push(ele.name)
-        IDsArr.push(ele.id)
-        NamesIDsArr.push({ id: ele.id, name: ele.name })
-      }
-    }
-    setAllName(NamesArr)
-    setAllIDs(IDsArr)
-    setAllIDsNames(NamesIDsArr)
-  }, [])
+ const addFeedback = 
+   async (AddedObj,message) => {
+     let ID = uuid.v4().slice(0,4)
+    await axios.post(`${baseUrl}/feedback`, {...AddedObj,id: ID ,place: message, type:"FeedBack"});
+   }
+
+ const addComplain = 
+  async (AddedObj) => {
+    let ID = uuid.v4().slice(0, 4);
+      await axios.post(`${baseUrl}/feedback`, { ...AddedObj, id: ID, type: "Complain" });
+   }
+
+//  const addContact = useCallback(
+//    (AddedObj) => {
+//      let ID = uuid().slice(0,4)
+//      axios.post("http://localhost:3005/feedback", {...AddedObj,id: ID ,type:"Contact us"});
+//      setDashBoardFeedback([...dashBoardFeedback, {...AddedObj,id: ID, type:"Contact us"}]);
+//    },
+//    [dashBoardFeedback]
+//  );
+
+
+
 
 
   const ExchangedData = {
+    addFeedback,
+    addComplain,
     All,
-    categoryNames,
-    AllName,
-    AllIDs,
+    // categoryNames,
+    // AllName,
+    // AllIDs,
     AllIDsNames,
     ImgsArr,
     fontsLoaded,

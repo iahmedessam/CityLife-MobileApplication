@@ -5,10 +5,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../../Styles';
 import { useContext } from 'react';
 import { DataContext } from '../../Context/Data';
+import Feedback_Complains from "../Feedback_Complains";
+import {Modal} from "native-base";
+import { useState } from 'react';
 
 
 const Kindergarten = () => {
     const {fontsLoaded,kindergarten, loadingKindergarten, errorKindergarten} = useContext(DataContext)
+    const [showModal3, setShowModal3] = useState(false);
+    const [message, setMessage] = useState('')
 
     if (loadingKindergarten) {
       return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 18 }}>loading...</Text></View>;
@@ -60,13 +65,32 @@ const Kindergarten = () => {
               </TouchableOpacity>
             </View>
             {/* Feedback Button */}
-            <TouchableOpacity style={styles.feedback} onPress={handlePress}>
+            <TouchableOpacity style={styles.feedback} onPress={()=>{
+                  setMessage(ele.name)
+                  setShowModal3(true)
+                  }}>
               <Text style={styles.feedbackText}>Feedback</Text>
             </TouchableOpacity>
 
           </View>
         </View>)}
     </ScrollView>
+         {/* FeedBack Modal */}
+         <Modal
+        isOpen={showModal3}
+        onClose={() => {
+          setShowModal3(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          <Modal.Header>Your FeedBack</Modal.Header>
+          <Modal.Body>
+           <Feedback_Complains message={message}></Feedback_Complains>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
        </>
        
     );

@@ -14,7 +14,8 @@ import {
   Linking,
 } from "react-native";
 import { DataContext } from "../../Context/Data";
-
+import Feedback_Complains from "../Feedback_Complains";
+import {Modal as Model} from "native-base";
 import styles from "../../Styles";
 
 export default function Restaurants() {
@@ -22,6 +23,8 @@ export default function Restaurants() {
   const [feedbackName, setFeedbackName] = useState("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [selectedImg, setSelectedImg] = useState(null);
+  const [showModal3, setShowModal3] = useState(false);
+  const [message, setMessage] = useState('')
 
   const handlefeedbackName = (value) => {
     setFeedbackName(value);
@@ -95,14 +98,17 @@ export default function Restaurants() {
                   <Text style={styles.buttonsText}>Location <Icon name="map-marker" size={15} color="white" /></Text>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity style={styles.feedback} onPress={handleShowModal}>
+              <TouchableOpacity style={styles.feedback} onPress={()=>{
+                  setMessage(ele.name)
+                  setShowModal3(true)
+                  }}>
                 <Text style={styles.feedbackText}>Feedback</Text>
               </TouchableOpacity>
             </View>
           </View>
         ))}
 
-        <Modal visible={showModal} animationType="slide">
+        {/* <Modal visible={showModal} animationType="slide">
           <View style={stylesArr.modalContainer}>
             <View style={stylesArr.modalHeader}>
               <Text style={stylesArr.modalTitle}>Leave Feedback</Text>
@@ -146,8 +152,8 @@ export default function Restaurants() {
             <View style={stylesArr.modalBody}>
               <Text style={stylesArr.modalThankYouText}>Thank you for your feedback!</Text>
             </View>
-          </View>
-        </Modal>
+          </View> */}
+        {/* </Modal> */}
       </ScrollView>
       {selectedImg && (
         <Modal visible={true} transparent={true}>
@@ -157,6 +163,24 @@ export default function Restaurants() {
         </Modal>
       )}
 
+
+
+ {/* FeedBack Modal */}
+ <Model
+        isOpen={showModal3}
+        onClose={() => {
+          setShowModal3(false);
+        }}
+        size="lg"
+      >
+        <Model.Content maxWidth="350">
+          <Model.CloseButton />
+          <Model.Header>Your FeedBack</Model.Header>
+          <Model.Body>
+           <Feedback_Complains message={message}></Feedback_Complains>
+          </Model.Body>
+        </Model.Content>
+      </Model>
     </>
   );
 }

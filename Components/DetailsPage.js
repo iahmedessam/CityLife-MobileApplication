@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function DetailsPage({ route }) {
   const { All,fontsLoaded } = useContext(DataContext);
-  const { id } = route.params;
+  const { id,name } = route.params;
 
 
  //Phone Function

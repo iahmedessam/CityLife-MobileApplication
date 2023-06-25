@@ -35,6 +35,7 @@ import DateTimePicker, {
 } from "@react-native-community/datetimepicker";
 import { Pressable } from "react-native";
 import { Platform } from "react-native";
+import Feedback_Complains from "./Feedback_Complains";
 
 export default function Hospitals() {
   const { fontsLoaded, centers, loadingCenters, errorCenters } =
@@ -68,6 +69,8 @@ export default function Hospitals() {
   const [date, setDate] = useState(new Date(1687383374089));
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
+  const [message, setMessage] = useState('')
+
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -115,6 +118,8 @@ export default function Hospitals() {
 
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  const [showModal3, setShowModal3] = useState(false);
+
 
   const [appointDetails, setAppointDetails] = useState({
     name: "",
@@ -137,9 +142,6 @@ export default function Hospitals() {
       centerName: "",
     });
   }, []);
-
-  //Feedback Function
-  function handlePress() {}
 
   return (
     <>
@@ -230,7 +232,10 @@ export default function Hospitals() {
                 >
                   <Text style={styles.feedbackText}>Appointment</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={Styles.feedback} onPress={handlePress}>
+                <TouchableOpacity style={Styles.feedback} onPress={()=>{
+                  setMessage(item.name)
+                  setShowModal3(true)
+                  }}>
                   <Text style={styles.feedbackText}>Feedback</Text>
                 </TouchableOpacity>
               </View>
@@ -412,6 +417,24 @@ export default function Hospitals() {
             <Text style={{ textAlign: "center", fontSize: 18 }}>
               {appointDetails.centerName}
             </Text>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+
+
+      {/* FeedBack Modal */}
+      <Modal
+        isOpen={showModal3}
+        onClose={() => {
+          setShowModal3(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          <Modal.Header>Your FeedBack</Modal.Header>
+          <Modal.Body>
+           <Feedback_Complains message={message}></Feedback_Complains>
           </Modal.Body>
         </Modal.Content>
       </Modal>

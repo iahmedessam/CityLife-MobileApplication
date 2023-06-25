@@ -1,17 +1,18 @@
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Linking, Image } from 'react-native';
-import React from 'react'
+import React, { useState } from 'react'
 import useAxios from 'axios-hooks'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../Styles'
 import { useContext } from 'react';
 import { DataContext } from '../Context/Data';
-
+import Feedback_Complains from "./Feedback_Complains";
+import {Modal} from "native-base";
 
 export default function Fashion() {
   
   const {fontsLoaded,fashion, loadingfashion, errorfashion } = useContext(DataContext)
-  
- 
+  const [showModal3, setShowModal3] = useState(false);
+  const [message, setMessage] = useState('')
 
   if (loadingfashion) {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 16 }}>loading...</Text></View>;
@@ -63,12 +64,32 @@ export default function Fashion() {
               </TouchableOpacity>
             </View>
             {/* Feedback Button */}
-            <TouchableOpacity style={styles.feedback} onPress={handlePress}>
+            <TouchableOpacity style={styles.feedback} onPress={()=>{
+                  setMessage(ele.name)
+                  setShowModal3(true)
+                  }}>
               <Text style={styles.feedbackText}>Feedback</Text>
             </TouchableOpacity>
 
           </View>
         </View>)}
+                {/* FeedBack Modal */}
+                <Modal
+        isOpen={showModal3}
+        onClose={() => {
+          setShowModal3(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          <Modal.Header>Your FeedBack</Modal.Header>
+          <Modal.Body>
+           <Feedback_Complains message={message}></Feedback_Complains>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
     </ScrollView>
+
   </>
 };

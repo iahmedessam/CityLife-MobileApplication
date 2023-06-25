@@ -24,16 +24,14 @@ import { useEffect } from "react";
 import { Video, ResizeMode } from 'expo-av';
 import { useRef } from "react";
 import { Dimensions } from "react-native";
+import { TextInput } from 'react-native';
+import { FlatList } from 'react-native';
 
 
-export default function HomeScreen({ navigation }) {
+export default  function HomeScreen  ({ navigation }) {
   const video = useRef(null);
   const [status, setStatus] = useState({});
-
-
-
-
-  const { AllIDsNames } = useContext(DataContext);
+  const { AllIDsNames } =  useContext(DataContext);
   const [query, setQuery] = useState("");
   const [filterData, setFilterData] = useState([]);
 
@@ -49,16 +47,18 @@ export default function HomeScreen({ navigation }) {
     require("../assets/homeImages/slider/slider6.jpg"),
     require("../assets/homeImages/slider/slider1.jpg"),
   ]
-  useEffect(() => {
+  useEffect( () => {
     // console.warn(query)
-    // if (query.trim() === "") {
-    //   setFilterData([]);
-    //   return;
-    // }
-    const selectedItem = AllIDsNames.filter((ele) =>
-      ele.name.toLowerCase().includes(query.toLowerCase())
-    );
+    if (query.trim() === "") {
+      setFilterData([]);
+      return;
+    }
+      const selectedItem = (AllIDsNames && AllIDsNames.filter((ele) =>{
+         ele["name"].toLowerCase().includes(query.toLowerCase())
+      }));
     setFilterData(selectedItem);
+    console.warn(selectedItem)
+
   }, [query]);
 
 
@@ -66,6 +66,46 @@ export default function HomeScreen({ navigation }) {
     <>
       {/* Search bar */}
       <View style={styles.autocompleteContainer}>
+       <TextInput
+         style={{
+          paddingVertical: 10,
+          paddingLeft: 5
+        }}
+        placeholder="search..."
+        name="query"
+        id="query"
+        value={query}
+        onChangeText={(val) =>
+          setQuery(val)
+        }
+       />
+      <FlatList
+       data={filterData}
+        // keyExtractor={({item}) => item.id}
+        renderItem={ ({ item })=> (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("Details", { id: item.id, name:item.name })
+              setQuery("")
+            }}
+            style={{
+              paddingVertical: 10,
+              paddingLeft: 5
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 15,
+              }}
+            >
+              {item.name}
+            </Text>
+          </TouchableOpacity>
+        )}
+       >
+
+       </FlatList>
+{/* 
         <AutocompleteInput
           style={{
           }}
@@ -79,7 +119,7 @@ export default function HomeScreen({ navigation }) {
             renderItem: ({ item }) => (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate("Details", { id: item.id })
+                  navigation.navigate("Details", { id: item.id, name:item.name })
                   setQuery("")
                 }}
                 style={{
@@ -97,7 +137,7 @@ export default function HomeScreen({ navigation }) {
               </TouchableOpacity>
             ),
           }}
-        />
+        /> */}
       </View>
       <SafeAreaView
         style={{ marginTop: Platform.OS === "android" ? 0 : 0, padding: 15 }}

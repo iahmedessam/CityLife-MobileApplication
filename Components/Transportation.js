@@ -28,12 +28,15 @@ import {
   Center,
 } from "native-base";
 import { useState,useEffect,useCallback } from "react";
+import Feedback_Complains from "./Feedback_Complains";
 
 export default function Transportation() {
   const { fontsLoaded, transportation, loadingTrans, errorTrans } = useContext(DataContext);
     const [showModal, setShowModal] = useState(false);
     const [line, setLine] = useState("");
-    
+    const [showModal3, setShowModal3] = useState(false);
+    const [message, setMessage] = useState('')
+
     const handleChange = useCallback((val) => {
       setLine(val)
       setShowModal(true);
@@ -178,7 +181,10 @@ export default function Transportation() {
                   </TouchableOpacity>
                 </View>
                 {/* Feedback Button */}
-                <TouchableOpacity style={styles.feedback} onPress={handlePress}>
+                <TouchableOpacity style={styles.feedback} onPress={()=>{
+                  setMessage(item.name)
+                  setShowModal3(true)
+                  }}>
                   <Text style={styles.feedbackText}>Feedback</Text>
                 </TouchableOpacity>
               </View>
@@ -207,6 +213,23 @@ export default function Transportation() {
         </Modal.Content>
       </Modal>
 
+
+        {/* FeedBack Modal */}
+        <Modal
+        isOpen={showModal3}
+        onClose={() => {
+          setShowModal3(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          <Modal.Header>Your FeedBack</Modal.Header>
+          <Modal.Body>
+           <Feedback_Complains message={message}></Feedback_Complains>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
     </>
   );
 }

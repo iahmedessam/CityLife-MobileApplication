@@ -1,13 +1,19 @@
 import { View, Text, ScrollView, TouchableOpacity, Linking, Image } from 'react-native';
-import React from 'react'
+import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../Styles'
 import { useContext } from 'react';
 import { DataContext } from '../Context/Data';
+import Feedback_Complains from "./Feedback_Complains";
+import {Modal} from "native-base";
 
 export default function Banks() {
   
   const {fontsLoaded,banks, loadingBanks, errorBanks } = useContext(DataContext)
+  const [showModal3, setShowModal3] = useState(false);
+  const [message, setMessage] = useState('')
+
+
   
   if (loadingBanks) {
     return <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}><Text style={{ fontSize: 16 }}>loading...</Text></View>;
@@ -59,11 +65,31 @@ export default function Banks() {
             </View>
             {/* Feedback Button */}
             <TouchableOpacity style={styles.feedback} onPress={handlePress}>
-              <Text style={styles.feedbackText}>Feedback</Text>
+              <Text style={styles.feedbackText} onPress={()=>{
+                  setMessage(ele.name)
+                  setShowModal3(true)
+                  }}>Feedback</Text>
             </TouchableOpacity>
 
           </View>
         </View>)}
     </ScrollView>
+
+    {/* FeedBack Modal */}
+      <Modal
+        isOpen={showModal3}
+        onClose={() => {
+          setShowModal3(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          <Modal.Header>Your FeedBack</Modal.Header>
+          <Modal.Body>
+           <Feedback_Complains message={message}></Feedback_Complains>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
   </>
 };

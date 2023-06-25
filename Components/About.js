@@ -12,7 +12,7 @@ export default function About() {
   return (
     <>
       <ScrollView style={{ backgroundColor: "white" }}>
-        <Text style={[styles.textAbout,{fontFamily:fontsLoaded? "boldItalic" :null}]}>About </Text>
+        {/* <Text style={[styles.textAbout,{fontFamily:fontsLoaded? "boldItalic" :null}]}>About </Text> */}
         <Image
           style={styles.topImg}
           source={{
@@ -26,6 +26,7 @@ export default function About() {
           New Cairo, located only ten minutes away from Heliopolis and Nasr City
           and twenty minutes from Downtown Cairo.
         </Text>
+        <Text style={[styles.textAbout,{fontFamily:fontsLoaded? "boldItalic" :null}]}>Big City With Its Residents </Text>
 
         <Text style={styles.textP}>
           AL-Rehab City covers a total area of 10 million m2 planned to
@@ -34,6 +35,7 @@ export default function About() {
           units that vary from apartment to villa accommodations, in addition to
           a wide variety of amenities.
         </Text>
+        <Text style={[styles.textAbout,{fontFamily:fontsLoaded? "boldItalic" :null}]}>In One Place All You Need </Text>
 
         <Text style={styles.textP}>
           Al Rehab is designed to accommodate 32,385 Apartment and 3741 Villas.
@@ -45,10 +47,10 @@ export default function About() {
           Exchange Services.
         </Text>
         <Text style={[styles.textAbout,{fontFamily:fontsLoaded? "boldItalic" :null}]}>Al-Rehab Images Gallery: </Text>
-        <View style={{ backgroundColor: "white", height: 25 }}></View>
+        <View style={{ backgroundColor: "white", height: 15 }}></View>
         <ScrollView horizontal={true} style={{
           marginHorizontal:17,
-          marginBottom:30
+          marginBottom:20
         }}>
           {ImgsArr.map((img) => (
             <Image
@@ -82,6 +84,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 17,
     borderRadius: 5,
     marginBottom: 10,
+    marginTop:20
   },
   textP: {
     marginVertical: 5,

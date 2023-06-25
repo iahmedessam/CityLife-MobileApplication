@@ -69,7 +69,7 @@ export default function MyTabs() {
             <Stack.Screen name="Stores" component={Stores} />
             <Stack.Screen name="Transportation" component={Transportation} />
             <Stack.Screen name="Maintenance Payment" component={MaintenancePayment} />
-            <Stack.Screen name="Details" component={DetailsPage} />
+            <Stack.Screen name="Details" component={DetailsPage} options={({route})=> ({title: route.params.name})} />
           </Stack.Navigator>
         )}
       </Tab.Screen>

@@ -40,7 +40,7 @@ import { Dimensions } from "react-native";
 import { createRef } from "react";
 
 export default function MaintenancePayment() {
-  const { PayArr, fontsLoaded } = useContext(DataContext);
+  const { PayArr, fontsLoaded, addComplain} = useContext(DataContext);
   const [hasPermission, setHasPermission] = Camera.useCameraPermissions();
   const [type, setType] = useState(CameraType.back);
   const [openCamera, setOpenCamera] = useState(false);
@@ -52,13 +52,15 @@ export default function MaintenancePayment() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showModal3, setShowModal3] = useState(false);
+  const [showModal4, setShowModal4] = useState(false);
   const [newFeedBack, setNewFeedback] = useState({
     // id: "",
-    name: "",
+    Name: "",
+    email:"",
     phone: "",
     place: "",
     message: "",
-    uploadedImg: "",
+    photo: "",
   });
 
   // if (!hasPermission) {
@@ -77,9 +79,18 @@ export default function MaintenancePayment() {
     if (ref.current) {
       const options = { quality: 0.5, base64: true };
       const img = await ref.current.takePictureAsync(options);
-      setPhoto(img)
+      // setPhoto(img)
+      setNewFeedback({...newFeedBack, photo:img["uri"]})
     }
   };
+  // console.warn (newFeedBack)
+ 
+  const handleSubmit = async ()=>{
+   await addComplain(newFeedBack)
+    setShowModal3(false)
+    handleClear2();
+    setShowModal4(true)
+  }
 
   const openModelBills = useCallback((name, fees) => {
     setSelectedName(name);
@@ -99,21 +110,21 @@ export default function MaintenancePayment() {
   }, []);
 
   //Feedback Function
-  const handlePress = useCallback(() => {}, []);
-  const handleChange = useCallback((val, key) => {
-    const myState = newFeedBack;
-    myState[key] = val;
-    setNewFeedback(myState);
-    // setNewFeedback({ ...newFeedBack, ["name"]: val });
-    console.warn(newFeedBack);
-  }, []);
+  // const handleChange = useCallback((val, key) => {
+  //   const myState = newFeedBack;
+  //   myState[key] = val;
+  //   setNewFeedback(myState);
+  //   // setNewFeedback({ ...newFeedBack, ["name"]: val });
+  //   console.warn(newFeedBack);
+  // }, []);
   const handleClear2 = useCallback(() => {
     setNewFeedback({
-      name: "",
+      Name: "",
+      email:"",
       phone: "",
       place: "",
       message: "",
-      uploadedImg: "",
+      photo: "",
     });
   }, []);
   return (
@@ -229,7 +240,7 @@ export default function MaintenancePayment() {
                 Complain
               </Text>
             </TouchableOpacity>
-            <Image source={{uri: `${photo.uri}`}} style={{width:200,height:200}}></Image>
+            {/* <Image source={{uri: `${photo.uri}`}} style={{width:200,height:200}}></Image> */}
           </View>
         }
       ></FlatList>
@@ -277,7 +288,7 @@ export default function MaintenancePayment() {
         isOpen={showModal3}
         onClose={() => {
           setShowModal3(false);
-          handleClear2();
+          // handleClear2();
         }}
         size="lg"
       >
@@ -285,14 +296,26 @@ export default function MaintenancePayment() {
           <Modal.CloseButton />
           <Modal.Header>Your Complain</Modal.Header>
           <Modal.Body>
+            
             <TextInput
               style={Styles.input}
               placeholder="Your name"
-              name="name"
-              id="name"
-              value={newFeedBack.name}
+              name="Name"
+              id="Name"
+              value={newFeedBack.Name}
+              onChangeText={(val) =>{
+                setNewFeedback({ ...newFeedBack, Name: val })
+                // console.warn(newFeedBack.Name)
+              }}
+            />
+             <TextInput
+              style={Styles.input}
+              placeholder="Your Email"
+              name="email"
+              id="email"
+              value={newFeedBack.email}
               onChangeText={(val) =>
-                setNewFeedback({ ...newFeedBack, name: val })
+                setNewFeedback({ ...newFeedBack, email: val })
               }
             />
             <TextInput
@@ -353,7 +376,7 @@ export default function MaintenancePayment() {
           <Modal.Footer>
             <TouchableOpacity
               style={[Styles.feedback, styles.navyBlueBG]}
-              // onPress={()=>setShowModal3(true)}
+              onPress={handleSubmit}
             >
               <Text style={[styles.feedbackText, { color: "white" }]}>
                 Submit
@@ -362,6 +385,26 @@ export default function MaintenancePayment() {
           </Modal.Footer>
         </Modal.Content>
       </Modal>
+
+
+
+    {/* success FeedBack Modal */}
+    <Modal
+        isOpen={showModal4}
+        onClose={() => {
+          setShowModal4(false);
+        }}
+        size="lg"
+      >
+        <Modal.Content maxWidth="350">
+          <Modal.CloseButton />
+          {/* <Modal.Header>Your FeedBack</Modal.Header> */}
+          <Modal.Body>
+           <Text>We Received your complain, within 48 hours will be resolved</Text>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+
 
       <Modal
         isOpen={openCamera}
