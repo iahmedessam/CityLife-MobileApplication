@@ -81,10 +81,13 @@ button: {
   borderRadius: 5,
   backgroundColor: "#112D4E",
   marginHorizontal: 5,
+flex:1,
+
 },
 buttonText: {
   color: "#fff",
   fontWeight: "bold",
+  textAlign:"center"
 },
 activeButton: {
   backgroundColor: "#112D4E",

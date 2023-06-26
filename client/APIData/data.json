@@ -716,5 +716,21 @@
       "soon": true
     }
   ],
-  "feedback": []
+  "feedback": [],
+  "users": [
+    {
+      "Name": "John Doe",
+      "email": "john@example.com",
+      "phone": "1234567890",
+      "password": "password123",
+      "img": "user1.jpg"
+    },
+    {
+      "Name": "Jane Smith",
+      "email": "jane@example.com",
+      "phone": "9876543210",
+      "password": "password456",
+      "img": "user2.jpg"
+    }
+  ]
 }

@@ -18,23 +18,23 @@ export default function Data(props) {
     const [All, setAll] = useState({})
     const [AllIDsNames, setAllIDsNames] = useState([])
   
-    useEffect(() => {
-      axios.get(`${baseUrl}/db`)
-        .then( (res) => {
-          setAll(res.data)
-        })
-    }, [])
+    // useEffect(() => {
+    //   axios.get(`${baseUrl}/db`)
+    //     .then( (res) => {
+    //       setAll(res.data)
+    //     })
+    // }, [])
   
-    useEffect(() => {
+    // useEffect(() => {
 
-      let NamesIDsArr = []
-      for (let category of Object.values(All)) {
-        for (let ele of category) {
-          NamesIDsArr.push({ id: ele.id, name: ele.name })
-        }
-      }
-      setAllIDsNames(NamesIDsArr)
-    }, [All])
+    //   let NamesIDsArr = []
+    //   for (let category of Object.values(All)) {
+    //     for (let ele of category) {
+    //       NamesIDsArr.push({ id: ele.id, name: ele.name })
+    //     }
+    //   }
+    //   setAllIDsNames(NamesIDsArr)
+    // }, [All])
 
   //Fonts
   const [fontsLoaded] = useFonts({
@@ -48,6 +48,7 @@ export default function Data(props) {
 
       // Set userdata Token
       const [userData, setUserData] = useState(null);
+
       const saveUserData = async () => {
         try {
           const encodedToken = await AsyncStorage.getItem('token');
@@ -58,6 +59,27 @@ export default function Data(props) {
           console.error('Error saving user data:', error);
         }
       };
+      
+const AddUser = async (userData) => {
+  try {
+    const response = await fetch("https://application-mock-server.loca.lt/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error adding user:', error);
+    throw error;
+  }
+};
 
   // Images About Slider
   const ImgsArr = useMemo(
@@ -181,9 +203,7 @@ export default function Data(props) {
   });
 
  // Dashboard [ Feed Back , Complain ]
-
-
- const addFeedback = 
+ const addFeedback =
    async (AddedObj,message) => {
      let ID = uuid.v4().slice(0,4)
     await axios.post(`${baseUrl}/feedback`, {...AddedObj,id: ID ,place: message, type:"FeedBack"});
@@ -211,7 +231,10 @@ export default function Data(props) {
 //    [dashBoardFeedback]
 //  );
 
-
+//users
+// const [{ data: users, loadingUsers, errorUsers}] = useAxios({
+//   url: `${baseUrl}/users`,
+// });
 
 
 
@@ -275,7 +298,8 @@ export default function Data(props) {
     shopping, loadingshopping, errorshopping,
     markets, loadingmarkets, errormarkets,
     PayArr,
-    userData, setUserData, saveUserData
+    userData, setUserData, saveUserData,
+    AddUser
   };
 
   return (

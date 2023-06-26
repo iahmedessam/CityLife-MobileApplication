@@ -24,16 +24,10 @@ import Sports from "../Components/Sports";
 import Stores from "../Components/Stores";
 import Transportation from "../Components/Transportation";
 import HomeRestaurants from "../Components/Restaurants/HomeRestaurants";
-import Shawarma from "../Components/Restaurants/shawarma";
-import Fastfood from "../Components/Restaurants/fastfood";
-import Fried from "../Components/Restaurants/fried";
-import Pizza from "../Components/Restaurants/pizza";
-import Seafood from "../Components/Restaurants/seafood";
-import Orientalfood from "../Components/Restaurants/orientalfood";
-
 import DetailsPage from "../Components/DetailsPage";
 import { useContext } from "react";
 import { DataContext } from "../Context/Data";
+import PaymentComponent from "../Components/payment/payment";
 
 export const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -73,6 +67,7 @@ const {userData} = useContext(DataContext)
             <Stack.Screen name="Transportation" component={Transportation} />
             <Stack.Screen name="Maintenance Payment" component={userData ===null ? SignIn : MaintenancePayment} />
             <Stack.Screen name="Details" component={DetailsPage} options={({route})=> ({title: route.params.name})} />
+            <Stack.Screen name="Payment" component={PaymentComponent}  />
           </Stack.Navigator>
         )}
       </Tab.Screen>

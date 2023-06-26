@@ -102,7 +102,7 @@ const ContactUs = () => {
             disabled={!(formik.isValid && formik.dirty)}
             onPress={formik.handleSubmit}
             style={{
-              backgroundColor: '#09913C',
+              backgroundColor: '#112D4E',
               borderRadius: 5,
               paddingVertical: 10,
               alignItems: 'center',

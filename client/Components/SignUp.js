@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ActivityIndicator, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -7,25 +7,55 @@ import axios from 'axios';
 import { ScrollView } from 'react-native';
 import { useState } from 'react';
 // import DocumentPicker from 'react-native-document-picker';
+// import * as ImagePicker from 'expo-image-picker';
+import { useEffect } from 'react';
+import { DataContext } from '../Context/Data';
+
 
 export default function Signup({ navigation }) {
-
+const {AddUser} = useContext(DataContext)
   const [isLoading, setIsLoading] = useState(false)
   const [errorMsg, seterrorMsg] = useState('')
   const [file, setFile] = useState(null);
+  // const [imageUri, setImageUri] = useState(null);
+  const [values, setValues] = useState(null);
 
-  const handleSelectFile = async () => {
-    let result = await DocumentPicker.getDocumentAsync({});
-    if (!result.cancelled) {
-      setFile(result);
-    }
-  }
+  // const users= useContext(DataContext)
+  // const handleSelectImage = async () => {
+  //   let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+  //   if (permissionResult.granted === false) {
+  //     alert('Permission to access camera roll is required!');
+  //     return;
+  //   }
+
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
+
+  //   if (!result.cancelled) {
+  //     setImageUri(result.uri);
+  //   }
+  // };
+  // // const handleSelectFile = async () => {
+  // //   let result = await DocumentPicker.getDocumentAsync({});
+  //   if (!result.cancelled) {
+  //     setFile(result);
+  //   }
+  // }
+  const handleChange = (name, value) => {
+    setValues(prevValues => ({ ...prevValues, [name]: value }));
+  };
 
   return <>
     <Formik
       initialValues={{ name: '', email: '', phone: '', password: '', rePassword: '' }}
 
-      onSubmit={values => {
+      onSubmit={async (values) => {
+await AddUser(values);
         setIsLoading(true)
         axios.post("https://route-ecommerce.onrender.com/api/v1/auth/signup", values)
           .then((res) => {
@@ -40,6 +70,35 @@ export default function Signup({ navigation }) {
           })
       }
       }
+
+//       onSubmit={async (values) => {
+//   setIsLoading(true);
+//   try {
+//     const response = await fetch("https://application-mock-server.loca.lt/users", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         Name: "Nerrmene",
+//         email: "example@gmail.com",
+//         phone: "01275256896",
+//         password: "123456",
+//         img: ""
+//       }),
+//     });
+//     if (!response.ok) {
+//       throw new Error("Failed to create user");
+//     }
+//     const data = await response.json();
+//     setUserData(data);
+//     navigation.navigate("Sign in");
+//   } catch (error) {
+//     seterrorMsg(error.message);
+//   } finally {
+//     setIsLoading(false);
+//   }
+// }}
 
       validationSchema={Yup.object({
         name: Yup.string().required('Name is required').min(5, "Name must be more than 5 characters").max(20, "Name must be less than 20 characters"),
@@ -111,11 +170,19 @@ export default function Signup({ navigation }) {
               placeholder='Username' name='username' id='username'
             />
             {/* Image */}
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.input}
               onPress={handleSelectFile}>
               <Text style={{ opacity: 0.3 }}>{file ? file.name : 'Upload your image'}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+
+                                                              {/* //imgpicker */}
+
+            {/* <TouchableOpacity style={styles.btn} onPress={handleSelectImage}>
+                <Text style={styles.btnText}>Select Image</Text>
+              </TouchableOpacity>
+              {imageUri && <Image source={{ uri: imageUri }} style={styles.imagePreview} resizeMode="contain" handleChange={handleChange('img')}/>} */}
+
             {/* Login Button  */}
             {isLoading ?
               <TouchableOpacity
@@ -182,5 +249,31 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     textAlign: "center"
-  }
+  },
+  imagePreview: {
+    width: '100%',
+    height: 300,
+    marginTop: '5%',
+  },
+  btn: {
+    margin: '5%',
+    height: 40,
+    width:"40%",
+    borderRadius: 5,
+    backgroundColor: '#3F72AF',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnDisabled: {
+    margin: '5%',
+    height: 40,
+    borderRadius: 5,
+    backgroundColor: '#BDBDBD',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btnText: {
+    color: 'white',
+    fontSize: 16,
+  },
 })
